@@ -80,7 +80,7 @@ A deep dive into the causes and consequences of Global Warming spanning Economic
             <Container>
               <Row className="justify-content-center">
                 <Col lg="12">
-                  <Row className="row-grid" align="center">
+                  <Row className="row-grid">
                     <Col lg="4">
                       <Card className="shadow border-0">
                         <CardBody className="py-5">
