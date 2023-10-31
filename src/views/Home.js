@@ -82,7 +82,7 @@ A deep dive into the causes and consequences of Global Warming spanning Economic
                 <Col lg="12">
                   <Row className="row-grid">
                     <Col lg="4">
-                      <Card className="shadow border-0">
+                      <Card className="shadow border-0s">
                         <CardBody className="py-5">
                         <img
                         alt="..."
@@ -156,6 +156,8 @@ Evolution of energy usage for different countries based on different factors.
                         </CardBody>
                       </Card>
                     </Col>
+                  </Row>
+                  <Row className="row-grid">
                     <Col lg="4">
                       <Card className="shadow border-0">
                         <CardBody className="py-5">
