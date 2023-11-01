@@ -73,7 +73,7 @@ class Graph extends React.Component {
                     <h2 className='text-white'>Country</h2>
                     <UncontrolledDropdown group>
                     <Button color="primary">
-                        Primary
+                        Select
                     </Button>
                     <DropdownToggle caret>
                         {this.state.dropDownValue}
@@ -232,6 +232,7 @@ class Graph extends React.Component {
             </section>
         </div>
         </main>
+        <Footer />
       </>
     );
   }
