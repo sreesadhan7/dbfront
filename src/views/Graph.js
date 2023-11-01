@@ -70,7 +70,7 @@ class Graph extends React.Component {
               <Row className="justify-content-center">
                 <Col lg="2">
                     <div align="center">
-                    <h2>Country</h2>
+                    <h2 className='text-white'>Country</h2>
                     <UncontrolledDropdown group>
                     <Button color="primary">
                         Primary
@@ -99,17 +99,132 @@ class Graph extends React.Component {
                     </div>
                 </Col>
                 <Col lg="2">
-                    <h1>Metric</h1>
+                    <div align="center">
+                    <h2 className='text-white'>Country</h2>
+                    <UncontrolledDropdown group>
+                    <Button color="primary">
+                        Primary
+                    </Button>
+                    <DropdownToggle caret>
+                        {this.state.dropDownValue}
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option1</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option2</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option3</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option4</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option5</div>
+                        </DropdownItem>
+                    </DropdownMenu>
+                    </UncontrolledDropdown>
+                    </div>
                 </Col>
                 <Col lg="2">
-                    <h1>Aggregation</h1>
+                    <div align="center">
+                    <h2 className='text-white'>Country</h2>
+                    <UncontrolledDropdown group>
+                    <Button color="primary">
+                        Primary
+                    </Button>
+                    <DropdownToggle caret>
+                        {this.state.dropDownValue}
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option1</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option2</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option3</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option4</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option5</div>
+                        </DropdownItem>
+                    </DropdownMenu>
+                    </UncontrolledDropdown>
+                    </div>
                 </Col>
                 <Col lg="2">
-                    <h1>From</h1>
+                    <div align="center">
+                    <h2 className='text-white'>Country</h2>
+                    <UncontrolledDropdown group>
+                    <Button color="primary">
+                        Primary
+                    </Button>
+                    <DropdownToggle caret>
+                        {this.state.dropDownValue}
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option1</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option2</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option3</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option4</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option5</div>
+                        </DropdownItem>
+                    </DropdownMenu>
+                    </UncontrolledDropdown>
+                    </div>
                 </Col>
                 <Col lg="2">
-                    <h1>To</h1>
+                    <div align="center">
+                    <h2 className='text-white'>Country</h2>
+                    <UncontrolledDropdown group>
+                    <Button color="primary">
+                        Primary
+                    </Button>
+                    <DropdownToggle caret>
+                        {this.state.dropDownValue}
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option1</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option2</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option3</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option4</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue}>Option5</div>
+                        </DropdownItem>
+                    </DropdownMenu>
+                    </UncontrolledDropdown>
+                    </div>
                 </Col>
+              </Row>
+              <Row>
+              <Col className="d-flex justify-content-center">
+              <Button className="btn-1 ml-1" color="info" type="button">
+                  Submit
+              </Button>
+              </Col>
               </Row>
               </container>
             </section>
