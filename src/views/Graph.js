@@ -221,9 +221,12 @@ class Graph extends React.Component {
               </Row>
               <Row>
               <Col className="d-flex justify-content-center">
+              <div>
+              <h1></h1>
               <Button className="btn-1 ml-1" color="info" type="button">
                   Submit
               </Button>
+              </div>
               </Col>
               </Row>
               </container>
