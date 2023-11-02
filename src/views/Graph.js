@@ -133,20 +133,20 @@ class Graph extends React.Component {
                         {this.state.dropDownValue2}
                     </DropdownToggle>
                     <DropdownMenu>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,2)}>Option1</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,2)}>
+                        <div>Option1</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,2)}>Option2</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,2)}>
+                        <div>Option2</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,2)}>Option3</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,2)}>
+                        <div>Option3</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,2)}>Option4</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,2)}>
+                        <div>Option4</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,2)}>Option5</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,2)}>
+                        <div>Option5</div>
                         </DropdownItem>
                     </DropdownMenu>
                     </UncontrolledDropdown>
@@ -160,20 +160,20 @@ class Graph extends React.Component {
                         {this.state.dropDownValue3}
                     </DropdownToggle>
                     <DropdownMenu>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,3)}>Option1</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,3)}>
+                        <div>Option1</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,3)}>Option2</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,3)}>
+                        <div>Option2</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,3)}>Option3</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,3)}>
+                        <div>Option3</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,3)}>Option4</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,3)}>
+                        <div>Option4</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,3)}>Option5</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,3)}>
+                        <div>Option5</div>
                         </DropdownItem>
                     </DropdownMenu>
                     </UncontrolledDropdown>
@@ -187,20 +187,20 @@ class Graph extends React.Component {
                         {this.state.dropDownValue4}
                     </DropdownToggle>
                     <DropdownMenu>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,4)}>Option1</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,4)}>
+                        <div>Option1</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,4)}>Option2</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,4)}>
+                        <div>Option2</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,4)}>Option3</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,4)}>
+                        <div>Option3</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,4)}>Option4</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,4)}>
+                        <div>Option4</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,4)}>Option5</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,4)}>
+                        <div>Option5</div>
                         </DropdownItem>
                     </DropdownMenu>
                     </UncontrolledDropdown>
@@ -214,20 +214,20 @@ class Graph extends React.Component {
                         {this.state.dropDownValue5}
                     </DropdownToggle>
                     <DropdownMenu>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,5)}>Option1</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,5)}>
+                        <div>Option1</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,5)}>Option2</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,5)}>
+                        <div>Option2</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,5)}>Option3</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,5)}>
+                        <div>Option3</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,5)}>Option4</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,5)}>
+                        <div>Option4</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,5)}>Option5</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,5)}>
+                        <div>Option5</div>
                         </DropdownItem>
                     </DropdownMenu>
                     </UncontrolledDropdown>
