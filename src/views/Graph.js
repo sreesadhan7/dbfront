@@ -35,17 +35,41 @@ import {
 // core components
 import Navbar from "../components/NavBar.js";
 import Footer from "../components/Footer.js";
+// import Chart from "../components/Chart.js";
 
 
 class Graph extends React.Component {
-  state = {};
+  constructor(props){
+    super(props)
+    this.state = {
+        dropDownValue1: "select",
+        dropDownValue2: "select",
+        dropDownValue3: "select",
+        dropDownValue4: "select",
+        dropDownValue5: "select"
+    };
+    this.changeValue = this.changeValue.bind(this);
+  }
   componentDidMount() {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
   }
-  changeValue(e) {
-    this.setState({dropDownValue: e.currentTarget.textContent})
+  changeValue(e, n) {
+    console.log(e);
+    console.log(this);
+    switch(n){
+        case 1:
+            this.setState({dropDownValue1: e.currentTarget.textContent});
+        case 2:
+            this.setState({dropDownValue2: e.currentTarget.textContent});
+        case 3:
+            this.setState({dropDownValue3: e.currentTarget.textContent});
+        case 4:
+            this.setState({dropDownValue4: e.currentTarget.textContent});
+        case 5:
+            this.setState({dropDownValue5: e.currentTarget.textContent});
+    }
   }
   render() {
     return (
@@ -72,9 +96,33 @@ class Graph extends React.Component {
                     <div align="center">
                     <h2 className='text-white'>Country</h2>
                     <UncontrolledDropdown group>
-                    <Button color="primary">
-                        Select
-                    </Button>
+                    <DropdownToggle caret>
+                    {this.state.dropDownValue}
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem>
+                        <div onClick={this.changeValue(1)}>Option1</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue(1,2)}>Option2</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue(3)}>Option3</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue(4)}>Option4</div>
+                        </DropdownItem>
+                        <DropdownItem>
+                        <div onClick={this.changeValue(5)}>Option5</div>
+                        </DropdownItem>
+                    </DropdownMenu>
+                    </UncontrolledDropdown>
+                    </div>
+                </Col>
+                <Col lg="2">
+                    <div align="center">
+                    <h2 className='text-white'>Country</h2>
+                    <UncontrolledDropdown group>
                     <DropdownToggle caret>
                         {this.state.dropDownValue}
                     </DropdownToggle>
@@ -102,9 +150,6 @@ class Graph extends React.Component {
                     <div align="center">
                     <h2 className='text-white'>Country</h2>
                     <UncontrolledDropdown group>
-                    <Button color="primary">
-                        Primary
-                    </Button>
                     <DropdownToggle caret>
                         {this.state.dropDownValue}
                     </DropdownToggle>
@@ -132,9 +177,6 @@ class Graph extends React.Component {
                     <div align="center">
                     <h2 className='text-white'>Country</h2>
                     <UncontrolledDropdown group>
-                    <Button color="primary">
-                        Primary
-                    </Button>
                     <DropdownToggle caret>
                         {this.state.dropDownValue}
                     </DropdownToggle>
@@ -162,39 +204,6 @@ class Graph extends React.Component {
                     <div align="center">
                     <h2 className='text-white'>Country</h2>
                     <UncontrolledDropdown group>
-                    <Button color="primary">
-                        Primary
-                    </Button>
-                    <DropdownToggle caret>
-                        {this.state.dropDownValue}
-                    </DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem>
-                        <div onClick={this.changeValue}>Option1</div>
-                        </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={this.changeValue}>Option2</div>
-                        </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={this.changeValue}>Option3</div>
-                        </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={this.changeValue}>Option4</div>
-                        </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={this.changeValue}>Option5</div>
-                        </DropdownItem>
-                    </DropdownMenu>
-                    </UncontrolledDropdown>
-                    </div>
-                </Col>
-                <Col lg="2">
-                    <div align="center">
-                    <h2 className='text-white'>Country</h2>
-                    <UncontrolledDropdown group>
-                    <Button color="primary">
-                        Primary
-                    </Button>
                     <DropdownToggle caret>
                         {this.state.dropDownValue}
                     </DropdownToggle>
