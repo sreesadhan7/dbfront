@@ -106,20 +106,20 @@ class Graph extends React.Component {
                     {this.state.dropDownValue1}
                     </DropdownToggle>
                     <DropdownMenu>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,1)}>Option1</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
+                        <div>Option1</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,1)}>Option2</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
+                        <div>Option2</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,1)}>Option3</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
+                        <div>Option3</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,1)}>Option4</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
+                        <div>Option4</div>
                         </DropdownItem>
-                        <DropdownItem>
-                        <div onClick={e=>this.changeValue(e,1)}>Option5</div>
+                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
+                        <div>Option5</div>
                         </DropdownItem>
                     </DropdownMenu>
                     </UncontrolledDropdown>
