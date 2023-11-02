@@ -35,7 +35,7 @@ import {
 // core components
 import Navbar from "../components/NavBar.js";
 import Footer from "../components/Footer.js";
-// import Chart from "../components/Chart.js";
+import Chart from "../components/Chart.js";
 
 
 class Graph extends React.Component {
@@ -84,17 +84,8 @@ class Graph extends React.Component {
         <main ref="main">
         <div className="position-relative">
             {/* shape Hero */}
-            <section className="section section-lg section-shaped pb-250">
+            <section className="section section-lg section-shaped ">
               <div className="shape shape-style-1 shape-default">
-                <span />
-                <span />
-                <span />
-                <span />
-                <span />
-                <span />
-                <span />
-                <span />
-                <span />
               </div>
               <container>
               <Row className="justify-content-center">
@@ -246,8 +237,11 @@ class Graph extends React.Component {
               </Row>
               </container>
             </section>
-            <section>
-            </section>
+            <container>
+                <Row className="justify-content-center">
+                    <Chart />
+                </Row>
+            </container>
         </div>
         </main>
         <Footer />
