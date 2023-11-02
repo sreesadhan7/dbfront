@@ -127,7 +127,7 @@ class Graph extends React.Component {
                 </Col>
                 <Col lg="2">
                     <div align="center">
-                    <h2 className='text-white'>Country</h2>
+                    <h2 className='text-white'>Metric</h2>
                     <UncontrolledDropdown group>
                     <DropdownToggle caret>
                         {this.state.dropDownValue2}
@@ -154,7 +154,7 @@ class Graph extends React.Component {
                 </Col>
                 <Col lg="2">
                     <div align="center">
-                    <h2 className='text-white'>Country</h2>
+                    <h2 className='text-white'>Aggregation</h2>
                     <UncontrolledDropdown group>
                     <DropdownToggle caret>
                         {this.state.dropDownValue3}
@@ -181,7 +181,7 @@ class Graph extends React.Component {
                 </Col>
                 <Col lg="2">
                     <div align="center">
-                    <h2 className='text-white'>Country</h2>
+                    <h2 className='text-white'>From</h2>
                     <UncontrolledDropdown group>
                     <DropdownToggle caret>
                         {this.state.dropDownValue4}
@@ -208,7 +208,7 @@ class Graph extends React.Component {
                 </Col>
                 <Col lg="2">
                     <div align="center">
-                    <h2 className='text-white'>Country</h2>
+                    <h2 className='text-white'>To</h2>
                     <UncontrolledDropdown group>
                     <DropdownToggle caret>
                         {this.state.dropDownValue5}
