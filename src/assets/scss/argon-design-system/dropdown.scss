@@ -7,10 +7,12 @@
 
 .dropdown-menu {
   min-width: 12rem;
+  z-index:9999;
 
   .dropdown-item {
     padding: 1rem;
     font-size: $font-size-sm;
+    z-index:9999;
     > i,
     > svg {
       margin-right: 1rem;

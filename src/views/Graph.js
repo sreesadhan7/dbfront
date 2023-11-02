@@ -84,7 +84,7 @@ class Graph extends React.Component {
         <main ref="main">
         <div className="position-relative">
             {/* shape Hero */}
-            <section className="section section-lg section-shaped ">
+            <section className="section section-lg section-shaped">
               <div className="shape shape-style-1 shape-default">
               </div>
               <container>
@@ -237,11 +237,13 @@ class Graph extends React.Component {
               </Row>
               </container>
             </section>
+            <section>
             <container>
                 <Row className="justify-content-center">
                     <Chart />
                 </Row>
             </container>
+            </section>
         </div>
         </main>
         <Footer />
