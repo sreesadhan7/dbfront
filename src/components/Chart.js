@@ -1,6 +1,7 @@
 import { LineChart } from '@mui/x-charts';
 
-function Chart() {
+function Chart(props) {
+        console.log(props)
         return (
                 <LineChart
         xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}

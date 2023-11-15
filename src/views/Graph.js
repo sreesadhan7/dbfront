@@ -78,6 +78,7 @@ class Graph extends React.Component {
     }
   }
   render() {
+    console.log("hello",this.state);
     return (
       <>
         <Navbar />
@@ -240,7 +241,7 @@ class Graph extends React.Component {
             <section>
             <container>
                 <Row className="justify-content-center">
-                    <Chart />
+                    <Chart x={this.state.dropDownValue1} y="bye"/>
                 </Row>
             </container>
             </section>
