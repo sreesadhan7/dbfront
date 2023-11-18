@@ -241,7 +241,79 @@ class Graph extends React.Component {
             <section>
             <container>
                 <Row className="justify-content-center">
-                    <Chart x={this.state.dropDownValue1} y="bye"/>
+                    <div align="center">
+                        <h2>Something something something</h2>
+                    </div>
+                </Row>
+                <Row className="justify-content-center">
+                    <Col>
+                        <Row>
+                            <Col>
+                                <div align="center">
+                                    <h2 className='text-black'>Country</h2>
+                                    <UncontrolledDropdown group>
+                                    <DropdownToggle caret>
+                                    {this.state.dropDownValue1}
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
+                                        <div>Option1</div>
+                                        </DropdownItem>
+                                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
+                                        <div>Option2</div>
+                                        </DropdownItem>
+                                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
+                                        <div>Option3</div>
+                                        </DropdownItem>
+                                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
+                                        <div>Option4</div>
+                                        </DropdownItem>
+                                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
+                                        <div>Option5</div>
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                    </UncontrolledDropdown>
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <div align="center">
+                                <h2 className='text-black'>Country</h2>
+                                <UncontrolledDropdown group>
+                                <DropdownToggle caret>
+                                {this.state.dropDownValue1}
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                    <DropdownItem onClick={e=>this.changeValue(e,1)}>
+                                    <div>Option1</div>
+                                    </DropdownItem>
+                                    <DropdownItem onClick={e=>this.changeValue(e,1)}>
+                                    <div>Option2</div>
+                                    </DropdownItem>
+                                    <DropdownItem onClick={e=>this.changeValue(e,1)}>
+                                    <div>Option3</div>
+                                    </DropdownItem>
+                                    <DropdownItem onClick={e=>this.changeValue(e,1)}>
+                                    <div>Option4</div>
+                                    </DropdownItem>
+                                    <DropdownItem onClick={e=>this.changeValue(e,1)}>
+                                    <div>Option5</div>
+                                    </DropdownItem>
+                                </DropdownMenu>
+                                </UncontrolledDropdown>
+                                </div>
+                            </Col>
+                        </Row>
+                    </Col>
+                    <Col className="align-self-center">
+                        <Chart x={this.state.dropDownValue1} y="bye"/>
+                    </Col>
+                    <Col className="align-self-center">
+                        <div>
+                            <p>Something something something Something something something Something something something Something something something Something something something Something something something Something something something</p>
+                        </div>
+                    </Col>
                 </Row>
             </container>
             </section>
