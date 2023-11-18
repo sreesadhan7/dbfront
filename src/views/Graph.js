@@ -36,46 +36,140 @@ import {
 import Navbar from "../components/NavBar.js";
 import Footer from "../components/Footer.js";
 import Chart from "../components/Chart.js";
+import Divider from "../components/Divider.js"
 
+function getCountries(){
+    fetch('http://127.0.0.1:5000/countries', {
+        method: 'POST',
+        body: JSON.stringify({
+          // Add parameters here
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+         .then((response) => response.json())
+         .then((data) => {
+            console.log(data.data);
+           return data.data;
+         })
+         .catch((err) => {
+            console.log(err.message);
+         });
+  }
 
 class Graph extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-        dropDownValue1: "select",
-        dropDownValue2: "select",
-        dropDownValue3: "select",
-        dropDownValue4: "select",
-        dropDownValue5: "select"
+        country: "select",
+        agg: "select",
+        from: "select",
+        to: "select",
+        xData: [],
+        yData1: [],
+        yData2: []
     };
-    this.changeValue = this.changeValue.bind(this);
+    this.changeCountry = this.changeCountry.bind(this);
+    this.changeAgg = this.changeAgg.bind(this);
+    this.changeYear = this.changeYear.bind(this);
+    this.countryList = this.countryList.bind(this);
   }
-  componentDidMount() {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    this.refs.main.scrollTop = 0;
+   countryList(){
+    const countries = ['Afghanistan','Albania','Algeria','Angola','Argentina','Australia','Austria','Bahrain','Bangladesh','Barbados','Benin','Bolivia','Botswana','Brazil','Bulgaria','Burkina Faso','Cambodia','Cameroon','Canada','Central African Republic','Chad','Chile','China','Colombia','Comoros','Congo Republic','Cuba','Cyprus','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eswatini','Finland','France','Gabon','Gambia','Germany','Ghana','Greece','Guatemala','Guinea','Guinea-Bissau','Haiti','Honduras','Hungary','Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Jordan','Kenya','Kuwait','Laos','Lebanon','Lesotho','Liberia','Libya','Madagascar','Malawi','Malaysia','Mali','Malta','Mauritania','Mauritius','Mexico','Mongolia','Morocco','Mozambique','Myanmar','Namibia','Nepal','Netherlands','New Zealand','Nicaragua','Niger','Nigeria','North Korea','Norway','Oman','Pakistan','Panama','Paraguay','Peru','Philippines','Poland','Portugal','Qatar','Romania','Saudi Arabia','Senegal','Seychelles','Sierra Leone','South Africa','South Korea','Spain','Sri Lanka','St. Lucia','Sweden','Switzerland','Syria','Tanzania','Thailand','Togo','Trinidad and Tobago','Tunisia','Uganda','United Arab Emirates','United Kingdom','United States','Uruguay','Venezuela','Vietnam','Zambia','Zimbabwe'];
+    console.log("countries", countries);
+    const options = []
+    for(let i=0; i<countries.length; i++){
+        options.push(<DropdownItem onClick={e=>this.changeCountry(e,countries[i])}><div>{countries[i]}</div></DropdownItem>);
+    }
+    return options;
   }
-  changeValue(e, n) {
+  yearList(param){
+    const yearList = [1960,1961,1962,1963,1964,1965,1966,1967,1968,1969,1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019];
+    const options = []
+    for(let i=0; i<yearList.length; i++){
+        options.push(<DropdownItem onClick={e=>this.changeYear(e,yearList[i], param)}><div>{yearList[i]}</div></DropdownItem>);
+    }
+    return options;
+  }
+//   componentDidMount() {
+//     document.documentElement.scrollTop = 0;
+//     document.scrollingElement.scrollTop = 0;
+//     this.refs.main.scrollTop = 0;
+//   }
+  changeCountry(e, n) {
     console.log(e);
     console.log(this);
     console.log(n)
-    switch(n){
-        case 1:
-            this.setState({dropDownValue1: e.currentTarget.textContent});
-            break;
-        case 2:
-            this.setState({dropDownValue2: e.currentTarget.textContent});
-            break;
-        case 3:
-            this.setState({dropDownValue3: e.currentTarget.textContent});
-            break;
-        case 4:
-            this.setState({dropDownValue4: e.currentTarget.textContent});
-            break;
-        case 5:
-            this.setState({dropDownValue5: e.currentTarget.textContent});
-            break;
+    this.setState({country: n});
+    fetch('http://127.0.0.1:5000/db', {
+        method: 'POST',
+        body: JSON.stringify({
+          // Add parameters here
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+         .then((response) => response.json())
+         .then((data) => {
+            console.log(data);
+            // Handle data
+         })
+         .catch((err) => {
+            console.log(err.message);
+         });
+  }
+  changeAgg(e, n) {
+    console.log(e);
+    console.log(this);
+    console.log(n)
+    this.setState({agg: e.currentTarget.textContent});
+    fetch('http://127.0.0.1:5000/db', {
+        method: 'POST',
+        body: JSON.stringify({
+          // Add parameters here
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+         .then((response) => response.json())
+         .then((data) => {
+            console.log(data);
+            // Handle data
+         })
+         .catch((err) => {
+            console.log(err.message);
+         });
+  }
+  changeYear(e, n, param) {
+    console.log(e);
+    console.log(this);
+    console.log(n)
+    if(param=="to"){
+        this.setState({to: n});
     }
+    else{
+        this.setState({from: n});
+    }
+    fetch('http://127.0.0.1:5000/db', {
+        method: 'POST',
+        body: JSON.stringify({
+          // Add parameters here
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+         .then((response) => response.json())
+         .then((data) => {
+            console.log(data);
+            // Handle data
+         })
+         .catch((err) => {
+            console.log(err.message);
+         });
   }
   render() {
     console.log("hello",this.state);
@@ -85,159 +179,17 @@ class Graph extends React.Component {
         <main ref="main">
         <div className="position-relative">
             {/* shape Hero */}
-            <section className="section section-lg section-shaped">
+            <section className="section section-shaped">
               <div className="shape shape-style-1 shape-default">
               </div>
               <container>
-              <Row className="justify-content-center">
-                <Col lg="2">
-                    <div align="center">
-                    <h2 className='text-white'>Country</h2>
-                    <UncontrolledDropdown group>
-                    <DropdownToggle caret>
-                    {this.state.dropDownValue1}
-                    </DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
-                        <div>Option1</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
-                        <div>Option2</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
-                        <div>Option3</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
-                        <div>Option4</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
-                        <div>Option5</div>
-                        </DropdownItem>
-                    </DropdownMenu>
-                    </UncontrolledDropdown>
+                <Row className="justify-content-center">
+                    <div>
+                        <h1 className='graphTitle text-white'>Graph Title</h1>
                     </div>
-                </Col>
-                <Col lg="2">
-                    <div align="center">
-                    <h2 className='text-white'>Metric</h2>
-                    <UncontrolledDropdown group>
-                    <DropdownToggle caret>
-                        {this.state.dropDownValue2}
-                    </DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem onClick={e=>this.changeValue(e,2)}>
-                        <div>Option1</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,2)}>
-                        <div>Option2</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,2)}>
-                        <div>Option3</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,2)}>
-                        <div>Option4</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,2)}>
-                        <div>Option5</div>
-                        </DropdownItem>
-                    </DropdownMenu>
-                    </UncontrolledDropdown>
-                    </div>
-                </Col>
-                <Col lg="2">
-                    <div align="center">
-                    <h2 className='text-white'>Aggregation</h2>
-                    <UncontrolledDropdown group>
-                    <DropdownToggle caret>
-                        {this.state.dropDownValue3}
-                    </DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem onClick={e=>this.changeValue(e,3)}>
-                        <div>Option1</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,3)}>
-                        <div>Option2</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,3)}>
-                        <div>Option3</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,3)}>
-                        <div>Option4</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,3)}>
-                        <div>Option5</div>
-                        </DropdownItem>
-                    </DropdownMenu>
-                    </UncontrolledDropdown>
-                    </div>
-                </Col>
-                <Col lg="2">
-                    <div align="center">
-                    <h2 className='text-white'>From</h2>
-                    <UncontrolledDropdown group>
-                    <DropdownToggle caret>
-                        {this.state.dropDownValue4}
-                    </DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem onClick={e=>this.changeValue(e,4)}>
-                        <div>Option1</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,4)}>
-                        <div>Option2</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,4)}>
-                        <div>Option3</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,4)}>
-                        <div>Option4</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,4)}>
-                        <div>Option5</div>
-                        </DropdownItem>
-                    </DropdownMenu>
-                    </UncontrolledDropdown>
-                    </div>
-                </Col>
-                <Col lg="2">
-                    <div align="center">
-                    <h2 className='text-white'>To</h2>
-                    <UncontrolledDropdown group>
-                    <DropdownToggle caret>
-                        {this.state.dropDownValue5}
-                    </DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem onClick={e=>this.changeValue(e,5)}>
-                        <div>Option1</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,5)}>
-                        <div>Option2</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,5)}>
-                        <div>Option3</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,5)}>
-                        <div>Option4</div>
-                        </DropdownItem>
-                        <DropdownItem onClick={e=>this.changeValue(e,5)}>
-                        <div>Option5</div>
-                        </DropdownItem>
-                    </DropdownMenu>
-                    </UncontrolledDropdown>
-                    </div>
-                </Col>
-              </Row>
-              <Row>
-              <Col className="d-flex justify-content-center">
-              <div>
-              <h1></h1>
-              <Button className="btn-1 ml-1" color="info" type="button">
-                  Submit
-              </Button>
-              </div>
-              </Col>
-              </Row>
+                </Row>
               </container>
-            </section>
+            </section>  
             <section>
             <container>
                 <Row className="justify-content-center">
@@ -253,24 +205,10 @@ class Graph extends React.Component {
                                     <h2 className='text-black'>Country</h2>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
-                                    {this.state.dropDownValue1}
+                                    {this.state.country}
                                     </DropdownToggle>
                                     <DropdownMenu>
-                                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
-                                        <div>Option1</div>
-                                        </DropdownItem>
-                                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
-                                        <div>Option2</div>
-                                        </DropdownItem>
-                                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
-                                        <div>Option3</div>
-                                        </DropdownItem>
-                                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
-                                        <div>Option4</div>
-                                        </DropdownItem>
-                                        <DropdownItem onClick={e=>this.changeValue(e,1)}>
-                                        <div>Option5</div>
-                                        </DropdownItem>
+                                        {this.countryList()}
                                     </DropdownMenu>
                                     </UncontrolledDropdown>
                                 </div>
@@ -279,27 +217,59 @@ class Graph extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                <h2 className='text-black'>Country</h2>
+                                <h2 className='text-black'>Aggregation View</h2>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.dropDownValue1}
+                                {this.state.agg}
                                 </DropdownToggle>
                                 <DropdownMenu>
-                                    <DropdownItem onClick={e=>this.changeValue(e,1)}>
-                                    <div>Option1</div>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"Y")}>
+                                    <div>Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeValue(e,1)}>
-                                    <div>Option2</div>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"2Y")}>
+                                    <div>2Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeValue(e,1)}>
-                                    <div>Option3</div>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"3Y")}>
+                                    <div>3Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeValue(e,1)}>
-                                    <div>Option4</div>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"4Y")}>
+                                    <div>5Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeValue(e,1)}>
-                                    <div>Option5</div>
-                                    </DropdownItem>
+                                </DropdownMenu>
+                                </UncontrolledDropdown>
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <div align="center">
+                                <h2>Date Range</h2>
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <div align="center">
+                                <h4 className='text-black'>From</h4>
+                                <UncontrolledDropdown group>
+                                <DropdownToggle caret>
+                                {this.state.from}
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                        {this.yearList("from")}
+                                </DropdownMenu>
+                                </UncontrolledDropdown>
+                                </div>
+                            </Col>
+                            <Col>
+                                <div align="center">
+                                <h4 className='text-black'>To</h4>
+                                <UncontrolledDropdown group>
+                                <DropdownToggle caret>
+                                {this.state.to}
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                        {this.yearList("to")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
@@ -317,6 +287,7 @@ class Graph extends React.Component {
                 </Row>
             </container>
             </section>
+            <Divider></Divider>
         </div>
         </main>
         <Footer />

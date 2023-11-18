@@ -6,6 +6,8 @@
 }
 
 .dropdown-menu {
+  height: 150px;
+  overflow-y: scroll;
   min-width: 12rem;
   z-index:9999;
 
