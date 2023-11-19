@@ -31,7 +31,7 @@ import {
 // core components
 import Navbar from "../components/NavBar.js";
 import Footer from "../components/Footer.js";
-import Chart from "../components/Chart.js";
+// import Chart from "../components/Chart.js";
 import Divider from "../components/Divider.js"
 
 
@@ -297,7 +297,7 @@ class Internet extends React.Component {
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
-                        <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/>
+                        {/* <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/> */}
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>

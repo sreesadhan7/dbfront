@@ -31,7 +31,9 @@ import {
 // core components
 import Navbar from "../components/NavBar.js";
 import Footer from "../components/Footer.js";
-import Chart from "../components/Chart.js";
+import Chart_m_1_1 from "../components/Chart_m_1_1.js";
+import Chart_m_1_2 from "../components/Chart_m_1_1.js";
+import Chart_m_1_3 from "../components/Chart_m_1_1.js";
 import Divider from "../components/Divider.js"
 
 
@@ -52,31 +54,31 @@ class GlobalTemp extends React.Component {
     this.changeYear = this.changeYear.bind(this);
     this.countryList = this.countryList.bind(this);
   }
-   countryList(){
+   countryList(url){
     const countries = ['Afghanistan','Albania','Algeria','Angola','Argentina','Australia','Austria','Bahrain','Bangladesh','Barbados','Benin','Bolivia','Botswana','Brazil','Bulgaria','Burkina Faso','Cambodia','Cameroon','Canada','Central African Republic','Chad','Chile','China','Colombia','Comoros','Congo Republic','Cuba','Cyprus','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eswatini','Finland','France','Gabon','Gambia','Germany','Ghana','Greece','Guatemala','Guinea','Guinea-Bissau','Haiti','Honduras','Hungary','Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Jordan','Kenya','Kuwait','Laos','Lebanon','Lesotho','Liberia','Libya','Madagascar','Malawi','Malaysia','Mali','Malta','Mauritania','Mauritius','Mexico','Mongolia','Morocco','Mozambique','Myanmar','Namibia','Nepal','Netherlands','New Zealand','Nicaragua','Niger','Nigeria','North Korea','Norway','Oman','Pakistan','Panama','Paraguay','Peru','Philippines','Poland','Portugal','Qatar','Romania','Saudi Arabia','Senegal','Seychelles','Sierra Leone','South Africa','South Korea','Spain','Sri Lanka','St. Lucia','Sweden','Switzerland','Syria','Tanzania','Thailand','Togo','Trinidad and Tobago','Tunisia','Uganda','United Arab Emirates','United Kingdom','United States','Uruguay','Venezuela','Vietnam','Zambia','Zimbabwe'];
     console.log("countries", countries);
     const options = []
     for(let i=0; i<countries.length; i++){
-        options.push(<DropdownItem className="dropdown-item" onClick={e=>this.changeCountry(e,countries[i])}><div>{countries[i]}</div></DropdownItem>);
+        options.push(<DropdownItem className="dropdown-item" onClick={e=>this.changeCountry(e,countries[i], url)}><div>{countries[i]}</div></DropdownItem>);
     }
     return options;
   }
-  yearList(param){
+  yearList(param, url){
     const yearList = [1960,1961,1962,1963,1964,1965,1966,1967,1968,1969,1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019];
     const options = []
     for(let i=0; i<yearList.length; i++){
-        options.push(<DropdownItem onClick={e=>this.changeYear(e,yearList[i], param)}><div>{yearList[i]}</div></DropdownItem>);
+        options.push(<DropdownItem onClick={e=>this.changeYear(e,yearList[i], param, url)}><div>{yearList[i]}</div></DropdownItem>);
     }
     return options;
   }
 
-  changeCountry(e, n) {
+  changeCountry(e, n, url) {
     console.log(e);
     console.log(this);
     console.log(n)
     this.setState({country: n});
     if(this.state.agg != "select" && this.state.from != "select" && this.state.to != "select"){
-        fetch('http://127.0.0.1:5000/mockup_1_1', {
+        fetch(`http://127.0.0.1:5000/${url}`, {
             method: 'POST',
             body: JSON.stringify({
                 country: n,
@@ -100,13 +102,13 @@ class GlobalTemp extends React.Component {
              });
     }
   }
-  changeAgg(e, n) {
+  changeAgg(e, n, url) {
     console.log(e);
     console.log(this);
     console.log(n)
     this.setState({agg: e.currentTarget.textContent});
     if(this.state.country != "select" && this.state.from != "select" && this.state.to != "select"){
-        fetch('http://127.0.0.1:5000/mockup_1_1', {
+        fetch(`http://127.0.0.1:5000/${url}`, {
             method: 'POST',
             body: JSON.stringify({
               country: this.state.country,
@@ -130,7 +132,7 @@ class GlobalTemp extends React.Component {
              });
     }
   }
-  changeYear(e, n, param) {
+  changeYear(e, n, param, url) {
     console.log(e);
     console.log(this);
     console.log(n)
@@ -142,7 +144,7 @@ class GlobalTemp extends React.Component {
     }
     if(param=="to"){
         if(this.state.country != "select" && this.state.from != "select" && this.state.agg != "select"){
-            fetch('http://127.0.0.1:5000/mockup_1_1', {
+            fetch(`http://127.0.0.1:5000/${url}`, {
                 method: 'POST',
                 body: JSON.stringify({
                   country: this.state.country,
@@ -167,7 +169,7 @@ class GlobalTemp extends React.Component {
     }
     else if(param="from"){
         if(this.state.country != "select" && this.state.to != "select" && this.state.agg != "select"){
-            fetch('http://127.0.0.1:5000/mockup_1_1', {
+            fetch(`http://127.0.0.1:5000/${url}`, {
                 method: 'POST',
                 body: JSON.stringify({
                     country: this.state.country,
@@ -228,7 +230,7 @@ class GlobalTemp extends React.Component {
                                     {this.state.country}
                                     </DropdownToggle>
                                     <DropdownMenu container={'body'}>
-                                        {this.countryList()}
+                                        {this.countryList("mockup_1_1")}
                                     </DropdownMenu>
                                     </UncontrolledDropdown>
                                 </div>
@@ -243,16 +245,16 @@ class GlobalTemp extends React.Component {
                                 {this.state.agg}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"Y")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"Y", "mockup_1_1")}>
                                     <div>Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"2Y")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"2Y", "mockup_1_1")}>
                                     <div>2Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"3Y")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"3Y", "mockup_1_1")}>
                                     <div>3Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"4Y")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"4Y", "mockup_1_1")}>
                                     <div>5Y</div>
                                     </DropdownItem>
                                 </DropdownMenu>
@@ -276,7 +278,7 @@ class GlobalTemp extends React.Component {
                                 {this.state.from}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("from")}
+                                        {this.yearList("from", "mockup_1_1")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
@@ -289,7 +291,7 @@ class GlobalTemp extends React.Component {
                                 {this.state.to}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("to")}
+                                        {this.yearList("to", "mockup_1_1")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
@@ -297,7 +299,7 @@ class GlobalTemp extends React.Component {
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
-                        <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/>
+                        <Chart_m_1_1 x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/>
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
@@ -395,7 +397,7 @@ class GlobalTemp extends React.Component {
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
-                        <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/>
+                        {/* <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/> */}
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
@@ -493,7 +495,7 @@ class GlobalTemp extends React.Component {
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
-                        <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/>
+                        {/* <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/> */}
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
