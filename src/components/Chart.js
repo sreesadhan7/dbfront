@@ -3,7 +3,7 @@ import { LineChart } from '@mui/x-charts';
 function Chart(props) {
         console.log("chart data: ", props)
       if(props.x.length <=0 || props.y1.length <=0 || props.y2.length <=0){
-        return(<div>
+        return(<div align="center">
           <p>Change parameters on the left to obtain graph</p>
         </div>)
       }
