@@ -102,48 +102,71 @@ class Graph extends React.Component {
     console.log(this);
     console.log(n)
     this.setState({country: n});
-    fetch('http://127.0.0.1:5000/db', {
-        method: 'POST',
-        body: JSON.stringify({
-          // Add parameters here
-        }),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      })
-         .then((response) => response.json())
-         .then((data) => {
-            console.log(data);
-            this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
-            // Handle data
-         })
-         .catch((err) => {
-            console.log(err.message);
-         });
+    if(this.state.agg != "select" && this.state.from != "select" && this.state.to != "select"){
+        fetch('http://127.0.0.1:5000/db', {
+            method: 'POST',
+            body: JSON.stringify({
+                country: n,
+                agg: this.state.agg,
+                from: this.state.from,
+                to: this.state.to
+              // Add parameters here
+            }),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+          })
+             .then((response) => response.json())
+             .then((data) => {
+                console.log(data);
+                this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
+                // Handle data
+             })
+             .catch((err) => {
+                console.log(err.message);
+             });
+    }
   }
   changeAgg(e, n) {
     console.log(e);
     console.log(this);
     console.log(n)
     this.setState({agg: e.currentTarget.textContent});
-    fetch('http://127.0.0.1:5000/db', {
-        method: 'POST',
-        body: JSON.stringify({
-          // Add parameters here
-        }),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      })
-         .then((response) => response.json())
-         .then((data) => {
-            console.log(data);
-            this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
-            // Handle data
-         })
-         .catch((err) => {
-            console.log(err.message);
-         });
+    let a;
+    switch(n){
+        case "Y":
+            a = 1
+        case "2Y":
+            a = 2
+        case "3Y":
+            a = 3
+        case "5Y":
+            a = 5
+    }
+    if(this.state.country != "select" && this.state.from != "select" && this.state.to != "select"){
+        fetch('http://127.0.0.1:5000/db', {
+            method: 'POST',
+            body: JSON.stringify({
+              country: this.state.country,
+              agg: a,
+              from: this.state.from,
+              to: this.state.to
+              // Add parameters here
+            }),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+          })
+             .then((response) => response.json())
+             .then((data) => {
+                console.log(data);
+                this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
+                // Handle data
+             })
+             .catch((err) => {
+                console.log(err.message);
+             });
+    }
   }
   changeYear(e, n, param) {
     console.log(e);
@@ -155,24 +178,56 @@ class Graph extends React.Component {
     else{
         this.setState({from: n});
     }
-    fetch('http://127.0.0.1:5000/db', {
-        method: 'POST',
-        body: JSON.stringify({
-          // Add parameters here
-        }),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      })
-         .then((response) => response.json())
-         .then((data) => {
-            console.log(data);
-            this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
-            // Handle data
-         })
-         .catch((err) => {
-            console.log(err.message);
-         });
+    if(param=="to"){
+        if(this.state.country != "select" && this.state.from != "select" && this.state.agg != "select"){
+            fetch('http://127.0.0.1:5000/db', {
+                method: 'POST',
+                body: JSON.stringify({
+                  country: this.state.country,
+                  agg: this.state.agg,
+                  from: this.state.from,
+                  to: n
+                }),
+                headers: {
+                  'Content-type': 'application/json; charset=UTF-8',
+                },
+              })
+                 .then((response) => response.json())
+                 .then((data) => {
+                    console.log(data);
+                    this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
+                    // Handle data
+                 })
+                 .catch((err) => {
+                    console.log(err.message);
+                 });
+        }
+    }
+    else if(param="from"){
+        if(this.state.country != "select" && this.state.to != "select" && this.state.agg != "select"){
+            fetch('http://127.0.0.1:5000/db', {
+                method: 'POST',
+                body: JSON.stringify({
+                    country: this.state.country,
+                    agg: this.state.agg,
+                    from: n,
+                    to: this.state.to
+                }),
+                headers: {
+                  'Content-type': 'application/json; charset=UTF-8',
+                },
+              })
+                 .then((response) => response.json())
+                 .then((data) => {
+                    console.log(data);
+                    this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
+                    // Handle data
+                 })
+                 .catch((err) => {
+                    console.log(err.message);
+                 });
+        }
+    }
   }
   render() {
     console.log("hello",this.state);
