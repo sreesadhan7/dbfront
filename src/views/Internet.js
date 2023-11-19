@@ -204,13 +204,13 @@ class Internet extends React.Component {
               </div>
               <container>
                 <Row className="justify-content-center">
-                    <div>
-                        <h1 className='graphTitle text-white'>Graph Title</h1>
+                    <div className="text-center mt-5">
+                        <h1 className='text-white'>Graph Title</h1>
                     </div>
                 </Row>
               </container>
             </section>  
-            <section>
+            <section className="section">
             <container>
                 <Row className="justify-content-center">
                     <div align="center">
@@ -263,14 +263,14 @@ class Internet extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                <h2>Date Range</h2>
+                                <h4>Date Range</h4>
                                 </div>
                             </Col>
                         </Row>
                         <Row>
                             <Col>
                                 <div align="center">
-                                <h4 className='text-black'>From</h4>
+                                <h6 className='text-black'>From</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
                                 {this.state.from}
@@ -283,7 +283,7 @@ class Internet extends React.Component {
                             </Col>
                             <Col>
                                 <div align="center">
-                                <h4 className='text-black'>To</h4>
+                                <h6 className='text-black'>To</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
                                 {this.state.to}
@@ -296,10 +296,10 @@ class Internet extends React.Component {
                             </Col>
                         </Row>
                     </Col>
-                    <Col className="align-self-center">
+                    <Col lg="7" className="align-self-center">
                         <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/>
                     </Col>
-                    <Col className="align-self-center">
+                    <Col lg="2" className="align-self-center mr-4">
                         <div>
                             <p>Something something something Something something something Something something something Something something something Something something something Something something something Something something something</p>
                         </div>
@@ -307,7 +307,6 @@ class Internet extends React.Component {
                 </Row>
             </container>
             </section>
-            <Divider></Divider>
         </div>
         </main>
         <Footer />
