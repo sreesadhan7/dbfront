@@ -114,6 +114,7 @@ class Graph extends React.Component {
          .then((response) => response.json())
          .then((data) => {
             console.log(data);
+            this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
             // Handle data
          })
          .catch((err) => {
@@ -137,6 +138,7 @@ class Graph extends React.Component {
          .then((response) => response.json())
          .then((data) => {
             console.log(data);
+            this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
             // Handle data
          })
          .catch((err) => {
@@ -165,6 +167,7 @@ class Graph extends React.Component {
          .then((response) => response.json())
          .then((data) => {
             console.log(data);
+            this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
             // Handle data
          })
          .catch((err) => {
@@ -277,7 +280,7 @@ class Graph extends React.Component {
                         </Row>
                     </Col>
                     <Col className="align-self-center">
-                        <Chart x={this.state.dropDownValue1} y="bye"/>
+                        <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/>
                     </Col>
                     <Col className="align-self-center">
                         <div>
