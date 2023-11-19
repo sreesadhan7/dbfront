@@ -132,23 +132,12 @@ class Graph extends React.Component {
     console.log(this);
     console.log(n)
     this.setState({agg: e.currentTarget.textContent});
-    let a;
-    switch(n){
-        case "Y":
-            a = 1
-        case "2Y":
-            a = 2
-        case "3Y":
-            a = 3
-        case "5Y":
-            a = 5
-    }
     if(this.state.country != "select" && this.state.from != "select" && this.state.to != "select"){
         fetch('http://127.0.0.1:5000/db', {
             method: 'POST',
             body: JSON.stringify({
               country: this.state.country,
-              agg: a,
+              agg: n,
               from: this.state.from,
               to: this.state.to
               // Add parameters here
