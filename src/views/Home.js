@@ -98,8 +98,8 @@ Evolution of yearly global temperatures for different countries based on differe
                           <Button
                             className="mt-4"
                             color="primary"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            href="GlobalTemp"
+                            onClick="window.location='http://localhost:3000/GlobalTemp';"
                           >
                             Learn more
                           </Button>
@@ -123,8 +123,8 @@ Evolution of yearly CO2 emissions for different countries based on different fac
                           <Button
                             className="mt-4"
                             color="primary"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            href="CO2"
+                            onClick="window.location='http://localhost:3000/CO2';"
                           >
                             Learn more
                           </Button>
@@ -148,8 +148,8 @@ Evolution of energy usage for different countries based on different factors.
                           <Button
                             className="mt-4"
                             color="primary"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            href="Energy"
+                            onClick="window.location='http://localhost:3000/Energy';"
                           >
                             Learn more
                           </Button>
@@ -175,8 +175,8 @@ Evolution of Gross Domestic Product (GDP) for different countries based on diffe
                           <Button
                             className="mt-4"
                             color="primary"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            href="GDP"
+                            onClick="window.location='http://localhost:3000/GDP';"
                           >
                             Learn more
                           </Button>
@@ -200,8 +200,8 @@ Evolution of yearly internet usage for different countries based on different fa
                           <Button
                             className="mt-4"
                             color="primary"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            href="Internet"
+                            onClick="window.location='http://localhost:3000/Internet';"
                           >
                             Learn more
                           </Button>

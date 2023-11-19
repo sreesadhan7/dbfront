@@ -108,19 +108,19 @@ class NavBar extends React.Component {
                 </div>
                 <Nav className="ml-auto" navbar>
                 <NavItem> 
-                    <NavLink href="#">Global Temperatures</NavLink> 
+                    <NavLink href="GlobalTemp">Global Temperatures</NavLink> 
                 </NavItem>
                 <NavItem> 
-                    <NavLink href="#">CO2 Emissions</NavLink> 
+                    <NavLink href="CO2">CO2 Emissions</NavLink> 
                 </NavItem>
                 <NavItem> 
-                    <NavLink href="#">Energy Consumption</NavLink> 
+                    <NavLink href="Energy">Energy Consumption</NavLink> 
                 </NavItem>
                 <NavItem> 
-                    <NavLink href="#">GDP</NavLink> 
+                    <NavLink href="GDP">GDP</NavLink> 
                 </NavItem> 
                 <NavItem> 
-                    <NavLink href="#">Internet Usage</NavLink> 
+                    <NavLink href="Internet">Internet Usage</NavLink> 
                 </NavItem>
                 </Nav>
               </UncontrolledCollapse>

@@ -35,7 +35,7 @@ import Chart from "../components/Chart.js";
 import Divider from "../components/Divider.js"
 
 
-class Graph extends React.Component {
+class Energy extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -316,4 +316,4 @@ class Graph extends React.Component {
   }
 }
 
-export default Graph;
+export default Energy;
