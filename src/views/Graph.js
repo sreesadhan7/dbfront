@@ -103,7 +103,7 @@ class Graph extends React.Component {
     console.log(n)
     this.setState({country: n});
     if(this.state.agg != "select" && this.state.from != "select" && this.state.to != "select"){
-        fetch('http://127.0.0.1:5000/db', {
+        fetch('http://127.0.0.1:5000/mockup_1_1', {
             method: 'POST',
             body: JSON.stringify({
                 country: n,
@@ -133,7 +133,7 @@ class Graph extends React.Component {
     console.log(n)
     this.setState({agg: e.currentTarget.textContent});
     if(this.state.country != "select" && this.state.from != "select" && this.state.to != "select"){
-        fetch('http://127.0.0.1:5000/db', {
+        fetch('http://127.0.0.1:5000/mockup_1_1', {
             method: 'POST',
             body: JSON.stringify({
               country: this.state.country,
@@ -169,7 +169,7 @@ class Graph extends React.Component {
     }
     if(param=="to"){
         if(this.state.country != "select" && this.state.from != "select" && this.state.agg != "select"){
-            fetch('http://127.0.0.1:5000/db', {
+            fetch('http://127.0.0.1:5000/mockup_1_1', {
                 method: 'POST',
                 body: JSON.stringify({
                   country: this.state.country,
@@ -194,7 +194,7 @@ class Graph extends React.Component {
     }
     else if(param="from"){
         if(this.state.country != "select" && this.state.to != "select" && this.state.agg != "select"){
-            fetch('http://127.0.0.1:5000/db', {
+            fetch('http://127.0.0.1:5000/mockup_1_1', {
                 method: 'POST',
                 body: JSON.stringify({
                     country: this.state.country,
