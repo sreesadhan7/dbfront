@@ -16,6 +16,7 @@
 
 */
 import React from "react";
+import { Link } from 'react-router-dom';
 // nodejs library that concatenates classes
 
 // reactstrap components
@@ -95,14 +96,11 @@ A deep dive into the causes and consequences of Global Warming spanning Economic
                           <p className="description mt-3">
 Evolution of yearly global temperatures for different countries based on different factors.
                           </p>
-                          <Button
-                            className="mt-4"
-                            color="primary"
-                            href="GlobalTemp"
-                            onClick="window.location='http://localhost:3000/GlobalTemp';"
-                          >
-                            Learn more
-                          </Button>
+                          <Link to="/GlobalTemp">
+                                <Button className="mt-4" color="primary">
+                                    Learn more
+                                </Button>
+                            </Link>
                         </CardBody>
                       </Card>
                     </Col>
@@ -120,14 +118,11 @@ Evolution of yearly global temperatures for different countries based on differe
                           <p className="description mt-3">
 Evolution of yearly CO2 emissions for different countries based on different factors.
                           </p>
-                          <Button
-                            className="mt-4"
-                            color="primary"
-                            href="CO2"
-                            onClick="window.location='http://localhost:3000/CO2';"
-                          >
-                            Learn more
-                          </Button>
+                          <Link to="/CO2">
+                                <Button className="mt-4" color="primary">
+                                    Learn more
+                                </Button>
+                            </Link>
                         </CardBody>
                       </Card>
                     </Col>
@@ -145,14 +140,11 @@ Evolution of yearly CO2 emissions for different countries based on different fac
                           <p className="description mt-3">
 Evolution of energy usage for different countries based on different factors.
                           </p>
-                          <Button
-                            className="mt-4"
-                            color="primary"
-                            href="Energy"
-                            onClick="window.location='http://localhost:3000/Energy';"
-                          >
-                            Learn more
-                          </Button>
+                          <Link to="/Energy">
+                                <Button className="mt-4" color="primary">
+                                    Learn more
+                                </Button>
+                            </Link>
                         </CardBody>
                       </Card>
                     </Col>
@@ -172,14 +164,11 @@ Evolution of energy usage for different countries based on different factors.
                           <p className="description mt-3">
 Evolution of Gross Domestic Product (GDP) for different countries based on different factors.
                           </p>
-                          <Button
-                            className="mt-4"
-                            color="primary"
-                            href="GDP"
-                            onClick="window.location='http://localhost:3000/GDP';"
-                          >
-                            Learn more
-                          </Button>
+                          <Link to="/GDP">
+                                <Button className="mt-4" color="primary">
+                                    Learn more
+                                </Button>
+                            </Link>
                         </CardBody>
                       </Card>
                     </Col>
@@ -197,14 +186,11 @@ Evolution of Gross Domestic Product (GDP) for different countries based on diffe
                           <p className="description mt-3">
 Evolution of yearly internet usage for different countries based on different factors.
                           </p>
-                          <Button
-                            className="mt-4"
-                            color="primary"
-                            href="Internet"
-                            onClick="window.location='http://localhost:3000/Internet';"
-                          >
-                            Learn more
-                          </Button>
+                          <Link to="/Internet">
+                                <Button className="mt-4" color="primary">
+                                    Learn more
+                                </Button>
+                            </Link>
                         </CardBody>
                       </Card>
                     </Col>
