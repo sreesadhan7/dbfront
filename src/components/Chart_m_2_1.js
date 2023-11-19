@@ -1,26 +1,37 @@
 import { LineChart } from '@mui/x-charts';
 
 function Chart_m_2_1(props) {
-    console.log("chart data: ", props)
-  if(props.x.length <=0 || props.y1.length <=0 || props.y2.length <=0){
+  console.log("chart data: ", props)
+  if(props.data == null){
     return(<div>
       <p>Change parameters on the left to obtain graph</p>
     </div>)
   }
   else{
+    const countries = [];
+    let allSeries = [];
+    console.log(props.data);
+    for (const [key, value] of Object.entries(props.data)) {
+        countries.push(key);
+      }
+    console.log(props.data[countries[0]]);
+    countries.forEach(c =>{
+        let seriesData = {
+            yAxisKey: 'y1',
+            data: props.data[c].y,
+            label: c
+        }
+        allSeries.push(seriesData);
+    });
+    console.log("tobeGraphed", allSeries);
     return(
     <LineChart
-      xAxis={[{ data: props.x , scaleType: 'band'}]}
+      xAxis={[{ data: props.data[countries.at(0)].x , scaleType: 'band'}]}
       yAxis={[
-        { id: 'y1', scaleType: 'linear' },
-        { id: 'y2', scaleType: 'linear' },
+        { id: 'y1', scaleType: 'linear' }
       ]}
-      series={[
-        { yAxisKey: 'y1', data: props.y1, label: 'total co2_emissions' },
-        { yAxisKey: 'y2', data: props.y2, label: 'GDP in billions' },
-      ]}
+      series={allSeries}
       leftAxis="y1"
-      rightAxis="y2"
       height={400}
     />
     )

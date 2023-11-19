@@ -43,9 +43,7 @@ class CO2 extends React.Component {
         agg: "select",
         from: "select",
         to: "select",
-        xData: [],
-        yData1: [],
-        yData2: []
+        data_m_2_1: null
     };
     this.changeCountry = this.changeCountry.bind(this);
     this.changeAgg = this.changeAgg.bind(this);
@@ -92,7 +90,7 @@ class CO2 extends React.Component {
              .then((response) => response.json())
              .then((data) => {
                 console.log(data);
-                this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
+                this.setState({data_m_2_1:data.data});
                 // Handle data
              })
              .catch((err) => {
@@ -122,7 +120,7 @@ class CO2 extends React.Component {
              .then((response) => response.json())
              .then((data) => {
                 console.log(data);
-                this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
+                this.setState({data_m_2_1:data.data});
                 // Handle data
              })
              .catch((err) => {
@@ -157,7 +155,7 @@ class CO2 extends React.Component {
                  .then((response) => response.json())
                  .then((data) => {
                     console.log(data);
-                    this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
+                    this.setState({data_m_2_1:data.data});
                     // Handle data
                  })
                  .catch((err) => {
@@ -182,7 +180,7 @@ class CO2 extends React.Component {
                  .then((response) => response.json())
                  .then((data) => {
                     console.log(data);
-                    this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
+                    this.setState({data_m_2_1:data.data});
                     // Handle data
                  })
                  .catch((err) => {
@@ -297,7 +295,7 @@ class CO2 extends React.Component {
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
-                        {/* <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/> */}
+                        <Chart_m_2_1 data={this.state.data_m_2_1}/>
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
