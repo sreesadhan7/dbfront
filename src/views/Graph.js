@@ -20,10 +20,6 @@ import React from "react";
 
 // reactstrap components
 import {
-  Button,
-  Card,
-  CardBody,
-  Container,
   UncontrolledDropdown,
   DropdownMenu,
   DropdownItem,
@@ -38,25 +34,6 @@ import Footer from "../components/Footer.js";
 import Chart from "../components/Chart.js";
 import Divider from "../components/Divider.js"
 
-function getCountries(){
-    fetch('http://127.0.0.1:5000/countries', {
-        method: 'POST',
-        body: JSON.stringify({
-          // Add parameters here
-        }),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      })
-         .then((response) => response.json())
-         .then((data) => {
-            console.log(data.data);
-           return data.data;
-         })
-         .catch((err) => {
-            console.log(err.message);
-         });
-  }
 
 class Graph extends React.Component {
   constructor(props){
@@ -80,7 +57,7 @@ class Graph extends React.Component {
     console.log("countries", countries);
     const options = []
     for(let i=0; i<countries.length; i++){
-        options.push(<DropdownItem onClick={e=>this.changeCountry(e,countries[i])}><div>{countries[i]}</div></DropdownItem>);
+        options.push(<DropdownItem className="dropdown-item" onClick={e=>this.changeCountry(e,countries[i])}><div>{countries[i]}</div></DropdownItem>);
     }
     return options;
   }
@@ -92,11 +69,7 @@ class Graph extends React.Component {
     }
     return options;
   }
-//   componentDidMount() {
-//     document.documentElement.scrollTop = 0;
-//     document.scrollingElement.scrollTop = 0;
-//     this.refs.main.scrollTop = 0;
-//   }
+
   changeCountry(e, n) {
     console.log(e);
     console.log(this);
@@ -254,7 +227,7 @@ class Graph extends React.Component {
                                     <DropdownToggle caret>
                                     {this.state.country}
                                     </DropdownToggle>
-                                    <DropdownMenu>
+                                    <DropdownMenu container={'body'}>
                                         {this.countryList()}
                                     </DropdownMenu>
                                     </UncontrolledDropdown>
@@ -269,7 +242,7 @@ class Graph extends React.Component {
                                 <DropdownToggle caret>
                                 {this.state.agg}
                                 </DropdownToggle>
-                                <DropdownMenu>
+                                <DropdownMenu container={'body'}>
                                     <DropdownItem onClick={e=>this.changeAgg(e,"Y")}>
                                     <div>Y</div>
                                     </DropdownItem>
@@ -302,7 +275,7 @@ class Graph extends React.Component {
                                 <DropdownToggle caret>
                                 {this.state.from}
                                 </DropdownToggle>
-                                <DropdownMenu>
+                                <DropdownMenu container={'body'}>
                                         {this.yearList("from")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
@@ -315,7 +288,7 @@ class Graph extends React.Component {
                                 <DropdownToggle caret>
                                 {this.state.to}
                                 </DropdownToggle>
-                                <DropdownMenu>
+                                <DropdownMenu container={'body'}>
                                         {this.yearList("to")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>

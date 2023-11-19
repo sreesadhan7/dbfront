@@ -6,12 +6,14 @@
 }
 
 .dropdown-menu {
+  position: relative;
   height: 150px;
   overflow-y: scroll;
   min-width: 12rem;
   z-index:9999;
 
   .dropdown-item {
+    position: relative;
     padding: 1rem;
     font-size: $font-size-sm;
     z-index:9999;
