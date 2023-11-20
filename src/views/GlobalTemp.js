@@ -41,13 +41,27 @@ class GlobalTemp extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-        country: "select",
-        agg: "select",
-        from: "select",
-        to: "select",
-        data_m_1_1: null,
-        data_m_1_2: null,
-        data_m_1_3: null
+        m_1_1: {
+            country: "select",
+            agg: "select",
+            from: "select",
+            to: "select",
+            data: null
+        },
+        m_1_2: {
+            country: "select",
+            agg: "select",
+            from: "select",
+            to: "select",
+            data: null
+        },
+        m_1_3: {
+            country: "select",
+            agg: "select",
+            from: "select",
+            to: "select",
+            data: null
+        }
     };
     this.changeCountry = this.changeCountry.bind(this);
     this.changeAgg = this.changeAgg.bind(this);
@@ -73,18 +87,42 @@ class GlobalTemp extends React.Component {
   }
 
   changeCountry(e, n, url) {
-    console.log(e);
-    console.log(this);
-    console.log(n)
-    this.setState({country: n});
-    if(this.state.agg != "select" && this.state.from != "select" && this.state.to != "select"){
+    var param_country = null;
+    var param_agg = null;
+    var param_from = null;
+    var param_to = null;
+    switch(url){
+        case "mockup_1_1":
+            this.state.m_1_1.country=n;
+            param_country = n;
+            param_agg = this.state.m_1_1.agg;
+            param_from = this.state.m_1_1.from;
+            param_to = this.state.m_1_1.to;
+            break;
+        case "mockup_1_2":
+            this.state.m_1_2.country=n;
+            param_country = n;
+            param_agg = this.state.m_1_2.agg;
+            param_from = this.state.m_1_2.from;
+            param_to = this.state.m_1_2.to;
+            break;
+        case "mockup_1_3":
+            this.state.m_1_3.country=n;
+            param_country = n;
+            param_agg = this.state.m_1_3.agg;
+            param_from = this.state.m_1_3.from;
+            param_to = this.state.m_1_3.to;
+            break;
+    }
+    this.setState({state: this.state});
+    if(param_agg != "select" && param_from != "select" && param_to != "select"){
         fetch(`http://127.0.0.1:5000/${url}`, {
             method: 'POST',
             body: JSON.stringify({
-                country: n,
-                agg: this.state.agg,
-                from: this.state.from,
-                to: this.state.to
+                country: param_country,
+                agg: param_agg,
+                from: param_from,
+                to: param_to
               // Add parameters here
             }),
             headers: {
@@ -96,13 +134,19 @@ class GlobalTemp extends React.Component {
                 console.log(data);
                 switch(url){
                   case "mockup_1_1":
-                    this.setState({data_m_1_1:data.data});
+                    var temp = this.state.m_1_1;
+                    temp.data = data.data;
+                    this.setState({m_1_1:temp});
                     break;
                   case "mockup_1_2":
-                    this.setState({data_m_1_2:data.data});
+                    var temp = this.state.m_1_2;
+                    temp.data = data.data;
+                    this.setState({m_1_2:temp});
                     break;
                   case "mockup_1_3":
-                    this.setState({data_m_1_3:data.data});
+                    var temp = this.state.m_1_3;
+                    temp.data = data.data;
+                    this.setState({m_1_3:temp});
                     break;
                 }
                 // Handle data
@@ -113,18 +157,42 @@ class GlobalTemp extends React.Component {
     }
   }
   changeAgg(e, n, url) {
-    console.log(e);
-    console.log(this);
-    console.log(n)
-    this.setState({agg: e.currentTarget.textContent});
-    if(this.state.country != "select" && this.state.from != "select" && this.state.to != "select"){
+    var param_country = null;
+    var param_agg = null;
+    var param_from = null;
+    var param_to = null;
+    switch(url){
+        case "mockup_1_1":
+            this.state.m_1_1.agg=n;
+            param_country = this.state.m_1_1.country;
+            param_agg = n;
+            param_from = this.state.m_1_1.from;
+            param_to = this.state.m_1_1.to;
+            break;
+        case "mockup_1_2":
+            this.state.m_1_2.agg=n;
+            param_country = this.state.m_1_2.country;
+            param_agg = n;
+            param_from = this.state.m_1_2.from;
+            param_to = this.state.m_1_2.to;
+            break;
+        case "mockup_1_3":
+            this.state.m_1_3.agg=n;
+            param_country = this.state.m_1_3.country;
+            param_agg = n;
+            param_from = this.state.m_1_3.from;
+            param_to = this.state.m_1_3.to;
+            break;
+    }
+    this.setState({state: this.state});
+    if(param_country != "select" && param_from != "select" && param_to != "select"){
         fetch(`http://127.0.0.1:5000/${url}`, {
             method: 'POST',
             body: JSON.stringify({
-              country: this.state.country,
-              agg: n,
-              from: this.state.from,
-              to: this.state.to
+              country: param_country,
+              agg: param_agg,
+              from: param_from,
+              to: param_to
               // Add parameters here
             }),
             headers: {
@@ -136,13 +204,19 @@ class GlobalTemp extends React.Component {
                 console.log(data);
                 switch(url){
                   case "mockup_1_1":
-                    this.setState({data_m_1_1:data.data});
+                    var temp = this.state.m_1_1;
+                    temp.data = data.data;
+                    this.setState({m_1_1:temp});
                     break;
                   case "mockup_1_2":
-                    this.setState({data_m_1_2:data.data});
+                    var temp = this.state.m_1_2;
+                    temp.data = data.data;
+                    this.setState({m_1_2:temp});
                     break;
                   case "mockup_1_3":
-                    this.setState({data_m_1_3:data.data});
+                    var temp = this.state.m_1_3;
+                    temp.data = data.data;
+                    this.setState({m_1_3:temp});
                     break;
                 }
              })
@@ -152,24 +226,71 @@ class GlobalTemp extends React.Component {
     }
   }
   changeYear(e, n, param, url) {
-    console.log(e);
-    console.log(this);
-    console.log(n)
+    var param_country = null;
+    var param_agg = null;
+    var param_from = null;
+    var param_to = null;
     if(param=="to"){
-        this.setState({to: n});
+        switch(url){
+            case "mockup_1_1":
+                this.state.m_1_1.to=n;
+                param_country = this.state.m_1_1.country;
+                param_agg = this.state.m_1_1.agg;
+                param_from = this.state.m_1_1.from;
+                param_to = n;
+                break;
+            case "mockup_1_2":
+                this.state.m_1_2.to=n;
+                param_country = this.state.m_1_2.country;
+                param_agg = this.state.m_1_2.agg;
+                param_from = this.state.m_1_2.from;
+                param_to = n;
+                break;
+            case "mockup_1_3":
+                this.state.m_1_3.to=n;
+                param_country = this.state.m_1_3.country;
+                param_agg = this.state.m_1_3.agg;
+                param_from = this.state.m_1_3.from;
+                param_to = n;
+                break;
+        }
+        this.setState({state: this.state});
     }
     else{
-        this.setState({from: n});
+        switch(url){
+            case "mockup_1_1":
+                this.state.m_1_1.from=n;
+                param_country = this.state.m_1_1.country;
+                param_agg = this.state.m_1_1.agg;
+                param_from = n;
+                param_to = this.state.m_1_1.to;
+                break;
+            case "mockup_1_2":
+                this.state.m_1_2.from=n;
+                param_country = this.state.m_1_2.country;
+                param_agg = this.state.m_1_2.agg;
+                param_from = n;
+                param_to = this.state.m_1_3.to;
+                break;
+            case "mockup_1_3":
+                this.state.m_1_3.from=n;
+                param_country = this.state.m_1_3.country;
+                param_agg = this.state.m_1_3.agg;
+                param_from = n;
+                param_to = this.state.m_1_3.to;
+                break;
+        }
+        this.setState({state: this.state});
     }
     if(param=="to"){
-        if(this.state.country != "select" && this.state.from != "select" && this.state.agg != "select"){
+        if(param_country != "select" && param_from != "select" && param_agg != "select"){
             fetch(`http://127.0.0.1:5000/${url}`, {
                 method: 'POST',
                 body: JSON.stringify({
-                  country: this.state.country,
-                  agg: this.state.agg,
-                  from: this.state.from,
-                  to: n
+                  country: param_country,
+                  agg: param_agg,
+                  from: param_from,
+                  to: param_to
                 }),
                 headers: {
                   'Content-type': 'application/json; charset=UTF-8',
@@ -180,13 +301,19 @@ class GlobalTemp extends React.Component {
                     console.log(data);
                     switch(url){
                       case "mockup_1_1":
-                        this.setState({data_m_1_1:data.data});
+                        var temp = this.state.m_1_1;
+                        temp.data = data.data;
+                        this.setState({m_1_1:temp});
                         break;
                       case "mockup_1_2":
-                        this.setState({data_m_1_2:data.data});
+                        var temp = this.state.m_1_2;
+                        temp.data = data.data;
+                        this.setState({m_1_2:temp});
                         break;
                       case "mockup_1_3":
-                        this.setState({data_m_1_3:data.data});
+                        var temp = this.state.m_1_3;
+                        temp.data = data.data;
+                        this.setState({m_1_3:temp});
                         break;
                     }
                  })
@@ -196,14 +323,14 @@ class GlobalTemp extends React.Component {
         }
     }
     else if(param="from"){
-        if(this.state.country != "select" && this.state.to != "select" && this.state.agg != "select"){
+        if(param_country != "select" && param_to != "select" && param_agg != "select"){
             fetch(`http://127.0.0.1:5000/${url}`, {
                 method: 'POST',
                 body: JSON.stringify({
-                    country: this.state.country,
-                    agg: this.state.agg,
-                    from: n,
-                    to: this.state.to
+                    country: param_country,
+                    agg: param_agg,
+                    from: param_from,
+                    to: param_to
                 }),
                 headers: {
                   'Content-type': 'application/json; charset=UTF-8',
@@ -213,16 +340,22 @@ class GlobalTemp extends React.Component {
                  .then((data) => {
                     console.log(data);
                     switch(url){
-                      case "mockup_1_1":
-                        this.setState({data_m_1_1:data.data});
-                        break;
-                      case "mockup_1_2":
-                        this.setState({data_m_1_2:data.data});
-                        break;
-                      case "mockup_1_3":
-                        this.setState({data_m_1_3:data.data});
-                        break;
-                    }
+                        case "mockup_1_1":
+                          var temp = this.state.m_1_1;
+                          temp.data = data.data;
+                          this.setState({m_1_1:temp});
+                          break;
+                        case "mockup_1_2":
+                          var temp = this.state.m_1_2;
+                          temp.data = data.data;
+                          this.setState({m_1_2:temp});
+                          break;
+                        case "mockup_1_3":
+                          var temp = this.state.m_1_3;
+                          temp.data = data.data;
+                          this.setState({m_1_3:temp});
+                          break;
+                      }
                     // Handle data
                  })
                  .catch((err) => {
@@ -265,7 +398,7 @@ class GlobalTemp extends React.Component {
                                     <h2 className='text-black'>Country</h2>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
-                                    {this.state.country}
+                                    {this.state.m_1_1.country}
                                     </DropdownToggle>
                                     <DropdownMenu container={'body'}>
                                         {this.countryList("mockup_1_1")}
@@ -280,7 +413,7 @@ class GlobalTemp extends React.Component {
                                 <h2 className='text-black'>Aggregation View</h2>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.agg}
+                                {this.state.m_1_1.agg}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
                                     <DropdownItem onClick={e=>this.changeAgg(e,"Y", "mockup_1_1")}>
@@ -313,7 +446,7 @@ class GlobalTemp extends React.Component {
                                 <h6 className='text-black'>From</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.from}
+                                {this.state.m_1_1.from}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
                                         {this.yearList("from", "mockup_1_1")}
@@ -326,7 +459,7 @@ class GlobalTemp extends React.Component {
                                 <h6 className='text-black'>To</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.to}
+                                {this.state.m_1_1.to}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
                                         {this.yearList("to", "mockup_1_1")}
@@ -337,7 +470,7 @@ class GlobalTemp extends React.Component {
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
-                        <Chart_m_1_1 data={this.state.data_m_1_1}/>
+                        <Chart_m_1_1 data={this.state.m_1_1.data}/>
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
@@ -363,7 +496,7 @@ class GlobalTemp extends React.Component {
                                     <h2 className='text-black'>Country</h2>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
-                                    {this.state.country}
+                                    {this.state.m_1_2.country}
                                     </DropdownToggle>
                                     <DropdownMenu container={'body'}>
                                         {this.countryList("mockup_1_2")}
@@ -378,7 +511,7 @@ class GlobalTemp extends React.Component {
                                 <h2 className='text-black'>Aggregation View</h2>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.agg}
+                                {this.state.m_1_2.agg}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
                                     <DropdownItem onClick={e=>this.changeAgg(e,"Y", "mockup_1_2")}>
@@ -411,7 +544,7 @@ class GlobalTemp extends React.Component {
                                 <h6 className='text-black'>From</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.from}
+                                {this.state.m_1_2.from}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
                                         {this.yearList("from", "mockup_1_2")}
@@ -424,7 +557,7 @@ class GlobalTemp extends React.Component {
                                 <h6 className='text-black'>To</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.to}
+                                {this.state.m_1_2.to}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
                                         {this.yearList("to", "mockup_1_2")}
@@ -435,7 +568,7 @@ class GlobalTemp extends React.Component {
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
-                        <Chart_m_1_2 data={this.state.data_m_1_2}/>
+                        <Chart_m_1_2 data={this.state.m_1_2.data}/>
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
@@ -461,7 +594,7 @@ class GlobalTemp extends React.Component {
                                     <h2 className='text-black'>Country</h2>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
-                                    {this.state.country}
+                                    {this.state.m_1_3.country}
                                     </DropdownToggle>
                                     <DropdownMenu container={'body'}>
                                         {this.countryList("mockup_1_3")}
@@ -476,7 +609,7 @@ class GlobalTemp extends React.Component {
                                 <h2 className='text-black'>Aggregation View</h2>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.agg}
+                                {this.state.m_1_3.agg}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
                                     <DropdownItem onClick={e=>this.changeAgg(e,"Y", "mockup_1_3")}>
@@ -509,7 +642,7 @@ class GlobalTemp extends React.Component {
                                 <h6 className='text-black'>From</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.from}
+                                {this.state.m_1_3.from}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
                                         {this.yearList("from", "mockup_1_3")}
@@ -522,7 +655,7 @@ class GlobalTemp extends React.Component {
                                 <h6 className='text-black'>To</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.to}
+                                {this.state.m_1_3.to}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
                                         {this.yearList("to", "mockup_1_3")}
@@ -533,7 +666,7 @@ class GlobalTemp extends React.Component {
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
-                        <Chart_m_1_3 data={this.state.data_m_1_3}/>
+                        <Chart_m_1_3 data={this.state.m_1_3.data}/>
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
