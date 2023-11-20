@@ -32,8 +32,8 @@ import {
 import Navbar from "../components/NavBar.js";
 import Footer from "../components/Footer.js";
 import Chart_m_1_1 from "../components/Chart_m_1_1.js";
-import Chart_m_1_2 from "../components/Chart_m_1_1.js";
-import Chart_m_1_3 from "../components/Chart_m_1_1.js";
+import Chart_m_1_2 from "../components/Chart_m_1_2.js";
+import Chart_m_1_3 from "../components/Chart_m_1_3.js";
 import Divider from "../components/Divider.js"
 
 
@@ -45,9 +45,9 @@ class GlobalTemp extends React.Component {
         agg: "select",
         from: "select",
         to: "select",
-        xData: [],
-        yData1: [],
-        yData2: []
+        data_m_1_1: null,
+        data_m_1_2: null,
+        data_m_1_3: null
     };
     this.changeCountry = this.changeCountry.bind(this);
     this.changeAgg = this.changeAgg.bind(this);
@@ -94,7 +94,17 @@ class GlobalTemp extends React.Component {
              .then((response) => response.json())
              .then((data) => {
                 console.log(data);
-                this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
+                switch(url){
+                  case "mockup_1_1":
+                    this.setState({data_m_1_1:data.data});
+                    break;
+                  case "mockup_1_2":
+                    this.setState({data_m_1_2:data.data});
+                    break;
+                  case "mockup_1_3":
+                    this.setState({data_m_1_3:data.data});
+                    break;
+                }
                 // Handle data
              })
              .catch((err) => {
@@ -124,8 +134,17 @@ class GlobalTemp extends React.Component {
              .then((response) => response.json())
              .then((data) => {
                 console.log(data);
-                this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
-                // Handle data
+                switch(url){
+                  case "mockup_1_1":
+                    this.setState({data_m_1_1:data.data});
+                    break;
+                  case "mockup_1_2":
+                    this.setState({data_m_1_2:data.data});
+                    break;
+                  case "mockup_1_3":
+                    this.setState({data_m_1_3:data.data});
+                    break;
+                }
              })
              .catch((err) => {
                 console.log(err.message);
@@ -159,8 +178,17 @@ class GlobalTemp extends React.Component {
                  .then((response) => response.json())
                  .then((data) => {
                     console.log(data);
-                    this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
-                    // Handle data
+                    switch(url){
+                      case "mockup_1_1":
+                        this.setState({data_m_1_1:data.data});
+                        break;
+                      case "mockup_1_2":
+                        this.setState({data_m_1_2:data.data});
+                        break;
+                      case "mockup_1_3":
+                        this.setState({data_m_1_3:data.data});
+                        break;
+                    }
                  })
                  .catch((err) => {
                     console.log(err.message);
@@ -184,7 +212,17 @@ class GlobalTemp extends React.Component {
                  .then((response) => response.json())
                  .then((data) => {
                     console.log(data);
-                    this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
+                    switch(url){
+                      case "mockup_1_1":
+                        this.setState({data_m_1_1:data.data});
+                        break;
+                      case "mockup_1_2":
+                        this.setState({data_m_1_2:data.data});
+                        break;
+                      case "mockup_1_3":
+                        this.setState({data_m_1_3:data.data});
+                        break;
+                    }
                     // Handle data
                  })
                  .catch((err) => {
@@ -299,7 +337,7 @@ class GlobalTemp extends React.Component {
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
-                        <Chart_m_1_1 x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/>
+                        <Chart_m_1_1 data={this.state.data_m_1_1}/>
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
@@ -328,7 +366,7 @@ class GlobalTemp extends React.Component {
                                     {this.state.country}
                                     </DropdownToggle>
                                     <DropdownMenu container={'body'}>
-                                        {this.countryList()}
+                                        {this.countryList("mockup_1_2")}
                                     </DropdownMenu>
                                     </UncontrolledDropdown>
                                 </div>
@@ -343,16 +381,16 @@ class GlobalTemp extends React.Component {
                                 {this.state.agg}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"Y")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"Y", "mockup_1_2")}>
                                     <div>Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"2Y")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"2Y", "mockup_1_2")}>
                                     <div>2Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"3Y")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"3Y", "mockup_1_2")}>
                                     <div>3Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"4Y")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"4Y", "mockup_1_2")}>
                                     <div>5Y</div>
                                     </DropdownItem>
                                 </DropdownMenu>
@@ -376,7 +414,7 @@ class GlobalTemp extends React.Component {
                                 {this.state.from}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("from")}
+                                        {this.yearList("from", "mockup_1_2")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
@@ -389,7 +427,7 @@ class GlobalTemp extends React.Component {
                                 {this.state.to}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("to")}
+                                        {this.yearList("to", "mockup_1_2")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
@@ -397,7 +435,7 @@ class GlobalTemp extends React.Component {
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
-                        {/* <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/> */}
+                        <Chart_m_1_2 data={this.state.data_m_1_2}/>
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
@@ -426,7 +464,7 @@ class GlobalTemp extends React.Component {
                                     {this.state.country}
                                     </DropdownToggle>
                                     <DropdownMenu container={'body'}>
-                                        {this.countryList()}
+                                        {this.countryList("mockup_1_3")}
                                     </DropdownMenu>
                                     </UncontrolledDropdown>
                                 </div>
@@ -441,16 +479,16 @@ class GlobalTemp extends React.Component {
                                 {this.state.agg}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"Y")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"Y", "mockup_1_3")}>
                                     <div>Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"2Y")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"2Y", "mockup_1_3")}>
                                     <div>2Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"3Y")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"3Y", "mockup_1_3")}>
                                     <div>3Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"4Y")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"4Y", "mockup_1_3")}>
                                     <div>5Y</div>
                                     </DropdownItem>
                                 </DropdownMenu>
@@ -474,7 +512,7 @@ class GlobalTemp extends React.Component {
                                 {this.state.from}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("from")}
+                                        {this.yearList("from", "mockup_1_3")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
@@ -487,7 +525,7 @@ class GlobalTemp extends React.Component {
                                 {this.state.to}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("to")}
+                                        {this.yearList("to", "mockup_1_3")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
@@ -495,7 +533,7 @@ class GlobalTemp extends React.Component {
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
-                        {/* <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/> */}
+                        <Chart_m_1_3 data={this.state.data_m_1_3}/>
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
