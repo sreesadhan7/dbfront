@@ -39,23 +39,22 @@ class CO2 extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-        country: "select",
+        topN: "select",
         agg: "select",
         from: "select",
         to: "select",
         data_m_2_1: null
     };
-    this.changeCountry = this.changeCountry.bind(this);
-    this.changeAgg = this.changeAgg.bind(this);
+    this.changeTopN = this.changeTopN.bind(this);
     this.changeYear = this.changeYear.bind(this);
-    this.countryList = this.countryList.bind(this);
+    this.topNCountries = this.topNCountries.bind(this);
   }
-   countryList(){
-    const countries = [5,10, 15]
-    console.log("countries", countries);
+   topNCountries(){
+    const years = [5,10, 15]
+    console.log("years", years);
     const options = []
-    for(let i=0; i<countries.length; i++){
-        options.push(<DropdownItem className="dropdown-item" onClick={e=>this.changeCountry(e,countries[i])}><div>{countries[i]}</div></DropdownItem>);
+    for(let i=0; i<years.length; i++){
+        options.push(<DropdownItem className="dropdown-item" onClick={e=>this.changeTopN(e,years[i])}><div>{years[i]}</div></DropdownItem>);
     }
     return options;
   }
@@ -68,49 +67,19 @@ class CO2 extends React.Component {
     return options;
   }
 
-  changeCountry(e, n) {
+  changeTopN(e, n) {
     console.log(e);
     console.log(this);
     console.log(n)
-    this.setState({country: n});
-    if(this.state.agg != "select" && this.state.from != "select" && this.state.to != "select"){
+    this.setState({topN: n});
+    if(this.state.from != "select" && this.state.to != "select"){
         fetch('http://127.0.0.1:5000/mockup_2_1', {
             method: 'POST',
             body: JSON.stringify({
-                country: n,
+                topN: n,
                 agg: this.state.agg,
                 from: this.state.from,
                 to: this.state.to
-              // Add parameters here
-            }),
-            headers: {
-              'Content-type': 'application/json; charset=UTF-8',
-            },
-          })
-             .then((response) => response.json())
-             .then((data) => {
-                console.log(data);
-                this.setState({data_m_2_1:data.data});
-                // Handle data
-             })
-             .catch((err) => {
-                console.log(err.message);
-             });
-    }
-  }
-  changeAgg(e, n) {
-    console.log(e);
-    console.log(this);
-    console.log(n)
-    this.setState({agg: e.currentTarget.textContent});
-    if(this.state.country != "select" && this.state.from != "select" && this.state.to != "select"){
-        fetch('http://127.0.0.1:5000/mockup_2_1', {
-            method: 'POST',
-            body: JSON.stringify({
-              country: this.state.country,
-              agg: n,
-              from: this.state.from,
-              to: this.state.to
               // Add parameters here
             }),
             headers: {
@@ -139,11 +108,11 @@ class CO2 extends React.Component {
         this.setState({from: n});
     }
     if(param=="to"){
-        if(this.state.country != "select" && this.state.from != "select" && this.state.agg != "select"){
+        if(this.state.topN != "select" && this.state.from != "select"){
             fetch('http://127.0.0.1:5000/mockup_2_1', {
                 method: 'POST',
                 body: JSON.stringify({
-                  country: this.state.country,
+                  topN: this.state.topN,
                   agg: this.state.agg,
                   from: this.state.from,
                   to: n
@@ -164,11 +133,11 @@ class CO2 extends React.Component {
         }
     }
     else if(param="from"){
-        if(this.state.country != "select" && this.state.to != "select" && this.state.agg != "select"){
+        if(this.state.topN != "select" && this.state.to != "select"){
             fetch('http://127.0.0.1:5000/mockup_2_1', {
                 method: 'POST',
                 body: JSON.stringify({
-                    country: this.state.country,
+                    topN: this.state.topN,
                     agg: this.state.agg,
                     from: n,
                     to: this.state.to
@@ -223,38 +192,12 @@ class CO2 extends React.Component {
                                     <h2 className='text-black'>Top N Countries</h2>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
-                                    {this.state.country}
+                                    {this.state.topN}
                                     </DropdownToggle>
                                     <DropdownMenu container={'body'}>
-                                        {this.countryList()}
+                                        {this.topNCountries()}
                                     </DropdownMenu>
                                     </UncontrolledDropdown>
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <div align="center">
-                                <h2 className='text-black'>Aggregation View</h2>
-                                <UncontrolledDropdown group>
-                                <DropdownToggle caret>
-                                {this.state.agg}
-                                </DropdownToggle>
-                                <DropdownMenu container={'body'}>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"Y")}>
-                                    <div>Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"2Y")}>
-                                    <div>2Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"3Y")}>
-                                    <div>3Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"4Y")}>
-                                    <div>5Y</div>
-                                    </DropdownItem>
-                                </DropdownMenu>
-                                </UncontrolledDropdown>
                                 </div>
                             </Col>
                         </Row>
@@ -318,44 +261,18 @@ class CO2 extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                    <h2 className='text-black'>Country</h2>
+                                    <h2 className='text-black'>Top N Countries</h2>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
-                                    {this.state.country}
+                                    {this.state.topN}
                                     </DropdownToggle>
                                     <DropdownMenu container={'body'}>
-                                        {this.countryList()}
+                                        {this.topNCountries()}
                                     </DropdownMenu>
                                     </UncontrolledDropdown>
                                 </div>
                             </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <div align="center">
-                                <h2 className='text-black'>Aggregation View</h2>
-                                <UncontrolledDropdown group>
-                                <DropdownToggle caret>
-                                {this.state.agg}
-                                </DropdownToggle>
-                                <DropdownMenu container={'body'}>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"Y")}>
-                                    <div>Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"2Y")}>
-                                    <div>2Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"3Y")}>
-                                    <div>3Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"4Y")}>
-                                    <div>5Y</div>
-                                    </DropdownItem>
-                                </DropdownMenu>
-                                </UncontrolledDropdown>
-                                </div>
-                            </Col>
-                        </Row>
+                        </Row>    
                         <Row>
                             <Col>
                                 <div align="center">
@@ -416,41 +333,15 @@ class CO2 extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                    <h2 className='text-black'>Country</h2>
+                                    <h2 className='text-black'>Top N Countries</h2>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
-                                    {this.state.country}
+                                    {this.state.topN}
                                     </DropdownToggle>
                                     <DropdownMenu container={'body'}>
-                                        {this.countryList()}
+                                        {this.topNCountries()}
                                     </DropdownMenu>
                                     </UncontrolledDropdown>
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <div align="center">
-                                <h2 className='text-black'>Aggregation View</h2>
-                                <UncontrolledDropdown group>
-                                <DropdownToggle caret>
-                                {this.state.agg}
-                                </DropdownToggle>
-                                <DropdownMenu container={'body'}>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"Y")}>
-                                    <div>Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"2Y")}>
-                                    <div>2Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"3Y")}>
-                                    <div>3Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"4Y")}>
-                                    <div>5Y</div>
-                                    </DropdownItem>
-                                </DropdownMenu>
-                                </UncontrolledDropdown>
                                 </div>
                             </Col>
                         </Row>
@@ -510,85 +401,7 @@ class CO2 extends React.Component {
                     </div>
                 </Row>
                 <Row className="justify-content-center">
-                    <Col>
-                        <Row>
-                            <Col>
-                                <div align="center">
-                                    <h2 className='text-black'>Country</h2>
-                                    <UncontrolledDropdown group>
-                                    <DropdownToggle caret>
-                                    {this.state.country}
-                                    </DropdownToggle>
-                                    <DropdownMenu container={'body'}>
-                                        {this.countryList()}
-                                    </DropdownMenu>
-                                    </UncontrolledDropdown>
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <div align="center">
-                                <h2 className='text-black'>Aggregation View</h2>
-                                <UncontrolledDropdown group>
-                                <DropdownToggle caret>
-                                {this.state.agg}
-                                </DropdownToggle>
-                                <DropdownMenu container={'body'}>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"Y")}>
-                                    <div>Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"2Y")}>
-                                    <div>2Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"3Y")}>
-                                    <div>3Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"4Y")}>
-                                    <div>5Y</div>
-                                    </DropdownItem>
-                                </DropdownMenu>
-                                </UncontrolledDropdown>
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <div align="center">
-                                <h4>Date Range</h4>
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <div align="center">
-                                <h6 className='text-black'>From</h6>
-                                <UncontrolledDropdown group>
-                                <DropdownToggle caret>
-                                {this.state.from}
-                                </DropdownToggle>
-                                <DropdownMenu container={'body'}>
-                                        {this.yearList("from")}
-                                </DropdownMenu>
-                                </UncontrolledDropdown>
-                                </div>
-                            </Col>
-                            <Col>
-                                <div align="center">
-                                <h6 className='text-black'>To</h6>
-                                <UncontrolledDropdown group>
-                                <DropdownToggle caret>
-                                {this.state.to}
-                                </DropdownToggle>
-                                <DropdownMenu container={'body'}>
-                                        {this.yearList("to")}
-                                </DropdownMenu>
-                                </UncontrolledDropdown>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Col>
-                    <Col lg="7" className="align-self-center">
+                    <Col lg="9" className="align-self-center">
                         {/* <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/> */}
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
