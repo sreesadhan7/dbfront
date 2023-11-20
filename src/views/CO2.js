@@ -39,11 +39,27 @@ class CO2 extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-        topN: "select",
-        agg: "select",
-        from: "select",
-        to: "select",
-        data_m_2_1: null
+        m_2_1: {
+            topN: "select",
+            from: "select",
+            to: "select",
+            data: null
+        },
+        m_2_2: {
+            topN: "select",
+            from: "select",
+            to: "select",
+            data: null
+        },
+        m_2_3: {
+            topN: "select",
+            from: "select",
+            to: "select",
+            data: null
+        },
+        m_2_4: {
+            data: null
+        }
     };
     this.changeTopN = this.changeTopN.bind(this);
     this.changeYear = this.changeYear.bind(this);

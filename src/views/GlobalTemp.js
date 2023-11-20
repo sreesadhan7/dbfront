@@ -49,20 +49,16 @@ class GlobalTemp extends React.Component {
             data: null
         },
         m_1_2: {
-            country: "select",
-            agg: "select",
-            from: "select",
-            to: "select",
-            data: null
+            data: this.get_m_1_2()
         },
         m_1_3: {
             country: "select",
-            agg: "select",
             from: "select",
             to: "select",
             data: null
         }
     };
+    this.get_m_1_2 = this.get_m_1_2.bind(this);
     this.changeCountry = this.changeCountry.bind(this);
     this.changeAgg = this.changeAgg.bind(this);
     this.changeYear = this.changeYear.bind(this);
@@ -85,7 +81,28 @@ class GlobalTemp extends React.Component {
     }
     return options;
   }
-
+  get_m_1_2(){
+    fetch('http://127.0.0.1:5000/mockup_1_2', {
+            method: 'POST',
+            body: JSON.stringify({
+              // Add parameters here
+            }),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+          })
+             .then((response) => response.json())
+             .then((data) => {
+                console.log(data);
+                var temp = this.state.m_1_2;
+                temp.data = data.data;
+                this.setState({m_1_2:temp});
+                // Handle data
+             })
+             .catch((err) => {
+                console.log(err.message);
+             });
+  }
   changeCountry(e, n, url) {
     var param_country = null;
     var param_agg = null;
@@ -99,17 +116,9 @@ class GlobalTemp extends React.Component {
             param_from = this.state.m_1_1.from;
             param_to = this.state.m_1_1.to;
             break;
-        case "mockup_1_2":
-            this.state.m_1_2.country=n;
-            param_country = n;
-            param_agg = this.state.m_1_2.agg;
-            param_from = this.state.m_1_2.from;
-            param_to = this.state.m_1_2.to;
-            break;
         case "mockup_1_3":
             this.state.m_1_3.country=n;
             param_country = n;
-            param_agg = this.state.m_1_3.agg;
             param_from = this.state.m_1_3.from;
             param_to = this.state.m_1_3.to;
             break;
@@ -138,11 +147,6 @@ class GlobalTemp extends React.Component {
                     temp.data = data.data;
                     this.setState({m_1_1:temp});
                     break;
-                  case "mockup_1_2":
-                    var temp = this.state.m_1_2;
-                    temp.data = data.data;
-                    this.setState({m_1_2:temp});
-                    break;
                   case "mockup_1_3":
                     var temp = this.state.m_1_3;
                     temp.data = data.data;
@@ -169,20 +173,6 @@ class GlobalTemp extends React.Component {
             param_from = this.state.m_1_1.from;
             param_to = this.state.m_1_1.to;
             break;
-        case "mockup_1_2":
-            this.state.m_1_2.agg=n;
-            param_country = this.state.m_1_2.country;
-            param_agg = n;
-            param_from = this.state.m_1_2.from;
-            param_to = this.state.m_1_2.to;
-            break;
-        case "mockup_1_3":
-            this.state.m_1_3.agg=n;
-            param_country = this.state.m_1_3.country;
-            param_agg = n;
-            param_from = this.state.m_1_3.from;
-            param_to = this.state.m_1_3.to;
-            break;
     }
     this.setState({state: this.state});
     if(param_country != "select" && param_from != "select" && param_to != "select"){
@@ -208,16 +198,6 @@ class GlobalTemp extends React.Component {
                     temp.data = data.data;
                     this.setState({m_1_1:temp});
                     break;
-                  case "mockup_1_2":
-                    var temp = this.state.m_1_2;
-                    temp.data = data.data;
-                    this.setState({m_1_2:temp});
-                    break;
-                  case "mockup_1_3":
-                    var temp = this.state.m_1_3;
-                    temp.data = data.data;
-                    this.setState({m_1_3:temp});
-                    break;
                 }
              })
              .catch((err) => {
@@ -239,17 +219,9 @@ class GlobalTemp extends React.Component {
                 param_from = this.state.m_1_1.from;
                 param_to = n;
                 break;
-            case "mockup_1_2":
-                this.state.m_1_2.to=n;
-                param_country = this.state.m_1_2.country;
-                param_agg = this.state.m_1_2.agg;
-                param_from = this.state.m_1_2.from;
-                param_to = n;
-                break;
             case "mockup_1_3":
                 this.state.m_1_3.to=n;
                 param_country = this.state.m_1_3.country;
-                param_agg = this.state.m_1_3.agg;
                 param_from = this.state.m_1_3.from;
                 param_to = n;
                 break;
@@ -265,17 +237,9 @@ class GlobalTemp extends React.Component {
                 param_from = n;
                 param_to = this.state.m_1_1.to;
                 break;
-            case "mockup_1_2":
-                this.state.m_1_2.from=n;
-                param_country = this.state.m_1_2.country;
-                param_agg = this.state.m_1_2.agg;
-                param_from = n;
-                param_to = this.state.m_1_3.to;
-                break;
             case "mockup_1_3":
                 this.state.m_1_3.from=n;
                 param_country = this.state.m_1_3.country;
-                param_agg = this.state.m_1_3.agg;
                 param_from = n;
                 param_to = this.state.m_1_3.to;
                 break;
@@ -304,11 +268,6 @@ class GlobalTemp extends React.Component {
                         var temp = this.state.m_1_1;
                         temp.data = data.data;
                         this.setState({m_1_1:temp});
-                        break;
-                      case "mockup_1_2":
-                        var temp = this.state.m_1_2;
-                        temp.data = data.data;
-                        this.setState({m_1_2:temp});
                         break;
                       case "mockup_1_3":
                         var temp = this.state.m_1_3;
@@ -344,11 +303,6 @@ class GlobalTemp extends React.Component {
                           var temp = this.state.m_1_1;
                           temp.data = data.data;
                           this.setState({m_1_1:temp});
-                          break;
-                        case "mockup_1_2":
-                          var temp = this.state.m_1_2;
-                          temp.data = data.data;
-                          this.setState({m_1_2:temp});
                           break;
                         case "mockup_1_3":
                           var temp = this.state.m_1_3;
@@ -488,89 +442,11 @@ class GlobalTemp extends React.Component {
                         <h2>Something something something</h2>
                     </div>
                 </Row>
-                <Row className="justify-content-center">
-                    <Col>
-                        <Row>
-                            <Col>
-                                <div align="center">
-                                    <h2 className='text-black'>Country</h2>
-                                    <UncontrolledDropdown group>
-                                    <DropdownToggle caret>
-                                    {this.state.m_1_2.country}
-                                    </DropdownToggle>
-                                    <DropdownMenu container={'body'}>
-                                        {this.countryList("mockup_1_2")}
-                                    </DropdownMenu>
-                                    </UncontrolledDropdown>
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <div align="center">
-                                <h2 className='text-black'>Aggregation View</h2>
-                                <UncontrolledDropdown group>
-                                <DropdownToggle caret>
-                                {this.state.m_1_2.agg}
-                                </DropdownToggle>
-                                <DropdownMenu container={'body'}>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"Y", "mockup_1_2")}>
-                                    <div>Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"2Y", "mockup_1_2")}>
-                                    <div>2Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"3Y", "mockup_1_2")}>
-                                    <div>3Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"5Y", "mockup_1_2")}>
-                                    <div>5Y</div>
-                                    </DropdownItem>
-                                </DropdownMenu>
-                                </UncontrolledDropdown>
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <div align="center">
-                                <h4>Date Range</h4>
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <div align="center">
-                                <h6 className='text-black'>From</h6>
-                                <UncontrolledDropdown group>
-                                <DropdownToggle caret>
-                                {this.state.m_1_2.from}
-                                </DropdownToggle>
-                                <DropdownMenu container={'body'}>
-                                        {this.yearList("from", "mockup_1_2")}
-                                </DropdownMenu>
-                                </UncontrolledDropdown>
-                                </div>
-                            </Col>
-                            <Col>
-                                <div align="center">
-                                <h6 className='text-black'>To</h6>
-                                <UncontrolledDropdown group>
-                                <DropdownToggle caret>
-                                {this.state.m_1_2.to}
-                                </DropdownToggle>
-                                <DropdownMenu container={'body'}>
-                                        {this.yearList("to", "mockup_1_2")}
-                                </DropdownMenu>
-                                </UncontrolledDropdown>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Col>
-                    <Col lg="7" className="align-self-center">
+                <Row>
+                    <Col lg="10" className="align-self-center">
                         <Chart_m_1_2 data={this.state.m_1_2.data}/>
                     </Col>
-                    <Col lg="2" className="align-self-center mr-4">
+                    <Col lg="2" className="align-self-center">
                         <div>
                             <p>Something something something Something something something Something something something Something something something Something something something Something something something Something something something</p>
                         </div>
@@ -600,32 +476,6 @@ class GlobalTemp extends React.Component {
                                         {this.countryList("mockup_1_3")}
                                     </DropdownMenu>
                                     </UncontrolledDropdown>
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <div align="center">
-                                <h2 className='text-black'>Aggregation View</h2>
-                                <UncontrolledDropdown group>
-                                <DropdownToggle caret>
-                                {this.state.m_1_3.agg}
-                                </DropdownToggle>
-                                <DropdownMenu container={'body'}>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"Y", "mockup_1_3")}>
-                                    <div>Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"2Y", "mockup_1_3")}>
-                                    <div>2Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"3Y", "mockup_1_3")}>
-                                    <div>3Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"5Y", "mockup_1_3")}>
-                                    <div>5Y</div>
-                                    </DropdownItem>
-                                </DropdownMenu>
-                                </UncontrolledDropdown>
                                 </div>
                             </Col>
                         </Row>
