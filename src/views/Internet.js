@@ -31,7 +31,7 @@ import {
 // core components
 import Navbar from "../components/NavBar.js";
 import Footer from "../components/Footer.js";
-// import Chart from "../components/Chart.js";
+import Chart_m_5 from "../components/Chart_m_5.js";
 import Divider from "../components/Divider.js"
 
 
@@ -76,7 +76,7 @@ class Internet extends React.Component {
     console.log(n)
     this.setState({country: n});
     if(this.state.agg != "select" && this.state.from != "select" && this.state.to != "select"){
-        fetch('http://127.0.0.1:5000/mockup_1_1', {
+        fetch('http://127.0.0.1:5000/mockup_5', {
             method: 'POST',
             body: JSON.stringify({
                 country: n,
@@ -106,7 +106,7 @@ class Internet extends React.Component {
     console.log(n)
     this.setState({agg: e.currentTarget.textContent});
     if(this.state.country != "select" && this.state.from != "select" && this.state.to != "select"){
-        fetch('http://127.0.0.1:5000/mockup_1_1', {
+        fetch('http://127.0.0.1:5000/mockup_5', {
             method: 'POST',
             body: JSON.stringify({
               country: this.state.country,
@@ -142,7 +142,7 @@ class Internet extends React.Component {
     }
     if(param=="to"){
         if(this.state.country != "select" && this.state.from != "select" && this.state.agg != "select"){
-            fetch('http://127.0.0.1:5000/mockup_1_1', {
+            fetch('http://127.0.0.1:5000/mockup_5', {
                 method: 'POST',
                 body: JSON.stringify({
                   country: this.state.country,
@@ -167,7 +167,7 @@ class Internet extends React.Component {
     }
     else if(param="from"){
         if(this.state.country != "select" && this.state.to != "select" && this.state.agg != "select"){
-            fetch('http://127.0.0.1:5000/mockup_1_1', {
+            fetch('http://127.0.0.1:5000/mockup_5', {
                 method: 'POST',
                 body: JSON.stringify({
                     country: this.state.country,
@@ -205,7 +205,7 @@ class Internet extends React.Component {
               <container>
                 <Row className="justify-content-center">
                     <div className="text-center mt-5">
-                        <h1 className='text-white'>Graph Title</h1>
+                        {/* <h1 className='text-white'>IUP VS Growth Rate</h1> */}
                     </div>
                 </Row>
               </container>
@@ -214,7 +214,7 @@ class Internet extends React.Component {
             <container>
                 <Row className="justify-content-center">
                     <div align="center">
-                        <h2>Something something something</h2>
+                        <h3>IUP VS Growth Rate</h3>
                     </div>
                 </Row>
                 <Row className="justify-content-center">
@@ -297,7 +297,7 @@ class Internet extends React.Component {
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
-                        {/* <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/> */}
+                        { <Chart_m_5 x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/> }
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
