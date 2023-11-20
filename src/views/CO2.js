@@ -32,6 +32,9 @@ import {
 import Navbar from "../components/NavBar.js";
 import Footer from "../components/Footer.js";
 import Chart_m_2_1 from "../components/Chart_m_2_1.js";
+import Chart_m_2_2 from "../components/Chart_m_2_2.js";
+import Chart_m_2_3 from "../components/Chart_m_2_3.js";
+import Chart_m_2_4 from "../components/Chart_m_2_4.js";
 import Divider from "../components/Divider.js"
 
 
@@ -46,56 +49,56 @@ class CO2 extends React.Component {
             data: null
         },
         m_2_2: {
-            topN: "select",
+            country: "select",
             from: "select",
             to: "select",
             data: null
         },
         m_2_3: {
-            topN: "select",
+            country: "select",
             from: "select",
             to: "select",
             data: null
         },
         m_2_4: {
-            data: null
+            data: this.get_m_2_4()
         }
     };
+    this.get_m_2_4 = this.get_m_2_4.bind(this);
     this.changeTopN = this.changeTopN.bind(this);
     this.changeYear = this.changeYear.bind(this);
     this.topNCountries = this.topNCountries.bind(this);
   }
-   topNCountries(){
+   topNCountries(url){
     const years = [5,10, 15]
     console.log("years", years);
     const options = []
     for(let i=0; i<years.length; i++){
-        options.push(<DropdownItem className="dropdown-item" onClick={e=>this.changeTopN(e,years[i])}><div>{years[i]}</div></DropdownItem>);
+        options.push(<DropdownItem className="dropdown-item" onClick={e=>this.changeTopN(e,years[i], url)}><div>{years[i]}</div></DropdownItem>);
     }
     return options;
   }
-  yearList(param){
+  countryList(url){
+    const countries = ['Afghanistan','Albania','Algeria','Angola','Argentina','Australia','Austria','Bahrain','Bangladesh','Barbados','Benin','Bolivia','Botswana','Brazil','Bulgaria','Burkina Faso','Cambodia','Cameroon','Canada','Central African Republic','Chad','Chile','China','Colombia','Comoros','Congo Republic','Cuba','Cyprus','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eswatini','Finland','France','Gabon','Gambia','Germany','Ghana','Greece','Guatemala','Guinea','Guinea-Bissau','Haiti','Honduras','Hungary','Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Jordan','Kenya','Kuwait','Laos','Lebanon','Lesotho','Liberia','Libya','Madagascar','Malawi','Malaysia','Mali','Malta','Mauritania','Mauritius','Mexico','Mongolia','Morocco','Mozambique','Myanmar','Namibia','Nepal','Netherlands','New Zealand','Nicaragua','Niger','Nigeria','North Korea','Norway','Oman','Pakistan','Panama','Paraguay','Peru','Philippines','Poland','Portugal','Qatar','Romania','Saudi Arabia','Senegal','Seychelles','Sierra Leone','South Africa','South Korea','Spain','Sri Lanka','St. Lucia','Sweden','Switzerland','Syria','Tanzania','Thailand','Togo','Trinidad and Tobago','Tunisia','Uganda','United Arab Emirates','United Kingdom','United States','Uruguay','Venezuela','Vietnam','Zambia','Zimbabwe'];
+    console.log("countries", countries);
+    const options = []
+    for(let i=0; i<countries.length; i++){
+        options.push(<DropdownItem className="dropdown-item" onClick={e=>this.changeCountry(e,countries[i], url)}><div>{countries[i]}</div></DropdownItem>);
+    }
+    return options;
+  }
+  yearList(param, url){
     const yearList = [1960,1961,1962,1963,1964,1965,1966,1967,1968,1969,1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019];
     const options = []
     for(let i=0; i<yearList.length; i++){
-        options.push(<DropdownItem onClick={e=>this.changeYear(e,yearList[i], param)}><div>{yearList[i]}</div></DropdownItem>);
+        options.push(<DropdownItem onClick={e=>this.changeYear(e,yearList[i], param, url)}><div>{yearList[i]}</div></DropdownItem>);
     }
     return options;
   }
-
-  changeTopN(e, n) {
-    console.log(e);
-    console.log(this);
-    console.log(n)
-    this.setState({topN: n});
-    if(this.state.from != "select" && this.state.to != "select"){
-        fetch('http://127.0.0.1:5000/mockup_2_1', {
+  get_m_2_4(){
+    fetch('http://127.0.0.1:5000/mockup_2_4', {
             method: 'POST',
             body: JSON.stringify({
-                topN: n,
-                agg: this.state.agg,
-                from: this.state.from,
-                to: this.state.to
               // Add parameters here
             }),
             headers: {
@@ -105,7 +108,51 @@ class CO2 extends React.Component {
              .then((response) => response.json())
              .then((data) => {
                 console.log(data);
-                this.setState({data_m_2_1:data.data});
+                var temp = this.state.m_2_4;
+                temp.data = data.data;
+                this.setState({m_2_4:temp});
+                // Handle data
+             })
+             .catch((err) => {
+                console.log(err.message);
+             });
+    }
+  changeTopN(e, n, url) {
+    var param_topN = null;
+    var param_from = null;
+    var param_to = null;
+    switch(url){
+        case "mockup_2_1":
+            this.state.m_2_1.topN = n;
+            param_topN = n;
+            param_from = this.state.m_2_1.from;
+            param_to = this.state.m_2_1.to;
+            break;
+    }
+    this.setState({state: this.state});
+    if(param_from != "select" && param_to != "select"){
+        fetch(`http://127.0.0.1:5000/${url}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                topN: param_topN,
+                from: param_from,
+                to: param_to
+              // Add parameters here
+            }),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+          })
+             .then((response) => response.json())
+             .then((data) => {
+                console.log(data);
+                switch(url){
+                    case "mockup_2_1":
+                      var temp = this.state.m_2_1;
+                      temp.data = data.data;
+                      this.setState({m_2_1:temp});
+                      break;
+                  }
                 // Handle data
              })
              .catch((err) => {
@@ -113,25 +160,120 @@ class CO2 extends React.Component {
              });
     }
   }
-  changeYear(e, n, param) {
-    console.log(e);
-    console.log(this);
-    console.log(n)
+  changeCountry(e, n, url) {
+    var param_country = null;
+    var param_from = null;
+    var param_to = null;
+    switch(url){
+        case "mockup_2_2":
+            this.state.m_2_2.country = n;
+            param_country = n;
+            param_from = this.state.m_2_2.from;
+            param_to = this.state.m_2_2.to;
+            break;
+        case "mockup_2_3":
+            this.state.m_2_3.country = n;
+            param_country = n;
+            param_from = this.state.m_2_3.from;
+            param_to = this.state.m_2_3.to;
+            break;
+    }
+    this.setState({state: this.state});
+    if(param_from != "select" && param_to != "select"){
+        fetch(`http://127.0.0.1:5000/${url}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                country: param_country,
+                from: param_from,
+                to: param_to
+              // Add parameters here
+            }),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+          })
+             .then((response) => response.json())
+             .then((data) => {
+                console.log(data);
+                switch(url){
+                    case "mockup_2_2":
+                      var temp = this.state.m_2_2;
+                      temp.data = data.data;
+                      this.setState({m_2_2:temp});
+                      break;
+                    case "mockup_2_3":
+                        var temp = this.state.m_2_3;
+                        temp.data = data.data;
+                        this.setState({m_2_3:temp});
+                        break;
+                  }
+                // Handle data
+             })
+             .catch((err) => {
+                console.log(err.message);
+             });
+    }
+  }
+  changeYear(e, n, param, url) {
+    var param_country = null;
+    var param_topN = null;
+    var param_from = null;
+    var param_to = null;
     if(param=="to"){
-        this.setState({to: n});
+        switch(url){
+            case "mockup_2_1":
+                this.state.m_2_1.to= n;
+                param_topN = this.state.m_2_1.topN;
+                param_from = this.state.m_2_1.from;
+                param_to =n;
+                break;
+            case "mockup_2_2":
+                this.state.m_2_2.to= n;
+                param_country = this.state.m_2_2.country;
+                param_from = this.state.m_2_2.from;
+                param_to =n;
+                break;
+            case "mockup_2_3":
+                this.state.m_2_3.to= n;
+                param_country = this.state.m_2_3.country;
+                param_from = this.state.m_2_3.from;
+                param_to =n;
+                break;
+        }
+        this.setState({state:this.state});
     }
     else{
-        this.setState({from: n});
+        switch(url){
+            case "mockup_2_1":
+                this.state.m_2_1.from= n;
+                param_topN = this.state.m_2_1.topN;
+                param_to = this.state.m_2_1.to;
+                param_from =n;
+                break;
+            case "mockup_2_2":
+                this.state.m_2_2.from= n;
+                param_country = this.state.m_2_2.country;
+                param_to = this.state.m_2_2.to;
+                param_from =n;
+                break;
+            case "mockup_2_3":
+                this.state.m_2_3.from= n;
+                param_country = this.state.m_2_3.country;
+                param_to = this.state.m_2_3.to;
+                param_from =n;
+                break;
+        }
+        this.setState({state:this.state});
     }
     if(param=="to"){
-        if(this.state.topN != "select" && this.state.from != "select"){
-            fetch('http://127.0.0.1:5000/mockup_2_1', {
+        if(param_topN != "select" && param_from != "select"){
+            fetch(`http://127.0.0.1:5000/${url}`, {
                 method: 'POST',
                 body: JSON.stringify({
-                  topN: this.state.topN,
-                  agg: this.state.agg,
-                  from: this.state.from,
-                  to: n
+                  topN: param_topN,
+                  country: param_country,
+                  from: param_from,
+                  to: param_to
                 }),
                 headers: {
                   'Content-type': 'application/json; charset=UTF-8',
@@ -140,7 +282,23 @@ class CO2 extends React.Component {
                  .then((response) => response.json())
                  .then((data) => {
                     console.log(data);
-                    this.setState({data_m_2_1:data.data});
+                    switch(url){
+                        case "mockup_2_1":
+                          var temp = this.state.m_2_1;
+                          temp.data = data.data;
+                          this.setState({m_2_1:temp});
+                          break;
+                        case "mockup_2_2":
+                            var temp = this.state.m_2_2;
+                            temp.data = data.data;
+                            this.setState({m_2_2:temp});
+                            break;
+                        case "mockup_2_3":
+                            var temp = this.state.m_2_3;
+                            temp.data = data.data;
+                            this.setState({m_2_3:temp});
+                            break;
+                      }
                     // Handle data
                  })
                  .catch((err) => {
@@ -149,14 +307,14 @@ class CO2 extends React.Component {
         }
     }
     else if(param="from"){
-        if(this.state.topN != "select" && this.state.to != "select"){
-            fetch('http://127.0.0.1:5000/mockup_2_1', {
+        if(param_topN != "select" && param_to != "select"){
+            fetch(`http://127.0.0.1:5000/${url}`, {
                 method: 'POST',
                 body: JSON.stringify({
-                    topN: this.state.topN,
-                    agg: this.state.agg,
-                    from: n,
-                    to: this.state.to
+                    topN: param_topN,
+                    country: param_country,
+                    from: param_from,
+                    to: param_to
                 }),
                 headers: {
                   'Content-type': 'application/json; charset=UTF-8',
@@ -165,7 +323,23 @@ class CO2 extends React.Component {
                  .then((response) => response.json())
                  .then((data) => {
                     console.log(data);
-                    this.setState({data_m_2_1:data.data});
+                    switch(url){
+                        case "mockup_2_1":
+                          var temp = this.state.m_2_1;
+                          temp.data = data.data;
+                          this.setState({m_2_1:temp});
+                          break;
+                        case "mockup_2_2":
+                            var temp = this.state.m_2_2;
+                            temp.data = data.data;
+                            this.setState({m_2_2:temp});
+                            break;
+                        case "mockup_2_3":
+                            var temp = this.state.m_2_3;
+                            temp.data = data.data;
+                            this.setState({m_2_3:temp});
+                            break;
+                      }
                     // Handle data
                  })
                  .catch((err) => {
@@ -208,10 +382,10 @@ class CO2 extends React.Component {
                                     <h2 className='text-black'>Top N Countries</h2>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
-                                    {this.state.topN}
+                                    {this.state.m_2_1.topN}
                                     </DropdownToggle>
                                     <DropdownMenu container={'body'}>
-                                        {this.topNCountries()}
+                                        {this.topNCountries("mockup_2_1")}
                                     </DropdownMenu>
                                     </UncontrolledDropdown>
                                 </div>
@@ -230,10 +404,10 @@ class CO2 extends React.Component {
                                 <h6 className='text-black'>From</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.from}
+                                {this.state.m_2_1.from}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("from")}
+                                        {this.yearList("from", "mockup_2_1")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
@@ -243,10 +417,10 @@ class CO2 extends React.Component {
                                 <h6 className='text-black'>To</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.to}
+                                {this.state.m_2_1.to}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("to")}
+                                        {this.yearList("to", "mockup_2_1")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
@@ -254,7 +428,7 @@ class CO2 extends React.Component {
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
-                        <Chart_m_2_1 data={this.state.data_m_2_1}/>
+                        <Chart_m_2_1 data={this.state.m_2_1.data}/>
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
@@ -277,13 +451,13 @@ class CO2 extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                    <h2 className='text-black'>Top N Countries</h2>
+                                    <h2 className='text-black'>Country</h2>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
-                                    {this.state.topN}
+                                    {this.state.m_2_2.country}
                                     </DropdownToggle>
                                     <DropdownMenu container={'body'}>
-                                        {this.topNCountries()}
+                                        {this.countryList("mockup_2_2")}
                                     </DropdownMenu>
                                     </UncontrolledDropdown>
                                 </div>
@@ -302,10 +476,10 @@ class CO2 extends React.Component {
                                 <h6 className='text-black'>From</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.from}
+                                {this.state.m_2_2.from}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("from")}
+                                        {this.yearList("from", "mockup_2_2")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
@@ -315,10 +489,10 @@ class CO2 extends React.Component {
                                 <h6 className='text-black'>To</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.to}
+                                {this.state.m_2_2.to}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("to")}
+                                        {this.yearList("to", "mockup_2_2")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
@@ -326,7 +500,7 @@ class CO2 extends React.Component {
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
-                        {/* <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/> */}
+                        <Chart_m_2_2 data={this.state.m_2_2.data}/>
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
@@ -349,13 +523,13 @@ class CO2 extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                    <h2 className='text-black'>Top N Countries</h2>
+                                    <h2 className='text-black'>Country</h2>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
-                                    {this.state.topN}
+                                    {this.state.m_2_3.country}
                                     </DropdownToggle>
                                     <DropdownMenu container={'body'}>
-                                        {this.topNCountries()}
+                                        {this.countryList("mockup_2_3")}
                                     </DropdownMenu>
                                     </UncontrolledDropdown>
                                 </div>
@@ -374,10 +548,10 @@ class CO2 extends React.Component {
                                 <h6 className='text-black'>From</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.from}
+                                {this.state.m_2_3.from}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("from")}
+                                        {this.yearList("from","mockup_2_3")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
@@ -387,10 +561,10 @@ class CO2 extends React.Component {
                                 <h6 className='text-black'>To</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.to}
+                                {this.state.m_2_3.to}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("to")}
+                                        {this.yearList("to", "mockup_2_3")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
@@ -398,7 +572,7 @@ class CO2 extends React.Component {
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
-                        {/* <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/> */}
+                        <Chart_m_2_3 data={this.state.m_2_3.data}/>
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
@@ -418,7 +592,7 @@ class CO2 extends React.Component {
                 </Row>
                 <Row className="justify-content-center">
                     <Col lg="9" className="align-self-center">
-                        {/* <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/> */}
+                        <Chart_m_2_4 data={this.state.m_2_4.data}/>
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
