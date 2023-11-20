@@ -425,7 +425,7 @@ class GlobalTemp extends React.Component {
                                     <DropdownItem onClick={e=>this.changeAgg(e,"3Y", "mockup_1_1")}>
                                     <div>3Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"4Y", "mockup_1_1")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"5Y", "mockup_1_1")}>
                                     <div>5Y</div>
                                     </DropdownItem>
                                 </DropdownMenu>
@@ -523,7 +523,7 @@ class GlobalTemp extends React.Component {
                                     <DropdownItem onClick={e=>this.changeAgg(e,"3Y", "mockup_1_2")}>
                                     <div>3Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"4Y", "mockup_1_2")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"5Y", "mockup_1_2")}>
                                     <div>5Y</div>
                                     </DropdownItem>
                                 </DropdownMenu>
@@ -621,7 +621,7 @@ class GlobalTemp extends React.Component {
                                     <DropdownItem onClick={e=>this.changeAgg(e,"3Y", "mockup_1_3")}>
                                     <div>3Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"4Y", "mockup_1_3")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"5Y", "mockup_1_3")}>
                                     <div>5Y</div>
                                     </DropdownItem>
                                 </DropdownMenu>
