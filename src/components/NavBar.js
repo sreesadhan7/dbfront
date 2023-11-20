@@ -122,6 +122,9 @@ class NavBar extends React.Component {
                 <NavItem> 
                     <NavLink href="Internet">Internet Usage</NavLink> 
                 </NavItem>
+                <NavItem> 
+                    <NavLink href="DatabaseCount">Database Count</NavLink> 
+                </NavItem>
                 </Nav>
               </UncontrolledCollapse>
             </Container>
