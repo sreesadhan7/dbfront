@@ -51,7 +51,7 @@ class CO2 extends React.Component {
     this.countryList = this.countryList.bind(this);
   }
    countryList(){
-    const countries = ['Afghanistan','Albania','Algeria','Angola','Argentina','Australia','Austria','Bahrain','Bangladesh','Barbados','Benin','Bolivia','Botswana','Brazil','Bulgaria','Burkina Faso','Cambodia','Cameroon','Canada','Central African Republic','Chad','Chile','China','Colombia','Comoros','Congo Republic','Cuba','Cyprus','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eswatini','Finland','France','Gabon','Gambia','Germany','Ghana','Greece','Guatemala','Guinea','Guinea-Bissau','Haiti','Honduras','Hungary','Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Jordan','Kenya','Kuwait','Laos','Lebanon','Lesotho','Liberia','Libya','Madagascar','Malawi','Malaysia','Mali','Malta','Mauritania','Mauritius','Mexico','Mongolia','Morocco','Mozambique','Myanmar','Namibia','Nepal','Netherlands','New Zealand','Nicaragua','Niger','Nigeria','North Korea','Norway','Oman','Pakistan','Panama','Paraguay','Peru','Philippines','Poland','Portugal','Qatar','Romania','Saudi Arabia','Senegal','Seychelles','Sierra Leone','South Africa','South Korea','Spain','Sri Lanka','St. Lucia','Sweden','Switzerland','Syria','Tanzania','Thailand','Togo','Trinidad and Tobago','Tunisia','Uganda','United Arab Emirates','United Kingdom','United States','Uruguay','Venezuela','Vietnam','Zambia','Zimbabwe'];
+    const countries = [5,10, 15]
     console.log("countries", countries);
     const options = []
     for(let i=0; i<countries.length; i++){
@@ -140,7 +140,7 @@ class CO2 extends React.Component {
     }
     if(param=="to"){
         if(this.state.country != "select" && this.state.from != "select" && this.state.agg != "select"){
-            fetch('http://127.0.0.1:5000/mockup2_1', {
+            fetch('http://127.0.0.1:5000/mockup_2_1', {
                 method: 'POST',
                 body: JSON.stringify({
                   country: this.state.country,
@@ -220,7 +220,7 @@ class CO2 extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                    <h2 className='text-black'>Country</h2>
+                                    <h2 className='text-black'>Top N Countries</h2>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
                                     {this.state.country}
