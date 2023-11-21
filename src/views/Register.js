@@ -15,13 +15,13 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 // reactstrap components
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
   FormGroup,
   Form,
@@ -35,20 +35,44 @@ import {
 } from "reactstrap";
 
 // core components
-import NavBar from "../components/NavBar.js";
 import Footer from "../components/Footer.js";
 
-class Register extends React.Component {
-  componentDidMount() {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    this.refs.main.scrollTop = 0;
+async function registerUser(credentials) {
+  console.log("credentials", credentials)
+  return fetch('http://127.0.0.1:5000/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(credentials)
+  })
+    .then(data => data.json())
+ }
+
+function Register() {
+  const navigate = useNavigate();
+ 
+  const handleRegistration = () => {
+    navigate("/"); // new line
+  };
+
+  const [username, setUserName] = useState();
+  const [password, setPassword] = useState();
+  const [name, setName] = useState();
+
+  const handleSubmit = async e => {
+    console.log("sending register request")
+    e.preventDefault();
+    const token = await registerUser({
+      username,
+      name,
+      password
+    });
+    handleRegistration();
   }
-  render() {
     return (
       <>
-        <NavBar />
-        <main ref="main">
+        <main>
           <section className="section section-shaped section-lg">
             <div className="shape shape-style-1 bg-gradient-default">
               <span />
@@ -64,52 +88,11 @@ class Register extends React.Component {
               <Row className="justify-content-center">
                 <Col lg="5">
                   <Card className="bg-secondary shadow border-0">
-                    <CardHeader className="bg-white pb-5">
-                      <div className="text-muted text-center mb-3">
-                        <small>Sign up with</small>
-                      </div>
-                      <div className="text-center">
-                        <Button
-                          className="btn-neutral btn-icon mr-4"
-                          color="default"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <span className="btn-inner--icon mr-1">
-                            <img
-                              alt="..."
-                              src={
-                                require("../assets/img/github.svg")
-                                  .default
-                              }
-                            />
-                          </span>
-                          <span className="btn-inner--text">Github</span>
-                        </Button>
-                        <Button
-                          className="btn-neutral btn-icon ml-1"
-                          color="default"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <span className="btn-inner--icon mr-1">
-                            <img
-                              alt="..."
-                              src={
-                                require("../assets/img/google.svg")
-                                  .default
-                              }
-                            />
-                          </span>
-                          <span className="btn-inner--text">Google</span>
-                        </Button>
-                      </div>
-                    </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
                       <div className="text-center text-muted mb-4">
-                        <small>Or sign up with credentials</small>
+                        <small>Sign up with credentials</small>
                       </div>
-                      <Form role="form">
+                      <Form role="form" onSubmit={handleSubmit}>
                         <FormGroup>
                           <InputGroup className="input-group-alternative mb-3">
                             <InputGroupAddon addonType="prepend">
@@ -117,7 +100,7 @@ class Register extends React.Component {
                                 <i className="ni ni-hat-3" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="Name" type="text" />
+                            <Input placeholder="Name" type="text" onChange={e => setName(e.target.value)}/>
                           </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -127,7 +110,7 @@ class Register extends React.Component {
                                 <i className="ni ni-email-83" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="Email" type="email" />
+                            <Input placeholder="Email" type="email" onChange={e => setUserName(e.target.value)}/>
                           </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -141,17 +124,10 @@ class Register extends React.Component {
                               placeholder="Password"
                               type="password"
                               autoComplete="off"
+                              onChange={e => setPassword(e.target.value)}
                             />
                           </InputGroup>
                         </FormGroup>
-                        <div className="text-muted font-italic">
-                          <small>
-                            password strength:{" "}
-                            <span className="text-success font-weight-700">
-                              strong
-                            </span>
-                          </small>
-                        </div>
                         <Row className="my-4">
                           <Col xs="12">
                             <div className="custom-control custom-control-alternative custom-checkbox">
@@ -166,12 +142,7 @@ class Register extends React.Component {
                               >
                                 <span>
                                   I agree with the{" "}
-                                  <a
-                                    href="#pablo"
-                                    onClick={(e) => e.preventDefault()}
-                                  >
                                     Privacy Policy
-                                  </a>
                                 </span>
                               </label>
                             </div>
@@ -181,7 +152,7 @@ class Register extends React.Component {
                           <Button
                             className="mt-4"
                             color="primary"
-                            type="button"
+                            type="submit"
                           >
                             Create account
                           </Button>
@@ -198,6 +169,5 @@ class Register extends React.Component {
       </>
     );
   }
-}
 
 export default Register;
