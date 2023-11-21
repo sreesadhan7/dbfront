@@ -17,6 +17,7 @@
 */
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 // nodejs library that concatenates classes
 import classnames from "classnames";
@@ -52,6 +53,12 @@ async function loginUser(credentials) {
 function Login({setToken}) {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
+  const navigate = useNavigate();
+
+  const handleUnAuth = () => {
+    console.log("leading to 404 page");
+    navigate("/404"); // new line
+  };
 
   const handleSubmit = async e => {
     console.log("sending login request")
@@ -60,7 +67,12 @@ function Login({setToken}) {
       username,
       password
     });
-    setToken(token.data);
+    if(token.data.token=="unAuth"){
+      handleUnAuth();
+    }
+    else{
+      setToken(token.data);
+    }
   }
     return (
       <>

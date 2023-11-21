@@ -10,6 +10,7 @@ import GDP from "./views/GDP.js";
 import Internet from "./views/Internet.js";
 import Register from "./views/Register.js";
 import DatabaseCount from "./views/DatabaseCount.js";
+import UnAuth from "./views/UnAuth.js"
 import useToken from './useToken';
 
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/Login" exact element={<LoginPage setToken={setToken}/>} />
         <Route path="/register" exact element={<Register />} />
         <Route path="/" exact element={<LoginPage setToken={setToken}/>} />
+        <Route path="/404" exact element={<UnAuth />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       </BrowserRouter>
@@ -34,7 +36,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path="/" exact element={<Home />} />
-      <Route path="/Login" exact element={<LoginPage />} />
+      <Route path="/Login" exact element={<LoginPage setToken={setToken}/>} />
       <Route path="/GlobalTemp" exact element={<GlobalTemp />} />
       <Route path="/CO2" exact element={<CO2 />} />
       <Route path="/Energy" exact element={<Energy />} />
@@ -42,6 +44,7 @@ function App() {
       <Route path="/Internet" exact element={<Internet />} />
       <Route path="/register" exact element={<Register />} />
       <Route path="/DatabaseCount" exact element={<DatabaseCount />} />
+      <Route path="/404" exact element={<UnAuth />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   </BrowserRouter>
