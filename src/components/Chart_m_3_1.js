@@ -2,7 +2,7 @@ import { LineChart } from '@mui/x-charts';
 
 function Chart_m_3_1(props) {
     console.log("chart data: ", props)
-  if(props.x.length <=0 || props.y1.length <=0 || props.y2.length <=0){
+  if(props.data == null || JSON.stringify(props.data) === "{}"){
     return(<div>
       <p>Change parameters on the left to obtain graph</p>
     </div>)

@@ -31,7 +31,8 @@ import {
 // core components
 import Navbar from "../components/NavBar.js";
 import Footer from "../components/Footer.js";
-// import Chart from "../components/Chart.js";
+import Chart_m_3_1 from "../components/Chart_m_3_1.js";
+import Chart_m_3_2 from "../components/Chart_m_3_2.js";
 import Divider from "../components/Divider.js"
 
 
@@ -39,50 +40,94 @@ class Energy extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-        country: "select",
-        agg: "select",
-        from: "select",
-        to: "select",
-        xData: [],
-        yData1: [],
-        yData2: []
+        m_3_1: {
+            country: "select",
+            agg: "select",
+            from: "select",
+            to: "select",
+            data: null
+        },
+        m_3_2: {
+            country: "select",
+            from: "select",
+            to: "select",
+            data: null
+        }
     };
+    // this.get_m_1_2 = this.get_m_1_2.bind(this);
     this.changeCountry = this.changeCountry.bind(this);
     this.changeAgg = this.changeAgg.bind(this);
     this.changeYear = this.changeYear.bind(this);
     this.countryList = this.countryList.bind(this);
   }
-   countryList(){
+   countryList(url){
     const countries = ['Afghanistan','Albania','Algeria','Angola','Argentina','Australia','Austria','Bahrain','Bangladesh','Barbados','Benin','Bolivia','Botswana','Brazil','Bulgaria','Burkina Faso','Cambodia','Cameroon','Canada','Central African Republic','Chad','Chile','China','Colombia','Comoros','Congo Republic','Cuba','Cyprus','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eswatini','Finland','France','Gabon','Gambia','Germany','Ghana','Greece','Guatemala','Guinea','Guinea-Bissau','Haiti','Honduras','Hungary','Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Jordan','Kenya','Kuwait','Laos','Lebanon','Lesotho','Liberia','Libya','Madagascar','Malawi','Malaysia','Mali','Malta','Mauritania','Mauritius','Mexico','Mongolia','Morocco','Mozambique','Myanmar','Namibia','Nepal','Netherlands','New Zealand','Nicaragua','Niger','Nigeria','North Korea','Norway','Oman','Pakistan','Panama','Paraguay','Peru','Philippines','Poland','Portugal','Qatar','Romania','Saudi Arabia','Senegal','Seychelles','Sierra Leone','South Africa','South Korea','Spain','Sri Lanka','St. Lucia','Sweden','Switzerland','Syria','Tanzania','Thailand','Togo','Trinidad and Tobago','Tunisia','Uganda','United Arab Emirates','United Kingdom','United States','Uruguay','Venezuela','Vietnam','Zambia','Zimbabwe'];
     console.log("countries", countries);
     const options = []
     for(let i=0; i<countries.length; i++){
-        options.push(<DropdownItem className="dropdown-item" onClick={e=>this.changeCountry(e,countries[i])}><div>{countries[i]}</div></DropdownItem>);
+        options.push(<DropdownItem className="dropdown-item" onClick={e=>this.changeCountry(e,countries[i], url)}><div>{countries[i]}</div></DropdownItem>);
     }
     return options;
   }
-  yearList(param){
+  yearList(param, url){
     const yearList = [1960,1961,1962,1963,1964,1965,1966,1967,1968,1969,1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019];
     const options = []
     for(let i=0; i<yearList.length; i++){
-        options.push(<DropdownItem onClick={e=>this.changeYear(e,yearList[i], param)}><div>{yearList[i]}</div></DropdownItem>);
+        options.push(<DropdownItem onClick={e=>this.changeYear(e,yearList[i], param, url)}><div>{yearList[i]}</div></DropdownItem>);
     }
     return options;
   }
-
-  changeCountry(e, n) {
-    console.log(e);
-    console.log(this);
-    console.log(n)
-    this.setState({country: n});
-    if(this.state.agg != "select" && this.state.from != "select" && this.state.to != "select"){
-        fetch('http://127.0.0.1:5000/mockup_1_1', {
+//   get_m_1_2(){
+//     fetch('http://127.0.0.1:5000/mockup_1_2', {
+//             method: 'POST',
+//             body: JSON.stringify({
+//               // Add parameters here
+//             }),
+//             headers: {
+//               'Content-type': 'application/json; charset=UTF-8',
+//             },
+//           })
+//              .then((response) => response.json())
+//              .then((data) => {
+//                 console.log(data);
+//                 var temp = this.state.m_1_2;
+//                 temp.data = data.data;
+//                 this.setState({m_1_2:temp});
+//                 // Handle data
+//              })
+//              .catch((err) => {
+//                 console.log(err.message);
+//              });
+//   }
+  changeCountry(e, n, url) {
+    var param_country = null;
+    var param_agg = null;
+    var param_from = null;
+    var param_to = null;
+    switch(url){
+        case "mockup_3_1":
+            this.state.m_3_1.country=n;
+            param_country = n;
+            param_agg = this.state.m_3_1.agg;
+            param_from = this.state.m_3_1.from;
+            param_to = this.state.m_3_1.to;
+            break;
+        case "mockup_3_2":
+            this.state.m_3_2.country=n;
+            param_country = n;
+            param_from = this.state.m_3_2.from;
+            param_to = this.state.m_3_2.to;
+            break;
+    }
+    this.setState({state: this.state});
+    if(param_agg != "select" && param_from != "select" && param_to != "select"){
+        fetch(`http://127.0.0.1:5000/${url}`, {
             method: 'POST',
             body: JSON.stringify({
-                country: n,
-                agg: this.state.agg,
-                from: this.state.from,
-                to: this.state.to
+                country: param_country,
+                agg: param_agg,
+                from: param_from,
+                to: param_to
               // Add parameters here
             }),
             headers: {
@@ -92,7 +137,18 @@ class Energy extends React.Component {
              .then((response) => response.json())
              .then((data) => {
                 console.log(data);
-                this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
+                switch(url){
+                  case "mockup_3_1":
+                    var temp = this.state.m_3_1;
+                    temp.data = data.data;
+                    this.setState({m_3_1:temp});
+                    break;
+                  case "mockup_3_2":
+                    var temp = this.state.m_3_2;
+                    temp.data = data.data;
+                    this.setState({m_3_2:temp});
+                    break;
+                }
                 // Handle data
              })
              .catch((err) => {
@@ -100,19 +156,29 @@ class Energy extends React.Component {
              });
     }
   }
-  changeAgg(e, n) {
-    console.log(e);
-    console.log(this);
-    console.log(n)
-    this.setState({agg: e.currentTarget.textContent});
-    if(this.state.country != "select" && this.state.from != "select" && this.state.to != "select"){
-        fetch('http://127.0.0.1:5000/mockup_1_1', {
+  changeAgg(e, n, url) {
+    var param_country = null;
+    var param_agg = null;
+    var param_from = null;
+    var param_to = null;
+    switch(url){
+        case "mockup_3_1":
+            this.state.m_1_1.agg=n;
+            param_country = this.state.m_3_1.country;
+            param_agg = n;
+            param_from = this.state.m_3_1.from;
+            param_to = this.state.m_3_1.to;
+            break;
+    }
+    this.setState({state: this.state});
+    if(param_country != "select" && param_from != "select" && param_to != "select"){
+        fetch(`http://127.0.0.1:5000/${url}`, {
             method: 'POST',
             body: JSON.stringify({
-              country: this.state.country,
-              agg: n,
-              from: this.state.from,
-              to: this.state.to
+              country: param_country,
+              agg: param_agg,
+              from: param_from,
+              to: param_to
               // Add parameters here
             }),
             headers: {
@@ -122,33 +188,69 @@ class Energy extends React.Component {
              .then((response) => response.json())
              .then((data) => {
                 console.log(data);
-                this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
-                // Handle data
+                switch(url){
+                  case "mockup_3_1":
+                    var temp = this.state.m_3_1;
+                    temp.data = data.data;
+                    this.setState({m_3_1:temp});
+                    break;
+                }
              })
              .catch((err) => {
                 console.log(err.message);
              });
     }
   }
-  changeYear(e, n, param) {
-    console.log(e);
-    console.log(this);
-    console.log(n)
+  changeYear(e, n, param, url) {
+    var param_country = null;
+    var param_agg = null;
+    var param_from = null;
+    var param_to = null;
     if(param=="to"){
-        this.setState({to: n});
+        switch(url){
+            case "mockup_3_1":
+                this.state.m_3_1.to=n;
+                param_country = this.state.m_3_1.country;
+                param_agg = this.state.m_3_1.agg;
+                param_from = this.state.m_3_1.from;
+                param_to = n;
+                break;
+            case "mockup_3_2":
+                this.state.m_3_2.to=n;
+                param_agg = this.state.m_3_2.agg;
+                param_from = this.state.m_3_2.from;
+                param_to = n;
+                break;
+        }
+        this.setState({state: this.state});
     }
     else{
-        this.setState({from: n});
+        switch(url){
+            case "mockup_3_1":
+                this.state.m_3_1.from=n;
+                param_country = this.state.m_3_1.country;
+                param_agg = this.state.m_3_1.agg;
+                param_from = n;
+                param_to = this.state.m_3_1.to;
+                break;
+            case "mockup_3_2":
+                this.state.m_3_2.from=n;
+                param_agg = this.state.m_3_2.agg;
+                param_from = n;
+                param_to = this.state.m_3_2.to;
+                break;
+        }
+        this.setState({state: this.state});
     }
     if(param=="to"){
-        if(this.state.country != "select" && this.state.from != "select" && this.state.agg != "select"){
-            fetch('http://127.0.0.1:5000/mockup_1_1', {
+        if(param_country != "select" && param_from != "select" && param_agg != "select"){
+            fetch(`http://127.0.0.1:5000/${url}`, {
                 method: 'POST',
                 body: JSON.stringify({
-                  country: this.state.country,
-                  agg: this.state.agg,
-                  from: this.state.from,
-                  to: n
+                  country: param_country,
+                  agg: param_agg,
+                  from: param_from,
+                  to: param_to
                 }),
                 headers: {
                   'Content-type': 'application/json; charset=UTF-8',
@@ -157,8 +259,18 @@ class Energy extends React.Component {
                  .then((response) => response.json())
                  .then((data) => {
                     console.log(data);
-                    this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
-                    // Handle data
+                    switch(url){
+                      case "mockup_3_1":
+                        var temp = this.state.m_3_1;
+                        temp.data = data.data;
+                        this.setState({m_3_1:temp});
+                        break;
+                      case "mockup_3_2":
+                            var temp = this.state.m_3_2;
+                            temp.data = data.data;
+                            this.setState({m_3_2:temp});
+                            break;
+                    }
                  })
                  .catch((err) => {
                     console.log(err.message);
@@ -166,14 +278,14 @@ class Energy extends React.Component {
         }
     }
     else if(param="from"){
-        if(this.state.country != "select" && this.state.to != "select" && this.state.agg != "select"){
-            fetch('http://127.0.0.1:5000/mockup_1_1', {
+        if(param_country != "select" && param_to != "select" && param_agg != "select"){
+            fetch(`http://127.0.0.1:5000/${url}`, {
                 method: 'POST',
                 body: JSON.stringify({
-                    country: this.state.country,
-                    agg: this.state.agg,
-                    from: n,
-                    to: this.state.to
+                    country: param_country,
+                    agg: param_agg,
+                    from: param_from,
+                    to: param_to
                 }),
                 headers: {
                   'Content-type': 'application/json; charset=UTF-8',
@@ -182,7 +294,18 @@ class Energy extends React.Component {
                  .then((response) => response.json())
                  .then((data) => {
                     console.log(data);
-                    this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
+                    switch(url){
+                        case "mockup_3_1":
+                          var temp = this.state.m_3_1;
+                          temp.data = data.data;
+                          this.setState({m_3_1:temp});
+                          break;
+                        case "mockup_3_2":
+                            var temp = this.state.m_3_2;
+                            temp.data = data.data;
+                            this.setState({m_3_2:temp});
+                            break;
+                      }
                     // Handle data
                  })
                  .catch((err) => {
@@ -225,10 +348,10 @@ class Energy extends React.Component {
                                     <h2 className='text-black'>Country</h2>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
-                                    {this.state.country}
+                                    {this.state.m_3_1.country}
                                     </DropdownToggle>
                                     <DropdownMenu container={'body'}>
-                                        {this.countryList()}
+                                        {this.countryList("mockup_3_1")}
                                     </DropdownMenu>
                                     </UncontrolledDropdown>
                                 </div>
@@ -240,19 +363,19 @@ class Energy extends React.Component {
                                 <h2 className='text-black'>Aggregation View</h2>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.agg}
+                                {this.state.m_3_1.agg}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"Y")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"Y", "mockup_3_1")}>
                                     <div>Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"2Y")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"2Y", "mockup_3_1")}>
                                     <div>2Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"3Y")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"3Y", "mockup_3_1")}>
                                     <div>3Y</div>
                                     </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"4Y")}>
+                                    <DropdownItem onClick={e=>this.changeAgg(e,"5Y", "mockup_3_1")}>
                                     <div>5Y</div>
                                     </DropdownItem>
                                 </DropdownMenu>
@@ -273,10 +396,10 @@ class Energy extends React.Component {
                                 <h6 className='text-black'>From</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.from}
+                                {this.state.m_3_1.from}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("from")}
+                                        {this.yearList("from", "mockup_3_1")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
@@ -286,10 +409,10 @@ class Energy extends React.Component {
                                 <h6 className='text-black'>To</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.to}
+                                {this.state.m_3_1.to}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("to")}
+                                        {this.yearList("to", "mockup_3_1")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
@@ -297,7 +420,7 @@ class Energy extends React.Component {
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
-                        {/* <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/> */}
+                        <Chart_m_3_1 data={this.state.m_3_1.data}/>
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
@@ -315,50 +438,24 @@ class Energy extends React.Component {
                         <h2>Something something something</h2>
                     </div>
                 </Row>
-                <Row className="justify-content-center">
+                <Row>
                     <Col>
-                        <Row>
-                            <Col>
+                    <Row>
+                        <Col>
                                 <div align="center">
                                     <h2 className='text-black'>Country</h2>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
-                                    {this.state.country}
+                                    {this.state.m_3_1.country}
                                     </DropdownToggle>
                                     <DropdownMenu container={'body'}>
-                                        {this.countryList()}
+                                        {this.countryList("mockup_3_2")}
                                     </DropdownMenu>
                                     </UncontrolledDropdown>
                                 </div>
                             </Col>
                         </Row>
-                        <Row>
-                            <Col>
-                                <div align="center">
-                                <h2 className='text-black'>Aggregation View</h2>
-                                <UncontrolledDropdown group>
-                                <DropdownToggle caret>
-                                {this.state.agg}
-                                </DropdownToggle>
-                                <DropdownMenu container={'body'}>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"Y")}>
-                                    <div>Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"2Y")}>
-                                    <div>2Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"3Y")}>
-                                    <div>3Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"4Y")}>
-                                    <div>5Y</div>
-                                    </DropdownItem>
-                                </DropdownMenu>
-                                </UncontrolledDropdown>
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
+                    <Row>
                             <Col>
                                 <div align="center">
                                 <h4>Date Range</h4>
@@ -371,10 +468,10 @@ class Energy extends React.Component {
                                 <h6 className='text-black'>From</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.from}
+                                {this.state.m_3_2.from}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("from")}
+                                        {this.yearList("from", "mockup_3_2")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
@@ -384,10 +481,10 @@ class Energy extends React.Component {
                                 <h6 className='text-black'>To</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
-                                {this.state.to}
+                                {this.state.m_3_2.to}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("to")}
+                                        {this.yearList("to", "mockup_3_2")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
@@ -395,9 +492,9 @@ class Energy extends React.Component {
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
-                        {/* <Chart x={this.state.xData} y1={this.state.yData1} y2={this.state.yData2}/> */}
+                        <Chart_m_3_2 data={this.state.m_3_2.data}/>
                     </Col>
-                    <Col lg="2" className="align-self-center mr-4">
+                    <Col lg="2" className="align-self-center">
                         <div>
                             <p>Something something something Something something something Something something something Something something something Something something something Something something something Something something something</p>
                         </div>

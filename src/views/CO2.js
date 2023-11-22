@@ -61,10 +61,12 @@ class CO2 extends React.Component {
             data: null
         },
         m_2_4: {
-            data: this.get_m_2_4()
+            from: "select",
+            to: "select",
+            data: null,
         }
     };
-    this.get_m_2_4 = this.get_m_2_4.bind(this);
+    // this.get_m_2_4 = this.get_m_2_4.bind(this);
     this.changeTopN = this.changeTopN.bind(this);
     this.changeYear = this.changeYear.bind(this);
     this.topNCountries = this.topNCountries.bind(this);
@@ -95,28 +97,28 @@ class CO2 extends React.Component {
     }
     return options;
   }
-  get_m_2_4(){
-    fetch('http://127.0.0.1:5000/mockup_2_4', {
-            method: 'POST',
-            body: JSON.stringify({
-              // Add parameters here
-            }),
-            headers: {
-              'Content-type': 'application/json; charset=UTF-8',
-            },
-          })
-             .then((response) => response.json())
-             .then((data) => {
-                console.log(data);
-                var temp = this.state.m_2_4;
-                temp.data = data.data;
-                this.setState({m_2_4:temp});
-                // Handle data
-             })
-             .catch((err) => {
-                console.log(err.message);
-             });
-    }
+//   get_m_2_4(){
+//     fetch('http://127.0.0.1:5000/mockup_2_4', {
+//             method: 'POST',
+//             body: JSON.stringify({
+//               // Add parameters here
+//             }),
+//             headers: {
+//               'Content-type': 'application/json; charset=UTF-8',
+//             },
+//           })
+//              .then((response) => response.json())
+//              .then((data) => {
+//                 console.log(data);
+//                 var temp = this.state.m_2_4;
+//                 temp.data = data.data;
+//                 this.setState({m_2_4:temp});
+//                 // Handle data
+//              })
+//              .catch((err) => {
+//                 console.log(err.message);
+//              });
+//     }
   changeTopN(e, n, url) {
     var param_topN = null;
     var param_from = null;
@@ -239,6 +241,11 @@ class CO2 extends React.Component {
                 param_from = this.state.m_2_3.from;
                 param_to =n;
                 break;
+            case "mockup_2_4":
+                this.state.m_2_4.to= n;
+                param_from = this.state.m_2_4.from;
+                param_to =n;
+                break;
         }
         this.setState({state:this.state});
     }
@@ -261,6 +268,11 @@ class CO2 extends React.Component {
                 param_country = this.state.m_2_3.country;
                 param_to = this.state.m_2_3.to;
                 param_from =n;
+                break;
+            case "mockup_2_4":
+                this.state.m_2_4.from= n;
+                param_from = n;
+                param_to =this.state.m_2_4.to;
                 break;
         }
         this.setState({state:this.state});
@@ -297,6 +309,11 @@ class CO2 extends React.Component {
                             var temp = this.state.m_2_3;
                             temp.data = data.data;
                             this.setState({m_2_3:temp});
+                            break;
+                        case "mockup_2_4":
+                            var temp = this.state.m_2_4;
+                            temp.data = data.data;
+                            this.setState({m_2_4:temp});
                             break;
                       }
                     // Handle data
@@ -338,6 +355,11 @@ class CO2 extends React.Component {
                             var temp = this.state.m_2_3;
                             temp.data = data.data;
                             this.setState({m_2_3:temp});
+                            break;
+                        case "mockup_2_4":
+                            var temp = this.state.m_2_4;
+                            temp.data = data.data;
+                            this.setState({m_2_4:temp});
                             break;
                       }
                     // Handle data
@@ -591,10 +613,47 @@ class CO2 extends React.Component {
                     </div>
                 </Row>
                 <Row className="justify-content-center">
-                    <Col lg="9" className="align-self-center">
+                    <Col>
+                    <Row >
+                    <Col>
+                        <div align="center">
+                        <h4>Date Range</h4>
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <div align="center">
+                        <h6 className='text-black'>From</h6>
+                        <UncontrolledDropdown group>
+                        <DropdownToggle caret>
+                        {this.state.m_2_4.from}
+                        </DropdownToggle>
+                        <DropdownMenu container={'body'}>
+                                {this.yearList("from", "mockup_2_4")}
+                        </DropdownMenu>
+                        </UncontrolledDropdown>
+                        </div>
+                    </Col>
+                    <Col>
+                        <div align="center">
+                        <h6 className='text-black'>To</h6>
+                        <UncontrolledDropdown group>
+                        <DropdownToggle caret>
+                        {this.state.m_2_4.to}
+                        </DropdownToggle>
+                        <DropdownMenu container={'body'}>
+                                {this.yearList("to", "mockup_2_4")}
+                        </DropdownMenu>
+                        </UncontrolledDropdown>
+                        </div>
+                    </Col>
+                </Row>
+                    </Col>
+                    <Col lg="7" className="align-self-center">
                         <Chart_m_2_4 data={this.state.m_2_4.data}/>
                     </Col>
-                    <Col lg="2" className="align-self-center mr-4">
+                    <Col lg="2" className="align-self-center">
                         <div>
                             <p>Something something something Something something something Something something something Something something something Something something something Something something something Something something something</p>
                         </div>

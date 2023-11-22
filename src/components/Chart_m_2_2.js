@@ -19,7 +19,7 @@ function Chart_m_2_2(props) {
       series={[
         { yAxisKey: 'y1', data: props.data.y1, label: 'total co2_emissions' },
         { yAxisKey: 'y2', data: props.data.y2, label: 'GDP in billions' },
-        { yAxisKey: 'y3', data: props.data.y2, label: 'surface temperature' },
+        { yAxisKey: 'y3', data: props.data.y3, label: 'surface temperature' },
       ]}
       leftAxis="y1"
       rightAxis="y3"
