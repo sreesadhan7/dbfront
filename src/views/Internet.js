@@ -39,10 +39,10 @@ class Internet extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-        country: "select",
-        agg: "select",
-        from: "select",
-        to: "select",
+        country: "India",
+        agg: "Y",
+        from: "2000",
+        to: "2020",
         xData: [],
         yData1: [],
         yData2: []
@@ -52,8 +52,37 @@ class Internet extends React.Component {
     this.changeYear = this.changeYear.bind(this);
     this.countryList = this.countryList.bind(this);
   }
+
+  componentDidMount() {
+    this.fetchChartData();
+  }
+  
+  fetchChartData() {
+    fetch('http://127.0.0.1:5000/mockup_5', {
+      method: 'POST',
+      body: JSON.stringify({
+        country: this.state.country,
+        agg: this.state.agg,
+        from: this.state.from,
+        to: this.state.to
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      this.setState({xData: data.data.x, yData1: data.data.y1, yData2: data.data.y2});
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+  }
+  
+
+
    countryList(){
-    const countries = ['Afghanistan','Albania','Algeria','Angola','Argentina','Australia','Austria','Bahrain','Bangladesh','Barbados','Benin','Bolivia','Botswana','Brazil','Bulgaria','Burkina Faso','Cambodia','Cameroon','Canada','Central African Republic','Chad','Chile','China','Colombia','Comoros','Congo Republic','Cuba','Cyprus','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eswatini','Finland','France','Gabon','Gambia','Germany','Ghana','Greece','Guatemala','Guinea','Guinea-Bissau','Haiti','Honduras','Hungary','Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Jordan','Kenya','Kuwait','Laos','Lebanon','Lesotho','Liberia','Libya','Madagascar','Malawi','Malaysia','Mali','Malta','Mauritania','Mauritius','Mexico','Mongolia','Morocco','Mozambique','Myanmar','Namibia','Nepal','Netherlands','New Zealand','Nicaragua','Niger','Nigeria','North Korea','Norway','Oman','Pakistan','Panama','Paraguay','Peru','Philippines','Poland','Portugal','Qatar','Romania','Saudi Arabia','Senegal','Seychelles','Sierra Leone','South Africa','South Korea','Spain','Sri Lanka','St. Lucia','Sweden','Switzerland','Syria','Tanzania','Thailand','Togo','Trinidad and Tobago','Tunisia','Uganda','United Arab Emirates','United Kingdom','United States','Uruguay','Venezuela','Vietnam','Zambia','Zimbabwe'];
+    const countries = ['Afghanistan','Albania','Algeria']
     console.log("countries", countries);
     const options = []
     for(let i=0; i<countries.length; i++){

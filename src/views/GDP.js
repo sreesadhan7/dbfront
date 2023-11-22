@@ -37,26 +37,61 @@ import Divider from "../components/Divider.js"
 
 
 class GDP extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {
+    constructor(props){
+      super(props)
+      this.state = {
         m_4_1: {
-            topN: "select",
-            from: "select",
-            to: "select",
-            data: null
+          topN: "5", // Default value for topN for m_4_1
+          from: "2000", // Default start year for m_4_1
+          to: "2010", // Default end year for m_4_1
+          data: null
         },
         m_4_2: {
-            topN: "select",
-            from: "select",
-            to: "select",
-            data: null
+          topN: "10", // Default value for topN for m_4_2
+          from: "2010", // Default start year for m_4_2
+          to: "2020", // Default end year for m_4_2
+          data: null
         }
-    };
-    // this.get_m_1_2 = this.get_m_1_2.bind(this);
-    this.topNCountries = this.topNCountries.bind(this);
-    this.changeYear = this.changeYear.bind(this);
-  }
+      };
+      // Bindings for your methods
+      this.topNCountries = this.topNCountries.bind(this);
+      this.changeYear = this.changeYear.bind(this);
+      this.changeTopN = this.changeTopN.bind(this);
+      this.fetchData = this.fetchData.bind(this);
+    }
+  
+    componentDidMount() {
+        this.fetchData('mockup_4_1', this.state.m_4_1.topN, this.state.m_4_1.from, this.state.m_4_1.to);
+        setTimeout(() => {
+            this.fetchData('mockup_4_2', this.state.m_4_2.topN, this.state.m_4_2.from, this.state.m_4_2.to);
+        }, 500); // Delay the second request by 500ms
+    }
+    
+  
+    fetchData(url, topN, from, to) {
+        fetch(`http://127.0.0.1:5000/${url}`, {
+          method: 'POST',
+          body: JSON.stringify({ topN, from, to }),
+          headers: { 'Content-type': 'application/json; charset=UTF-8' },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          switch(url) {
+            case 'mockup_4_1':
+              this.setState({ m_4_1: { ...this.state.m_4_1, data: data.data } });
+              break;
+            case 'mockup_4_2':
+              this.setState({ m_4_2: { ...this.state.m_4_2, data: data.data } });
+              break;
+            // Add more cases here if you have more URLs to handle
+            default:
+              console.log('Unknown URL');
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+      }
   topNCountries(url){
     const years = [5,10, 15]
     console.log("years", years);

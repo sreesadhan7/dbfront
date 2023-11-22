@@ -42,21 +42,21 @@ class GlobalTemp extends React.Component {
     super(props)
     this.state = {
         m_1_1: {
-            country: "select",
-            agg: "select",
-            from: "select",
-            to: "select",
+            country: "India",
+            agg: "Y",
+            from: "1960",
+            to: "2018",
             data: null
         },
         m_1_2: {
-            from: "select",
-            to: "select",
+            from: "1960",
+            to: "2018",
             data: null
         },
         m_1_3: {
-            country: "select",
-            from: "select",
-            to: "select",
+            country: "India",
+            from: "1960",
+            to: "2018",
             data: null
         }
     };
@@ -65,6 +65,44 @@ class GlobalTemp extends React.Component {
     this.changeAgg = this.changeAgg.bind(this);
     this.changeYear = this.changeYear.bind(this);
     this.countryList = this.countryList.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchData('mockup_1_1', this.state.m_1_1.country, this.state.m_1_1.agg, this.state.m_1_1.from, this.state.m_1_1.to);
+    setTimeout(() => {
+        this.fetchData('mockup_1_2', 'junk', 'junk', this.state.m_1_2.from, this.state.m_1_2.to);
+    }, 500); // Delay the second request by 500ms
+    setTimeout(() => {
+        this.fetchData('mockup_1_3', this.state.m_1_3.country, 'junk', this.state.m_1_3.from, this.state.m_1_3.to);
+    }, 1000); // Delay the second request by 500ms
+  }
+
+  fetchData(url, country, agg, from, to) {
+    fetch(`http://127.0.0.1:5000/${url}`, {
+      method: 'POST',
+      body: JSON.stringify({country, agg, from, to}),
+      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      switch(url) {
+        case 'mockup_1_1':
+          this.setState({ m_1_1: { ...this.state.m_1_1, data: data.data } });
+          break;
+        case 'mockup_1_2':
+          this.setState({ m_1_2: { ...this.state.m_1_2, data: data.data } });
+          break;
+        case 'mockup_1_3':
+          this.setState({ m_1_3: { ...this.state.m_1_3, data: data.data } });
+          break;
+        // Add more cases here if you have more URLs to handle
+        default:
+          console.log('Unknown URL');
+      }
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
   }
    countryList(url){
     const countries = ['Afghanistan','Albania','Algeria','Angola','Argentina','Australia','Austria','Bahrain','Bangladesh','Barbados','Benin','Bolivia','Botswana','Brazil','Bulgaria','Burkina Faso','Cambodia','Cameroon','Canada','Central African Republic','Chad','Chile','China','Colombia','Comoros','Congo Republic','Cuba','Cyprus','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eswatini','Finland','France','Gabon','Gambia','Germany','Ghana','Greece','Guatemala','Guinea','Guinea-Bissau','Haiti','Honduras','Hungary','Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Jordan','Kenya','Kuwait','Laos','Lebanon','Lesotho','Liberia','Libya','Madagascar','Malawi','Malaysia','Mali','Malta','Mauritania','Mauritius','Mexico','Mongolia','Morocco','Mozambique','Myanmar','Namibia','Nepal','Netherlands','New Zealand','Nicaragua','Niger','Nigeria','North Korea','Norway','Oman','Pakistan','Panama','Paraguay','Peru','Philippines','Poland','Portugal','Qatar','Romania','Saudi Arabia','Senegal','Seychelles','Sierra Leone','South Africa','South Korea','Spain','Sri Lanka','St. Lucia','Sweden','Switzerland','Syria','Tanzania','Thailand','Togo','Trinidad and Tobago','Tunisia','Uganda','United Arab Emirates','United Kingdom','United States','Uruguay','Venezuela','Vietnam','Zambia','Zimbabwe'];

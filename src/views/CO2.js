@@ -43,26 +43,26 @@ class CO2 extends React.Component {
     super(props)
     this.state = {
         m_2_1: {
-            topN: "select",
-            from: "select",
-            to: "select",
+            topN: "5",
+            from: "2000",
+            to: "2020",
             data: null
         },
         m_2_2: {
-            country: "select",
-            from: "select",
-            to: "select",
+            country: "India",
+            from: "2000",
+            to: "2020",
             data: null
         },
         m_2_3: {
-            country: "select",
-            from: "select",
-            to: "select",
+            country: "India",
+            from: "2000",
+            to: "2019",
             data: null
         },
         m_2_4: {
-            from: "select",
-            to: "select",
+            from: "2000",
+            to: "2019",
             data: null,
         }
     };
@@ -70,7 +70,54 @@ class CO2 extends React.Component {
     this.changeTopN = this.changeTopN.bind(this);
     this.changeYear = this.changeYear.bind(this);
     this.topNCountries = this.topNCountries.bind(this);
+    this.changeCountry = this.changeCountry.bind(this);
   }
+
+  componentDidMount() {
+    this.fetchData('mockup_2_1', this.state.m_2_1.topN, 'junk', this.state.m_2_1.from, this.state.m_2_1.to);
+    setTimeout(() => {
+        this.fetchData('mockup_2_2', 'junk', this.state.m_2_2.country, this.state.m_2_2.from, this.state.m_2_2.to);
+    }, 250); // Delay the second request by 500ms
+    setTimeout(() => {
+        this.fetchData('mockup_2_3', 'junk', this.state.m_2_3.country, this.state.m_2_3.from, this.state.m_2_3.to);
+    }, 500); // Delay the second request by 500ms
+    setTimeout(() => {
+        this.fetchData('mockup_2_4', 'junk', 'junk', this.state.m_2_4.from, this.state.m_2_4.to);
+    }, 700); // Delay the second request by 500ms
+    }
+
+  fetchData(url, topN,country, from, to) {
+    fetch(`http://127.0.0.1:5000/${url}`, {
+      method: 'POST',
+      body: JSON.stringify({ topN, country, from, to }),
+      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      switch(url) {
+        case 'mockup_2_1':
+          this.setState({ m_2_1: { ...this.state.m_2_1, data: data.data } });
+          break;
+        case 'mockup_2_2':
+          this.setState({ m_2_2: { ...this.state.m_2_2, data: data.data } });
+          break;
+        case 'mockup_2_3':
+          this.setState({ m_2_3: { ...this.state.m_2_3, data: data.data } });
+          break;
+        case 'mockup_2_4':
+          this.setState({ m_2_4: { ...this.state.m_2_4, data: data.data } });
+          break;
+        // Add more cases here if you have more URLs to handle
+        default:
+          console.log('Unknown URL');
+      }
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+  }
+
+
    topNCountries(url){
     const years = [5,10, 15]
     console.log("years", years);
