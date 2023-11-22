@@ -41,7 +41,7 @@ class Energy extends React.Component {
     super(props)
     this.state = {
         m_3_1: {
-            country: "select",
+            topN: "select",
             agg: "select",
             from: "select",
             to: "select",
@@ -55,10 +55,20 @@ class Energy extends React.Component {
         }
     };
     // this.get_m_1_2 = this.get_m_1_2.bind(this);
+    this.topNCountries = this.topNCountries.bind(this);
     this.changeCountry = this.changeCountry.bind(this);
     this.changeAgg = this.changeAgg.bind(this);
     this.changeYear = this.changeYear.bind(this);
     this.countryList = this.countryList.bind(this);
+  }
+  topNCountries(url){
+    const years = [5,10, 15]
+    console.log("years", years);
+    const options = []
+    for(let i=0; i<years.length; i++){
+        options.push(<DropdownItem className="dropdown-item" onClick={e=>this.changeTopN(e,years[i], url)}><div>{years[i]}</div></DropdownItem>);
+    }
+    return options;
   }
    countryList(url){
     const countries = ['Afghanistan','Albania','Algeria','Angola','Argentina','Australia','Austria','Bahrain','Bangladesh','Barbados','Benin','Bolivia','Botswana','Brazil','Bulgaria','Burkina Faso','Cambodia','Cameroon','Canada','Central African Republic','Chad','Chile','China','Colombia','Comoros','Congo Republic','Cuba','Cyprus','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eswatini','Finland','France','Gabon','Gambia','Germany','Ghana','Greece','Guatemala','Guinea','Guinea-Bissau','Haiti','Honduras','Hungary','Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Jordan','Kenya','Kuwait','Laos','Lebanon','Lesotho','Liberia','Libya','Madagascar','Malawi','Malaysia','Mali','Malta','Mauritania','Mauritius','Mexico','Mongolia','Morocco','Mozambique','Myanmar','Namibia','Nepal','Netherlands','New Zealand','Nicaragua','Niger','Nigeria','North Korea','Norway','Oman','Pakistan','Panama','Paraguay','Peru','Philippines','Poland','Portugal','Qatar','Romania','Saudi Arabia','Senegal','Seychelles','Sierra Leone','South Africa','South Korea','Spain','Sri Lanka','St. Lucia','Sweden','Switzerland','Syria','Tanzania','Thailand','Togo','Trinidad and Tobago','Tunisia','Uganda','United Arab Emirates','United Kingdom','United States','Uruguay','Venezuela','Vietnam','Zambia','Zimbabwe'];
@@ -99,6 +109,54 @@ class Energy extends React.Component {
 //                 console.log(err.message);
 //              });
 //   }
+
+changeTopN(e, n, url) {
+    var param_topN = null;
+    var param_from = null;
+    var param_to = null;
+    var param_agg = null;
+    switch(url){
+        case "mockup_3_1":
+            this.state.m_3_1.topN = n;
+            param_topN = n;
+            param_agg = this.state.m_3_1.agg;
+            param_from = this.state.m_3_1.from;
+            param_to = this.state.m_3_1.to;
+            break;
+    }
+    this.setState({state: this.state});
+    if(param_from != "select" && param_to != "select"){
+        fetch(`http://127.0.0.1:5000/${url}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                topN: param_topN,
+                from: param_from,
+                agg: param_agg,
+                to: param_to
+              // Add parameters here
+            }),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+          })
+             .then((response) => response.json())
+             .then((data) => {
+                console.log(data);
+                switch(url){
+                    case "mockup_3_1":
+                      var temp = this.state.m_3_1;
+                      temp.data = data.data;
+                      this.setState({m_3_1:temp});
+                      break;
+                  }
+                // Handle data
+             })
+             .catch((err) => {
+                console.log(err.message);
+             });
+    }
+  }
+
   changeCountry(e, n, url) {
     var param_country = null;
     var param_agg = null;
@@ -120,12 +178,11 @@ class Energy extends React.Component {
             break;
     }
     this.setState({state: this.state});
-    if(param_agg != "select" && param_from != "select" && param_to != "select"){
+    if(param_from != "select" && param_to != "select"){
         fetch(`http://127.0.0.1:5000/${url}`, {
             method: 'POST',
             body: JSON.stringify({
                 country: param_country,
-                agg: param_agg,
                 from: param_from,
                 to: param_to
               // Add parameters here
@@ -161,10 +218,12 @@ class Energy extends React.Component {
     var param_agg = null;
     var param_from = null;
     var param_to = null;
+    var param_topN = null;
     switch(url){
         case "mockup_3_1":
-            this.state.m_1_1.agg=n;
+            this.state.m_3_1.agg=n;
             param_country = this.state.m_3_1.country;
+            param_topN = this.state.m_3_1.topN;
             param_agg = n;
             param_from = this.state.m_3_1.from;
             param_to = this.state.m_3_1.to;
@@ -176,6 +235,7 @@ class Energy extends React.Component {
             method: 'POST',
             body: JSON.stringify({
               country: param_country,
+              topN: param_topN,
               agg: param_agg,
               from: param_from,
               to: param_to
@@ -205,19 +265,20 @@ class Energy extends React.Component {
     var param_country = null;
     var param_agg = null;
     var param_from = null;
+    var param_topN = null;
     var param_to = null;
     if(param=="to"){
         switch(url){
             case "mockup_3_1":
                 this.state.m_3_1.to=n;
-                param_country = this.state.m_3_1.country;
                 param_agg = this.state.m_3_1.agg;
                 param_from = this.state.m_3_1.from;
+                param_topN = this.state.m_3_1.topN;
                 param_to = n;
                 break;
             case "mockup_3_2":
                 this.state.m_3_2.to=n;
-                param_agg = this.state.m_3_2.agg;
+                param_country = this.state.m_3_2.country;
                 param_from = this.state.m_3_2.from;
                 param_to = n;
                 break;
@@ -231,11 +292,12 @@ class Energy extends React.Component {
                 param_country = this.state.m_3_1.country;
                 param_agg = this.state.m_3_1.agg;
                 param_from = n;
+                param_topN = this.state.m_3_1.topN;
                 param_to = this.state.m_3_1.to;
                 break;
             case "mockup_3_2":
                 this.state.m_3_2.from=n;
-                param_agg = this.state.m_3_2.agg;
+                param_country = this.state.m_3_2.country;
                 param_from = n;
                 param_to = this.state.m_3_2.to;
                 break;
@@ -250,6 +312,7 @@ class Energy extends React.Component {
                   country: param_country,
                   agg: param_agg,
                   from: param_from,
+                  topN: param_topN,
                   to: param_to
                 }),
                 headers: {
@@ -285,6 +348,7 @@ class Energy extends React.Component {
                     country: param_country,
                     agg: param_agg,
                     from: param_from,
+                    topN: param_topN,
                     to: param_to
                 }),
                 headers: {
@@ -345,13 +409,13 @@ class Energy extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                    <h2 className='text-black'>Country</h2>
+                                    <h2 className='text-black'>Top N Countries</h2>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
-                                    {this.state.m_3_1.country}
+                                    {this.state.m_3_1.topN}
                                     </DropdownToggle>
                                     <DropdownMenu container={'body'}>
-                                        {this.countryList("mockup_3_1")}
+                                        {this.topNCountries("mockup_3_1")}
                                     </DropdownMenu>
                                     </UncontrolledDropdown>
                                 </div>
@@ -446,7 +510,7 @@ class Energy extends React.Component {
                                     <h2 className='text-black'>Country</h2>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
-                                    {this.state.m_3_1.country}
+                                    {this.state.m_3_2.country}
                                     </DropdownToggle>
                                     <DropdownMenu container={'body'}>
                                         {this.countryList("mockup_3_2")}

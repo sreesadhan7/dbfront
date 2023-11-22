@@ -8,19 +8,30 @@ function Chart_m_3_1(props) {
     </div>)
   }
   else{
+    const countries = [];
+    let allSeries = [];
+    console.log(props.data);
+    for (const [key, value] of Object.entries(props.data)) {
+        countries.push(key);
+      }
+    console.log(props.data[countries[0]]);
+    countries.forEach(c =>{
+        let seriesData = {
+            yAxisKey: 'y1',
+            data: props.data[c].y,
+            label: c
+        }
+        allSeries.push(seriesData);
+    });
+    console.log("tobeGraphed", allSeries);
     return(
     <LineChart
-      xAxis={[{ data: props.x , scaleType: 'band'}]}
+      xAxis={[{ data: props.data[countries.at(0)].x , scaleType: 'band'}]}
       yAxis={[
-        { id: 'y1', scaleType: 'linear' },
-        { id: 'y2', scaleType: 'linear' },
+        { id: 'y1', scaleType: 'linear' }
       ]}
-      series={[
-        { yAxisKey: 'y1', data: props.y1, label: 'total co2_emissions' },
-        { yAxisKey: 'y2', data: props.y2, label: 'GDP in billions' },
-      ]}
+      series={allSeries}
       leftAxis="y1"
-      rightAxis="y2"
       height={400}
     />
     )
@@ -28,154 +39,3 @@ function Chart_m_3_1(props) {
   }
 
   export default Chart_m_3_1;
-//   {
-//     "data": {
-//         "China": {
-//             "x": [
-//                 2001,
-//                 2002,
-//                 2003,
-//                 2004,
-//                 2005,
-//                 2006,
-//                 2007,
-//                 2008,
-//                 2009,
-//                 2010,
-//                 2011,
-//                 2012,
-//                 2013,
-//                 2014,
-//                 2015
-//             ],
-//             "y": [
-//                 1315,
-//                 1459,
-//                 1677,
-//                 1955,
-//                 2196,
-//                 2524,
-//                 2892,
-//                 3071,
-//                 3290,
-//                 3717,
-//                 4183,
-//                 4440,
-//                 4846,
-//                 5079,
-//                 5274
-//             ]
-//         },
-//         "Japan": {
-//             "x": [
-//                 2001,
-//                 2002,
-//                 2003,
-//                 2004,
-//                 2005,
-//                 2006,
-//                 2007,
-//                 2008,
-//                 2009,
-//                 2010,
-//                 2011,
-//                 2012,
-//                 2013,
-//                 2014,
-//                 2015
-//             ],
-//             "y": [
-//                 920,
-//                 933,
-//                 924,
-//                 953,
-//                 963,
-//                 981,
-//                 1020,
-//                 954,
-//                 927,
-//                 1032,
-//                 997,
-//                 1000,
-//                 980,
-//                 984,
-//                 962
-//             ]
-//         },
-//         "United States": {
-//             "x": [
-//                 2001,
-//                 2002,
-//                 2003,
-//                 2004,
-//                 2005,
-//                 2006,
-//                 2007,
-//                 2008,
-//                 2009,
-//                 2010,
-//                 2011,
-//                 2012,
-//                 2013,
-//                 2014,
-//                 2015
-//             ],
-//             "y": [
-//                 3557,
-//                 3632,
-//                 3662,
-//                 3716,
-//                 3811,
-//                 3817,
-//                 3891,
-//                 3867,
-//                 3725,
-//                 3889,
-//                 3887,
-//                 3839,
-//                 3877,
-//                 3915,
-//                 3914
-//             ]
-//         },
-//         "rest_of_countries": {
-//             "x": [
-//                 2001,
-//                 2002,
-//                 2003,
-//                 2004,
-//                 2005,
-//                 2006,
-//                 2007,
-//                 2008,
-//                 2009,
-//                 2010,
-//                 2011,
-//                 2012,
-//                 2013,
-//                 2014,
-//                 2015
-//             ],
-//             "y": [
-//                 6045,
-//                 6227,
-//                 6448,
-//                 6696,
-//                 6907,
-//                 7148,
-//                 7373,
-//                 7535,
-//                 7529,
-//                 8013,
-//                 8242,
-//                 8476,
-//                 8671,
-//                 8833,
-//                 9046
-//             ]
-//         }
-//     },
-//     "isError": false,
-//     "message": "Success",
-//     "statusCode": 200
-// }
