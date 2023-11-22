@@ -112,22 +112,22 @@ class NavBar extends React.Component {
                 </div>
                 <Nav className="ml-auto" navbar>
                 <NavItem> 
-                    <NavLink href="GlobalTemp" style={{ fontSize: '16px' }} align ="center">Global Temperatures</NavLink> 
+                    <NavLink href="GlobalTemp" style={{ fontSize: '18px' }} align ="center">Global Temperatures</NavLink> 
                 </NavItem>
                 <NavItem> 
-                    <NavLink href="CO2" style={{ fontSize: '16px' }} align ="center">CO2 Emissions</NavLink> 
+                    <NavLink href="CO2" style={{ fontSize: '18px' }} align ="center">CO2 Emissions</NavLink> 
                 </NavItem>
                 <NavItem> 
-                    <NavLink href="Energy" style={{ fontSize: '16px' }} align ="center">Energy Consumption</NavLink> 
+                    <NavLink href="Energy" style={{ fontSize: '18px' }} align ="center">Energy Consumption</NavLink> 
                 </NavItem>
                 <NavItem> 
-                    <NavLink href="GDP" style={{ fontSize: '16px' }} align ="center">Gross Domestic Product</NavLink> 
+                    <NavLink href="GDP" style={{ fontSize: '18px' }} align ="center">Gross Domestic Product</NavLink> 
                 </NavItem> 
                 <NavItem> 
-                    <NavLink href="Internet" style={{ fontSize: '16px' }} align ="center">Internet Usage</NavLink> 
+                    <NavLink href="Internet" style={{ fontSize: '18px' }} align ="center">Internet Usage</NavLink> 
                 </NavItem>
                 <NavItem> 
-                    <NavLink href="DatabaseCount" style={{ fontSize: '16px' }} align ="center">Database Count</NavLink> 
+                    <NavLink href="DatabaseCount" style={{ fontSize: '18px' }} align ="center">Database Count</NavLink> 
                 </NavItem>
                 </Nav>
               </UncontrolledCollapse>

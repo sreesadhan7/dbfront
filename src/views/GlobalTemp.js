@@ -404,7 +404,7 @@ class GlobalTemp extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                    <h4 className='text-black'>Country</h4>
+                                    <h5 className='text-black'>Country</h5>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
                                     {this.state.m_1_1.country}
