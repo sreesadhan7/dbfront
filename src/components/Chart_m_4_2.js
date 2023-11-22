@@ -4,7 +4,7 @@ import { LineChart } from '@mui/x-charts';
 function Chart_m_4_2(props) {
   console.log("chart data: ", props)
   if(props.data == null || JSON.stringify(props.data) === "{}"){
-    return(<div>
+    return(<div align="center">
       <p>Change parameters on the left to obtain graph</p>
     </div>)
   }

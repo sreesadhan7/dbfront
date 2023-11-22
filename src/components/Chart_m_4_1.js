@@ -4,36 +4,45 @@ import { LineChart } from '@mui/x-charts';
 function Chart_m_4_1(props) {
   console.log("chart data: ", props)
   if(props.data == null || JSON.stringify(props.data) === "{}"){
-    return(<div>
+    return(<div align="center">
       <p>Change parameters on the left to obtain graph</p>
     </div>)
   }
   else{
     const countries = [];
     let allSeries = [];
-    console.log(props.data);
-    for (const [key, value] of Object.entries(props.data)) {
+    console.log(props.data.rank);
+    for (const [key, value] of Object.entries(props.data.rank)) {
         countries.push(key);
       }
-    console.log(props.data[countries[0]]);
+    console.log(props.data.rank[countries[0]]);
     countries.forEach(c =>{
         let seriesData = {
             yAxisKey: 'y1',
-            data: props.data[c].y,
-            label: c
+            data: props.data.rank[c].y,
+            label: c,
+            valueFormatter: (value) => (value == null ? 'NaN' : value.toString()),
         }
         allSeries.push(seriesData);
     });
     console.log("tobeGraphed", allSeries);
     return(
     <LineChart
-      xAxis={[{ data: props.data[countries.at(0)].x , scaleType: 'band'}]}
+      xAxis={[{ data: props.data.x , scaleType: 'band'}]}
       yAxis={[
         { id: 'y1', scaleType: 'linear' }
       ]}
       series={allSeries}
       leftAxis="y1"
-      height={400}
+      height={500}
+      margin={{ top: 100, bottom: 100, left: 100, right:100 }}
+      slotProps={{
+        legend: {
+          direction: 'row',
+          position: { vertical: 'top', horizontal: 'middle' },
+          padding: 0,
+        },
+      }}
     />
     )
   }
