@@ -391,13 +391,6 @@ class GlobalTemp extends React.Component {
             <section className="section section-shaped">
               <div className="shape shape-style-1 shape-default">
               </div>
-              <container>
-                <Row className="justify-content-center">
-                    <div className="text-center mt-5">
-                        <h1 className='text-white'>Graph Title</h1>
-                    </div>
-                </Row>
-              </container>
             </section>  
             <section className="section">
             <container>
@@ -411,7 +404,7 @@ class GlobalTemp extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                    <h2 className='text-black'>Country</h2>
+                                    <h4 className='text-black'>Country</h4>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
                                     {this.state.m_1_1.country}
@@ -426,7 +419,8 @@ class GlobalTemp extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                <h2 className='text-black'>Aggregation View</h2>
+                                    <br></br>
+                                <h5 className='text-black'>Aggregation View</h5>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
                                 {this.state.m_1_1.agg}
@@ -452,13 +446,15 @@ class GlobalTemp extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                <h4>Date Range</h4>
+                                <br></br>
+                                <h5>TIme Range</h5>
                                 </div>
                             </Col>
                         </Row>
                         <Row>
-                            <Col>
-                                <div align="center">
+                            <Col></Col>
+                            <Col >
+                                <div align="right">
                                 <h6 className='text-black'>From</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
@@ -470,8 +466,9 @@ class GlobalTemp extends React.Component {
                                 </UncontrolledDropdown>
                                 </div>
                             </Col>
+                            <Col></Col>
                             <Col>
-                                <div align="center">
+                                <div align="left">
                                 <h6 className='text-black'>To</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
@@ -483,6 +480,7 @@ class GlobalTemp extends React.Component {
                                 </UncontrolledDropdown>
                                 </div>
                             </Col>
+                            <Col></Col>
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">

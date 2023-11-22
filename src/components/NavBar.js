@@ -19,6 +19,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 // JavaScript plugin that hides or shows a component based on your scroll
 import Headroom from "headroom.js";
+
+import '../App.css';
 // reactstrap components
 import {
   Button,
@@ -90,11 +92,13 @@ class NavBar extends React.Component {
               >
                 <div className="navbar-collapse-header">
                   <Row>
-                    <Col className="collapse-brand" xs="6">
+                    <Col className="collapse-brand" xs="10">
                       <Link to="/">
                         <img
                           alt="..."
                           src={require("../assets/img/globalWarming.png")}
+                          width="500" 
+                          height="500"
                         />
                       </Link>
                     </Col>
@@ -108,22 +112,22 @@ class NavBar extends React.Component {
                 </div>
                 <Nav className="ml-auto" navbar>
                 <NavItem> 
-                    <NavLink href="GlobalTemp">Global Temperatures</NavLink> 
+                    <NavLink href="GlobalTemp" style={{ fontSize: '16px' }} align ="center">Global Temperatures</NavLink> 
                 </NavItem>
                 <NavItem> 
-                    <NavLink href="CO2">CO2 Emissions</NavLink> 
+                    <NavLink href="CO2" style={{ fontSize: '16px' }} align ="center">CO2 Emissions</NavLink> 
                 </NavItem>
                 <NavItem> 
-                    <NavLink href="Energy">Energy Consumption</NavLink> 
+                    <NavLink href="Energy" style={{ fontSize: '16px' }} align ="center">Energy Consumption</NavLink> 
                 </NavItem>
                 <NavItem> 
-                    <NavLink href="GDP">GDP</NavLink> 
+                    <NavLink href="GDP" style={{ fontSize: '16px' }} align ="center">Gross Domestic Product</NavLink> 
                 </NavItem> 
                 <NavItem> 
-                    <NavLink href="Internet">Internet Usage</NavLink> 
+                    <NavLink href="Internet" style={{ fontSize: '16px' }} align ="center">Internet Usage</NavLink> 
                 </NavItem>
                 <NavItem> 
-                    <NavLink href="DatabaseCount">Database Count</NavLink> 
+                    <NavLink href="DatabaseCount" style={{ fontSize: '16px' }} align ="center">Database Count</NavLink> 
                 </NavItem>
                 </Nav>
               </UncontrolledCollapse>
