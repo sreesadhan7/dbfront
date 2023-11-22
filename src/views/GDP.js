@@ -167,7 +167,7 @@ changeTopN(e, n, url) {
             case "mockup_4_2":
                 this.state.m_4_2.to=n;
                 param_from = this.state.m_4_2.from;
-                param_topN = this.state.m_4_1.topN;
+                param_topN = this.state.m_4_2.topN;
                 param_to = n;
                 break;
         }

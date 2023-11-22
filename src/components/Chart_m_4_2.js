@@ -33,7 +33,7 @@ function Chart_m_4_2(props) {
       ]}
       series={allSeries}
       leftAxis="y1"
-      height={400}
+      height={500}
       margin={{ top: 100, bottom: 100, left: 100, right:100 }}
       slotProps={{
         legend: {
