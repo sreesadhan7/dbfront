@@ -42,7 +42,7 @@ class GlobalTemp extends React.Component {
     super(props)
     this.state = {
         m_1_1: {
-            country: "India",
+            country: "United States",
             agg: "Y",
             from: "1960",
             to: "2018",
@@ -396,7 +396,7 @@ class GlobalTemp extends React.Component {
             <container>
                 <Row className="justify-content-center">
                     <div align="center">
-                        <h2>Something something something</h2>
+                        <h2>Atmosphere Temperature VS Surface Temperature</h2>
                     </div>
                 </Row>
                 <Row className="justify-content-center">
@@ -488,7 +488,10 @@ class GlobalTemp extends React.Component {
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
-                            <p>Something something something Something something something Something something something Something something something Something something something Something something something Something something something</p>
+                            <p><li>A clear correlation between surface and atmosphere can be observed indicating that rising 
+                            atmosphere temperatures can rise surface temperatures.</li>
+                            <li>Both the parameters shows an upward trend over the decades.</li>
+                            <li>More spikes can be observed in recent years indicating the extreme weather events.</li></p>
                         </div>
                     </Col>
                 </Row>
