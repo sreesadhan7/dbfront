@@ -20,6 +20,26 @@ else{
     ]}
 
     xAxis={[{ data: props.data.x , scaleType: 'band'}]}
+    sx={{
+      '.MuiLineElement-root, .MuiMarkElement-root': {
+        strokeWidth: 2,
+      },
+      '.MuiLineElement-series-pvId': {
+        strokeDasharray: '4 4',
+      },
+      '.MuiLineElement-series-uvId': {
+        strokeDasharray: '3 4 5 2',
+      },
+      '.MuiMarkElement-root:not(.MuiMarkElement-highlighted)': {
+        fill: '#fff',
+        strokeWidth: 1,
+        markerwidth : 20
+
+      },
+      '& .MuiMarkElement-highlighted': {
+        stroke: 'None',
+      },
+    }}
   />
   )
 }
