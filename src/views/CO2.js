@@ -428,19 +428,12 @@ class CO2 extends React.Component {
             <section className="section section-shaped">
               <div className="shape shape-style-1 shape-default">
               </div>
-              <container>
-                <Row className="justify-content-center">
-                    <div className="text-center mt-5">
-                        <h1 className='text-white'>Graph Title</h1>
-                    </div>
-                </Row>
-              </container>
             </section>  
             <section className="section">
             <container>
                 <Row className="justify-content-center">
                     <div align="center">
-                        <h2>Something something something</h2>
+                        <h2>Atmosphere Temperature VS Surface Temperature</h2>
                     </div>
                 </Row>
                 <Row className="justify-content-center">
