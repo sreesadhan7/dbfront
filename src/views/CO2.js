@@ -49,19 +49,19 @@ class CO2 extends React.Component {
             data: null
         },
         m_2_2: {
-            country: "India",
+            country: "United States",
             from: "2000",
             to: "2020",
             data: null
         },
         m_2_3: {
-            country: "India",
+            country: "Germany",
             from: "2000",
             to: "2019",
             data: null
         },
         m_2_4: {
-            from: "2000",
+            from: "1980",
             to: "2019",
             data: null,
         }
@@ -119,7 +119,7 @@ class CO2 extends React.Component {
 
 
    topNCountries(url){
-    const years = [5,10, 15]
+    const years = [2,3,4,5,6,7,8,9,10,11,12,13,14,15]
     console.log("years", years);
     const options = []
     for(let i=0; i<years.length; i++){
@@ -136,8 +136,60 @@ class CO2 extends React.Component {
     }
     return options;
   }
-  yearList(param, url){
-    const yearList = [1960,1961,1962,1963,1964,1965,1966,1967,1968,1969,1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019];
+  yearList21(param, url){
+    const yearList = [1750, 1751, 1752, 1753, 1754, 1755, 1756, 1757, 1758, 1759, 1760,
+        1761, 1762, 1763, 1764, 1765, 1766, 1767, 1768, 1769, 1770, 1771,
+        1772, 1773, 1774, 1775, 1776, 1777, 1778, 1779, 1780, 1781, 1782,
+        1783, 1784, 1785, 1786, 1787, 1788, 1789, 1790, 1791, 1792, 1793,
+        1794, 1795, 1796, 1797, 1798, 1799, 1800, 1801, 1802, 1803, 1804,
+        1805, 1806, 1807, 1808, 1809, 1810, 1811, 1812, 1813, 1814, 1815,
+        1816, 1817, 1818, 1819, 1820, 1821, 1822, 1823, 1824, 1825, 1826,
+        1827, 1828, 1829, 1830, 1831, 1832, 1833, 1834, 1835, 1836, 1837,
+        1838, 1839, 1840, 1841, 1842, 1843, 1844, 1845, 1846, 1847, 1848,
+        1849, 1850, 1851, 1852, 1853, 1854, 1855, 1856, 1857, 1858, 1859,
+        1860, 1861, 1862, 1863, 1864, 1865, 1866, 1867, 1868, 1869, 1870,
+        1871, 1872, 1873, 1874, 1875, 1876, 1877, 1878, 1879, 1880, 1881,
+        1882, 1883, 1884, 1885, 1886, 1887, 1888, 1889, 1890, 1891, 1892,
+        1893, 1894, 1895, 1896, 1897, 1898, 1899, 1900, 1901, 1902, 1903,
+        1904, 1905, 1906, 1907, 1908, 1909, 1910, 1911, 1912, 1913, 1914,
+        1915, 1916, 1917, 1918, 1919, 1920, 1921, 1922, 1923, 1924, 1925,
+        1926, 1927, 1928, 1929, 1930, 1931, 1932, 1933, 1934, 1935, 1936,
+        1937, 1938, 1939, 1940, 1941, 1942, 1943, 1944, 1945, 1946, 1947,
+        1948, 1949, 1950, 1951, 1952, 1953, 1954, 1955, 1956, 1957, 1958,
+        1959, 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969,
+        1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980,
+        1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991,
+        1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002,
+        2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013,
+        2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021];
+
+    const options = []
+    for(let i=0; i<yearList.length; i++){
+        options.push(<DropdownItem onClick={e=>this.changeYear(e,yearList[i], param, url)}><div>{yearList[i]}</div></DropdownItem>);
+    }
+    return options;
+  }
+
+  yearList22(param, url){
+    const yearList = [2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018];
+    const options = []
+    for(let i=0; i<yearList.length; i++){
+        options.push(<DropdownItem onClick={e=>this.changeYear(e,yearList[i], param, url)}><div>{yearList[i]}</div></DropdownItem>);
+    }
+    return options;
+  }
+
+  yearList23(param, url){
+    const yearList = [2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018];
+    const options = []
+    for(let i=0; i<yearList.length; i++){
+        options.push(<DropdownItem onClick={e=>this.changeYear(e,yearList[i], param, url)}><div>{yearList[i]}</div></DropdownItem>);
+    }
+    return options;
+  }
+
+  yearList24(param, url){
+    const yearList = [1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021];
     const options = []
     for(let i=0; i<yearList.length; i++){
         options.push(<DropdownItem onClick={e=>this.changeYear(e,yearList[i], param, url)}><div>{yearList[i]}</div></DropdownItem>);
@@ -433,7 +485,7 @@ class CO2 extends React.Component {
             <container>
                 <Row className="justify-content-center">
                     <div align="center">
-                        <h2>Atmosphere Temperature VS Surface Temperature</h2>
+                        <h3>Atmosphere Temperature VS Surface Temperature</h3>
                     </div>
                 </Row>
                 <Row className="justify-content-center">
@@ -441,7 +493,7 @@ class CO2 extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                    <h2 className='text-black'>Top N Countries</h2>
+                                    <h5 className='text-black'>Top N Countries</h5>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
                                     {this.state.m_2_1.topN}
@@ -453,14 +505,16 @@ class CO2 extends React.Component {
                                 </div>
                             </Col>
                         </Row>
+                        <br></br>
                         <Row>
                             <Col>
                                 <div align="center">
-                                <h4>Date Range</h4>
+                                <h5>Date Range</h5>
                                 </div>
                             </Col>
                         </Row>
                         <Row>
+                            <Col></Col>
                             <Col>
                                 <div align="center">
                                 <h6 className='text-black'>From</h6>
@@ -469,11 +523,12 @@ class CO2 extends React.Component {
                                 {this.state.m_2_1.from}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("from", "mockup_2_1")}
+                                        {this.yearList21("from", "mockup_2_1")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
                             </Col>
+                            <Col></Col>
                             <Col>
                                 <div align="center">
                                 <h6 className='text-black'>To</h6>
@@ -482,11 +537,12 @@ class CO2 extends React.Component {
                                 {this.state.m_2_1.to}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("to", "mockup_2_1")}
+                                        {this.yearList21("to", "mockup_2_1")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
                             </Col>
+                            <Col></Col>
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
@@ -494,7 +550,9 @@ class CO2 extends React.Component {
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
-                            <p>Something something something Something something something Something something something Something something something Something something something Something something something Something something something</p>
+                            <p><li>The chart gives holistic view of the countries over the years.</li>
+
+                            <li>It can be obseved from chart that some countries are reducing emissions whereas others not.</li></p>
                         </div>
                     </Col>
                 </Row>
@@ -505,7 +563,7 @@ class CO2 extends React.Component {
             <container>
                 <Row className="justify-content-center">
                     <div align="center">
-                        <h2>Something something something</h2>
+                        <h3>CO2 Emissions vs GDP VS surface temperature</h3>
                     </div>
                 </Row>
                 <Row className="justify-content-center">
@@ -513,7 +571,7 @@ class CO2 extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                    <h2 className='text-black'>Country</h2>
+                                    <h5 className='text-black'>Country</h5>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
                                     {this.state.m_2_2.country}
@@ -524,15 +582,17 @@ class CO2 extends React.Component {
                                     </UncontrolledDropdown>
                                 </div>
                             </Col>
-                        </Row>    
+                        </Row> 
+                        <br></br>   
                         <Row>
                             <Col>
                                 <div align="center">
-                                <h4>Date Range</h4>
+                                <h5>Date Range</h5>
                                 </div>
                             </Col>
                         </Row>
                         <Row>
+                            <Col></Col>
                             <Col>
                                 <div align="center">
                                 <h6 className='text-black'>From</h6>
@@ -541,11 +601,12 @@ class CO2 extends React.Component {
                                 {this.state.m_2_2.from}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("from", "mockup_2_2")}
+                                        {this.yearList22("from", "mockup_2_2")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
                             </Col>
+                            <Col></Col>
                             <Col>
                                 <div align="center">
                                 <h6 className='text-black'>To</h6>
@@ -554,11 +615,12 @@ class CO2 extends React.Component {
                                 {this.state.m_2_2.to}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("to", "mockup_2_2")}
+                                        {this.yearList22("to", "mockup_2_2")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
                             </Col>
+                            <Col></Col>
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
@@ -566,7 +628,9 @@ class CO2 extends React.Component {
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
-                            <p>Something something something Something something something Something something something Something something something Something something something Something something something Something something something</p>
+                            <p>While there was a noticeable correlation between CO2 emissions and GDP in the first decade, 
+                                this relationship has not persisted in the recent decade, suggesting a shift toward a more 
+                                environmentally conscious approach to economic growth</p>
                         </div>
                     </Col>
                 </Row>
@@ -577,7 +641,7 @@ class CO2 extends React.Component {
             <container>
                 <Row className="justify-content-center">
                     <div align="center">
-                        <h2>Something something something</h2>
+                        <h3>Carbon Intensity vs GDP</h3>
                     </div>
                 </Row>
                 <Row className="justify-content-center">
@@ -585,7 +649,7 @@ class CO2 extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                    <h2 className='text-black'>Country</h2>
+                                    <h5 className='text-black'>Country</h5>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
                                     {this.state.m_2_3.country}
@@ -597,14 +661,16 @@ class CO2 extends React.Component {
                                 </div>
                             </Col>
                         </Row>
+                        <br></br>
                         <Row>
                             <Col>
                                 <div align="center">
-                                <h4>Date Range</h4>
+                                <h5>Date Range</h5>
                                 </div>
                             </Col>
                         </Row>
                         <Row>
+                            <Col></Col>
                             <Col>
                                 <div align="center">
                                 <h6 className='text-black'>From</h6>
@@ -613,11 +679,12 @@ class CO2 extends React.Component {
                                 {this.state.m_2_3.from}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("from","mockup_2_3")}
+                                        {this.yearList23("from","mockup_2_3")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
                             </Col>
+                            <Col></Col>
                             <Col>
                                 <div align="center">
                                 <h6 className='text-black'>To</h6>
@@ -626,11 +693,12 @@ class CO2 extends React.Component {
                                 {this.state.m_2_3.to}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("to", "mockup_2_3")}
+                                        {this.yearList23("to", "mockup_2_3")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
                             </Col>
+                            <Col></Col>
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
@@ -638,7 +706,8 @@ class CO2 extends React.Component {
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
-                            <p>Something something something Something something something Something something something Something something something Something something something Something something something Something something something</p>
+                            <p>The chart display a derived metric called carbon intensity, which is net co2 emission per person.
+                                A clear shift of relation between the GDP and carbon emissions can be observed.</p>
                         </div>
                     </Col>
                 </Row>
@@ -649,7 +718,7 @@ class CO2 extends React.Component {
             <container>
                 <Row className="justify-content-center">
                     <div align="center">
-                        <h2>Something something something</h2>
+                        <h3>Count of Non Eco-Friendly Countries</h3>
                     </div>
                 </Row>
                 <Row className="justify-content-center">
@@ -657,11 +726,12 @@ class CO2 extends React.Component {
                     <Row >
                     <Col>
                         <div align="center">
-                        <h4>Date Range</h4>
+                        <h5>Date Range</h5>
                         </div>
                     </Col>
                 </Row>
                 <Row>
+                    <Col></Col>
                     <Col>
                         <div align="center">
                         <h6 className='text-black'>From</h6>
@@ -670,11 +740,12 @@ class CO2 extends React.Component {
                         {this.state.m_2_4.from}
                         </DropdownToggle>
                         <DropdownMenu container={'body'}>
-                                {this.yearList("from", "mockup_2_4")}
+                                {this.yearList24("from", "mockup_2_4")}
                         </DropdownMenu>
                         </UncontrolledDropdown>
                         </div>
                     </Col>
+                    <Col></Col>
                     <Col>
                         <div align="center">
                         <h6 className='text-black'>To</h6>
@@ -683,11 +754,12 @@ class CO2 extends React.Component {
                         {this.state.m_2_4.to}
                         </DropdownToggle>
                         <DropdownMenu container={'body'}>
-                                {this.yearList("to", "mockup_2_4")}
+                                {this.yearList24("to", "mockup_2_4")}
                         </DropdownMenu>
                         </UncontrolledDropdown>
                         </div>
                     </Col>
+                    <Col></Col>
                 </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
@@ -695,7 +767,10 @@ class CO2 extends React.Component {
                     </Col>
                     <Col lg="2" className="align-self-center">
                         <div>
-                            <p>Something something something Something something something Something something something Something something something Something something something Something something something Something something something</p>
+                            <p><li>Formula :  If the country produces co2 more than 1.5 times of gloabl avegrage for the respective year,
+                               the country is counted as non Eco friendly.</li>
+
+                                <li>The rise and slight decline of non-eco friendly countries can be observed in chart.</li></p>
                         </div>
                     </Col>
                 </Row>

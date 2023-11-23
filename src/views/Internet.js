@@ -39,9 +39,9 @@ class Internet extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-        country: "India",
+        country: "United States",
         agg: "Y",
-        from: "2000",
+        from: "2005",
         to: "2020",
         xData: [],
         yData1: [],
@@ -91,7 +91,7 @@ class Internet extends React.Component {
     return options;
   }
   yearList(param){
-    const yearList = [1960,1961,1962,1963,1964,1965,1966,1967,1968,1969,1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019];
+    const yearList = [1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020];
     const options = []
     for(let i=0; i<yearList.length; i++){
         options.push(<DropdownItem onClick={e=>this.changeYear(e,yearList[i], param)}><div>{yearList[i]}</div></DropdownItem>);
@@ -243,7 +243,7 @@ class Internet extends React.Component {
             <container>
                 <Row className="justify-content-center">
                     <div align="center">
-                        <h3>IUP VS Growth Rate</h3>
+                        <h3>Internet Usage percent and YOY Growth rate </h3>
                     </div>
                 </Row>
                 <Row className="justify-content-center">
@@ -251,7 +251,7 @@ class Internet extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                    <h2 className='text-black'>Country</h2>
+                                    <h5 className='text-black'>Country</h5>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
                                     {this.state.country}
@@ -263,10 +263,11 @@ class Internet extends React.Component {
                                 </div>
                             </Col>
                         </Row>
+                        <br></br>
                         <Row>
                             <Col>
                                 <div align="center">
-                                <h2 className='text-black'>Aggregation View</h2>
+                                <h5 className='text-black'>Aggregation View</h5>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
                                 {this.state.agg}
@@ -289,14 +290,16 @@ class Internet extends React.Component {
                                 </div>
                             </Col>
                         </Row>
+                        <br></br>
                         <Row>
                             <Col>
                                 <div align="center">
-                                <h4>Date Range</h4>
+                                <h5>Date Range</h5>
                                 </div>
                             </Col>
                         </Row>
                         <Row>
+                          <Col></Col>
                             <Col>
                                 <div align="center">
                                 <h6 className='text-black'>From</h6>
@@ -310,6 +313,7 @@ class Internet extends React.Component {
                                 </UncontrolledDropdown>
                                 </div>
                             </Col>
+                            <Col></Col>
                             <Col>
                                 <div align="center">
                                 <h6 className='text-black'>To</h6>
@@ -323,6 +327,7 @@ class Internet extends React.Component {
                                 </UncontrolledDropdown>
                                 </div>
                             </Col>
+                            <Col></Col>
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
@@ -330,7 +335,9 @@ class Internet extends React.Component {
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
-                            <p>Something something something Something something something Something something something Something something something Something something something Something something something Something something something</p>
+                            <p><li>The chart displays the percentage of users in a selected country and the year-on-year growth rate of users.</li>
+
+                            <li>This data can be used to assess how internet usage contributes to raising awareness about sustainability.</li></p>
                         </div>
                     </Col>
                 </Row>
