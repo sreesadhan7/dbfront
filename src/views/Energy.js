@@ -41,16 +41,16 @@ class Energy extends React.Component {
     super(props)
     this.state = {
         m_3_1: {
-            topN: "select",
-            agg: "select",
-            from: "select",
-            to: "select",
+            topN: "5",
+            agg: "Y",
+            from: "1990",
+            to: "2000",
             data: null
         },
         m_3_2: {
-            country: "select",
-            from: "select",
-            to: "select",
+            country: "India",
+            from: "1990",
+            to: "2000",
             data: null
         }
     };
@@ -61,6 +61,42 @@ class Energy extends React.Component {
     this.changeYear = this.changeYear.bind(this);
     this.countryList = this.countryList.bind(this);
   }
+
+  componentDidMount() {
+    this.fetchData('mockup_3_1', this.state.m_3_1.topN,  'junk', this.state.m_3_1.agg, this.state.m_3_1.from, this.state.m_3_1.to);
+    setTimeout(() => {
+        this.fetchData('mockup_3_2', 'junk', this.state.m_3_2.country, 'junk', this.state.m_3_2.from, this.state.m_3_2.to);
+    }, 500); // Delay the second request by 500ms
+    }
+  
+  fetchData(url, topN, country, agg, from, to) {
+    fetch(`http://127.0.0.1:5000/${url}`, {
+      method: 'POST',
+      body: JSON.stringify({topN, country, agg, from, to }),
+      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      switch(url) {
+        case 'mockup_3_1':
+          this.setState({ m_3_1: { ...this.state.m_3_1, data: data.data } });
+          break;
+        case 'mockup_3_2':
+          this.setState({ m_3_2: { ...this.state.m_3_2, data: data.data } });
+          break;
+        // Add more cases here if you have more URLs to handle
+        default:
+          console.log('Unknown URL');
+      }
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+  }
+
+
+
+
   topNCountries(url){
     const years = [5,10, 15]
     console.log("years", years);

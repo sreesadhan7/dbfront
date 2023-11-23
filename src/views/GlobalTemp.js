@@ -42,21 +42,21 @@ class GlobalTemp extends React.Component {
     super(props)
     this.state = {
         m_1_1: {
-            country: "select",
-            agg: "select",
-            from: "select",
-            to: "select",
+            country: "India",
+            agg: "Y",
+            from: "1960",
+            to: "2018",
             data: null
         },
         m_1_2: {
-            from: "select",
-            to: "select",
+            from: "1960",
+            to: "2018",
             data: null
         },
         m_1_3: {
-            country: "select",
-            from: "select",
-            to: "select",
+            country: "India",
+            from: "1960",
+            to: "2018",
             data: null
         }
     };
@@ -65,6 +65,44 @@ class GlobalTemp extends React.Component {
     this.changeAgg = this.changeAgg.bind(this);
     this.changeYear = this.changeYear.bind(this);
     this.countryList = this.countryList.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchData('mockup_1_1', this.state.m_1_1.country, this.state.m_1_1.agg, this.state.m_1_1.from, this.state.m_1_1.to);
+    setTimeout(() => {
+        this.fetchData('mockup_1_2', 'junk', 'junk', this.state.m_1_2.from, this.state.m_1_2.to);
+    }, 500); // Delay the second request by 500ms
+    setTimeout(() => {
+        this.fetchData('mockup_1_3', this.state.m_1_3.country, 'junk', this.state.m_1_3.from, this.state.m_1_3.to);
+    }, 1000); // Delay the second request by 500ms
+  }
+
+  fetchData(url, country, agg, from, to) {
+    fetch(`http://127.0.0.1:5000/${url}`, {
+      method: 'POST',
+      body: JSON.stringify({country, agg, from, to}),
+      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      switch(url) {
+        case 'mockup_1_1':
+          this.setState({ m_1_1: { ...this.state.m_1_1, data: data.data } });
+          break;
+        case 'mockup_1_2':
+          this.setState({ m_1_2: { ...this.state.m_1_2, data: data.data } });
+          break;
+        case 'mockup_1_3':
+          this.setState({ m_1_3: { ...this.state.m_1_3, data: data.data } });
+          break;
+        // Add more cases here if you have more URLs to handle
+        default:
+          console.log('Unknown URL');
+      }
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
   }
    countryList(url){
     const countries = ['Afghanistan','Albania','Algeria','Angola','Argentina','Australia','Austria','Bahrain','Bangladesh','Barbados','Benin','Bolivia','Botswana','Brazil','Bulgaria','Burkina Faso','Cambodia','Cameroon','Canada','Central African Republic','Chad','Chile','China','Colombia','Comoros','Congo Republic','Cuba','Cyprus','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eswatini','Finland','France','Gabon','Gambia','Germany','Ghana','Greece','Guatemala','Guinea','Guinea-Bissau','Haiti','Honduras','Hungary','Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Jordan','Kenya','Kuwait','Laos','Lebanon','Lesotho','Liberia','Libya','Madagascar','Malawi','Malaysia','Mali','Malta','Mauritania','Mauritius','Mexico','Mongolia','Morocco','Mozambique','Myanmar','Namibia','Nepal','Netherlands','New Zealand','Nicaragua','Niger','Nigeria','North Korea','Norway','Oman','Pakistan','Panama','Paraguay','Peru','Philippines','Poland','Portugal','Qatar','Romania','Saudi Arabia','Senegal','Seychelles','Sierra Leone','South Africa','South Korea','Spain','Sri Lanka','St. Lucia','Sweden','Switzerland','Syria','Tanzania','Thailand','Togo','Trinidad and Tobago','Tunisia','Uganda','United Arab Emirates','United Kingdom','United States','Uruguay','Venezuela','Vietnam','Zambia','Zimbabwe'];
@@ -353,13 +391,6 @@ class GlobalTemp extends React.Component {
             <section className="section section-shaped">
               <div className="shape shape-style-1 shape-default">
               </div>
-              <container>
-                <Row className="justify-content-center">
-                    <div className="text-center mt-5">
-                        <h1 className='text-white'>Graph Title</h1>
-                    </div>
-                </Row>
-              </container>
             </section>  
             <section className="section">
             <container>
@@ -373,7 +404,7 @@ class GlobalTemp extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                    <h2 className='text-black'>Country</h2>
+                                    <h5 className='text-black'>Country</h5>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
                                     {this.state.m_1_1.country}
@@ -388,7 +419,8 @@ class GlobalTemp extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                <h2 className='text-black'>Aggregation View</h2>
+                                    <br></br>
+                                <h5 className='text-black'>Aggregation View</h5>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
                                 {this.state.m_1_1.agg}
@@ -414,13 +446,15 @@ class GlobalTemp extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                <h4>Date Range</h4>
+                                <br></br>
+                                <h5>TIme Range</h5>
                                 </div>
                             </Col>
                         </Row>
                         <Row>
-                            <Col>
-                                <div align="center">
+                            <Col></Col>
+                            <Col >
+                                <div align="right">
                                 <h6 className='text-black'>From</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
@@ -432,8 +466,9 @@ class GlobalTemp extends React.Component {
                                 </UncontrolledDropdown>
                                 </div>
                             </Col>
+                            <Col></Col>
                             <Col>
-                                <div align="center">
+                                <div align="left">
                                 <h6 className='text-black'>To</h6>
                                 <UncontrolledDropdown group>
                                 <DropdownToggle caret>
@@ -445,6 +480,7 @@ class GlobalTemp extends React.Component {
                                 </UncontrolledDropdown>
                                 </div>
                             </Col>
+                            <Col></Col>
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">

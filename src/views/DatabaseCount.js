@@ -79,7 +79,7 @@ class DatabaseCount extends React.Component {
               <container>
                 <Row className="justify-content-center">
                     <div className="text-center mt-5">
-                        <h1 className='text-white'>Total queries run against the database:</h1>
+                        <h1 className='text-white'>Total number of tuples:</h1>
                         <h4 className='text-white'>{this.state.count}</h4>
                     </div>
                 </Row>
