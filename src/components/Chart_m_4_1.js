@@ -43,6 +43,26 @@ function Chart_m_4_1(props) {
           padding: 0,
         },
       }}
+      sx={{
+        '.MuiLineElement-root, .MuiMarkElement-root': {
+          strokeWidth: 13,
+        },
+        '.MuiLineElement-series-pvId': {
+          strokeDasharray: '4 4',
+        },
+        '.MuiLineElement-series-uvId': {
+          strokeDasharray: '3 4 5 2',
+        },
+        '.MuiMarkElement-root:not(.MuiMarkElement-highlighted)': {
+          fill: '#fff',
+          strokeWidth: 1
+          // markerwidth : 20
+  
+        },
+        '& .MuiMarkElement-highlighted': {
+          stroke: 'None',
+        },
+      }}
     />
     )
   }

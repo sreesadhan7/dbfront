@@ -41,14 +41,14 @@ class GDP extends React.Component {
       super(props)
       this.state = {
         m_4_1: {
-          topN: "5", // Default value for topN for m_4_1
-          from: "2000", // Default start year for m_4_1
-          to: "2010", // Default end year for m_4_1
+          topN: "10", // Default value for topN for m_4_1
+          from: "2005", // Default start year for m_4_1
+          to: "2019", // Default end year for m_4_1
           data: null
         },
         m_4_2: {
           topN: "10", // Default value for topN for m_4_2
-          from: "2010", // Default start year for m_4_2
+          from: "2001", // Default start year for m_4_2
           to: "2020", // Default end year for m_4_2
           data: null
         }
@@ -101,8 +101,17 @@ class GDP extends React.Component {
     }
     return options;
   }
-  yearList(param, url){
-    const yearList = [1960,1961,1962,1963,1964,1965,1966,1967,1968,1969,1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019];
+  yearList41(param, url){
+    const yearList = [2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018];
+    const options = []
+    for(let i=0; i<yearList.length; i++){
+        options.push(<DropdownItem onClick={e=>this.changeYear(e,yearList[i], param, url)}><div>{yearList[i]}</div></DropdownItem>);
+    }
+    return options;
+  }
+
+  yearList42(param, url){
+    const yearList = [2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018];
     const options = []
     for(let i=0; i<yearList.length; i++){
         options.push(<DropdownItem onClick={e=>this.changeYear(e,yearList[i], param, url)}><div>{yearList[i]}</div></DropdownItem>);
@@ -311,7 +320,7 @@ changeTopN(e, n, url) {
             <container>
                 <Row className="justify-content-center">
                     <div align="center">
-                        <h2>Something something something</h2>
+                        <h3>GLOBAL GDP ranks</h3>
                     </div>
                 </Row>
                 <Row className="justify-content-center">
@@ -319,7 +328,7 @@ changeTopN(e, n, url) {
                     <Row>
                         <Col>
                                 <div align="center">
-                                    <h2 className='text-black'>Top N Countries</h2>
+                                    <h5 className='text-black'>Top N Countries</h5>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
                                     {this.state.m_4_1.topN}
@@ -331,14 +340,16 @@ changeTopN(e, n, url) {
                                 </div>
                             </Col>
                         </Row>
+                        <br></br>
                         <Row>
                             <Col>
                                 <div align="center">
-                                <h4>Date Range</h4>
+                                <h5>Date Range</h5>
                                 </div>
                             </Col>
                         </Row>
                         <Row>
+                          <Col></Col>
                             <Col>
                                 <div align="center">
                                 <h6 className='text-black'>From</h6>
@@ -347,11 +358,12 @@ changeTopN(e, n, url) {
                                 {this.state.m_4_1.from}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("from", "mockup_4_1")}
+                                        {this.yearList41("from", "mockup_4_1")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
                             </Col>
+                            <Col></Col>
                             <Col>
                                 <div align="center">
                                 <h6 className='text-black'>To</h6>
@@ -360,11 +372,12 @@ changeTopN(e, n, url) {
                                 {this.state.m_4_1.to}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("to", "mockup_4_1")}
+                                        {this.yearList41("to", "mockup_4_1")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
                             </Col>
+                            <Col></Col>
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
@@ -372,7 +385,7 @@ changeTopN(e, n, url) {
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
-                            <p>Something something something Something something something Something something something Something something something Something something something Something something something Something something something</p>
+                            <p>The chart displays the changing countires GDP positional ranks over time.</p>
                         </div>
                     </Col>
                 </Row>
@@ -383,7 +396,7 @@ changeTopN(e, n, url) {
             <container>
                 <Row className="justify-content-center">
                     <div align="center">
-                        <h2>Something something something</h2>
+                        <h3>Something something something</h3>
                     </div>
                 </Row>
                 <Row>
@@ -391,7 +404,7 @@ changeTopN(e, n, url) {
                     <Row>
                         <Col>
                                 <div align="center">
-                                    <h2 className='text-black'>Top N Countries</h2>
+                                    <h5 className='text-black'>Top N Countries</h5>
                                     <UncontrolledDropdown group>
                                     <DropdownToggle caret>
                                     {this.state.m_4_2.topN}
@@ -403,14 +416,16 @@ changeTopN(e, n, url) {
                                 </div>
                             </Col>
                         </Row>
+                        <br></br>
                     <Row>
                             <Col>
                                 <div align="center">
-                                <h4>Date Range</h4>
+                                <h5>Date Range</h5>
                                 </div>
                             </Col>
                         </Row>
                         <Row>
+                          <Col></Col>
                             <Col>
                                 <div align="center">
                                 <h6 className='text-black'>From</h6>
@@ -419,11 +434,12 @@ changeTopN(e, n, url) {
                                 {this.state.m_4_2.from}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("from", "mockup_4_2")}
+                                        {this.yearList42("from", "mockup_4_2")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
                             </Col>
+                            <Col></Col>
                             <Col>
                                 <div align="center">
                                 <h6 className='text-black'>To</h6>
@@ -432,11 +448,12 @@ changeTopN(e, n, url) {
                                 {this.state.m_4_2.to}
                                 </DropdownToggle>
                                 <DropdownMenu container={'body'}>
-                                        {this.yearList("to", "mockup_4_2")}
+                                        {this.yearList42("to", "mockup_4_2")}
                                 </DropdownMenu>
                                 </UncontrolledDropdown>
                                 </div>
                             </Col>
+                            <Col></Col>
                         </Row>
                     </Col>
                     <Col lg="7" className="align-self-center">
@@ -444,7 +461,11 @@ changeTopN(e, n, url) {
                     </Col>
                     <Col lg="2" className="align-self-center">
                         <div>
-                            <p>Something something something Something something something Something something something Something something something Something something something Something something something Something something something</p>
+                            <p><li>The chart showcases the top 10 GDP countries, while the remaining nations are aggregated into a 
+                                single category to represent their relative global position.</li>
+
+                                <li>From the chart, it is evident that the 'Rest of Countries' category has experienced substantial growth, 
+                                particularly at the beginning of the current decades, indicating global development trends</li></p>
                         </div>
                     </Col>
                 </Row>
