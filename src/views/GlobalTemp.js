@@ -530,9 +530,9 @@ class GlobalTemp extends React.Component {
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
                             <p><li>A clear correlation between surface and atmosphere can be observed indicating that rising 
-                            atmosphere temperatures can rise surface temperatures.</li>
-                            <li>Both the parameters shows an upward trend over the decades.</li>
-                            <li>More spikes can be observed in recent years indicating the extreme weather events.</li></p>
+                            atmosphere temperatures can lead to rise in surface temperatures.</li>
+                            <li>Both the factors shows an upward trend over the decades.</li>
+                            <li>More spikes are observed in recent years indicating the extreme weather events.</li></p>
                         </div>
                     </Col>
                 </Row>

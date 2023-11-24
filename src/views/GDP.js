@@ -320,7 +320,7 @@ changeTopN(e, n, url) {
             <container>
                 <Row className="justify-content-center">
                     <div align="center">
-                        <h3>GLOBAL GDP ranks</h3>
+                        <h3>Global GDP ranks</h3>
                     </div>
                 </Row>
                 <Row className="justify-content-center">
@@ -385,7 +385,7 @@ changeTopN(e, n, url) {
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
-                            <p>The chart displays the changing countires GDP positional ranks over time.</p>
+                            <p>The chart presents the dynamic shifts in the GDP rankings of various countries over time.</p>
                         </div>
                     </Col>
                 </Row>
@@ -396,7 +396,7 @@ changeTopN(e, n, url) {
             <container>
                 <Row className="justify-content-center">
                     <div align="center">
-                        <h3>Something something something</h3>
+                        <h3>World GDP by Countries</h3>
                     </div>
                 </Row>
                 <Row>

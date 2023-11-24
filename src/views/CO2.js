@@ -485,7 +485,7 @@ class CO2 extends React.Component {
             <container>
                 <Row className="justify-content-center">
                     <div align="center">
-                        <h3>Atmosphere Temperature VS Surface Temperature</h3>
+                        <h3>CO2 Emissions</h3>
                     </div>
                 </Row>
                 <Row className="justify-content-center">
@@ -550,9 +550,9 @@ class CO2 extends React.Component {
                     </Col>
                     <Col lg="2" className="align-self-center mr-4">
                         <div>
-                            <p><li>The chart gives holistic view of the countries over the years.</li>
+                            <p><li>The chart gives comprehensive overview of various countries emissions trends over the years.</li>
 
-                            <li>It can be obseved from chart that some countries are reducing emissions whereas others not.</li></p>
+                            <li>It can be obseved from chart that some countries are reducing their emissions whereas others not.</li></p>
                         </div>
                     </Col>
                 </Row>
