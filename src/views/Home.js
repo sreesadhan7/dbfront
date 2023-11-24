@@ -94,7 +94,7 @@ A deep dive into the causes and consequences of Global Warming spanning Economic
                             Global Temperatures
                           </h6>
                           <p className="description mt-3">
-Evolution of yearly global temperatures for different countries based on different factors.
+                          Global Heat on the Move: How Temperature Swings in Different Countries over years?
                           </p>
                           <Link to="/GlobalTemp">
                                 <Button className="mt-4" color="primary">
@@ -116,7 +116,7 @@ Evolution of yearly global temperatures for different countries based on differe
                             CO2 Emissions
                           </h6>
                           <p className="description mt-3">
-Evolution of yearly CO2 emissions for different countries based on different factors.
+                          CO2 Emissions Dynamics: How CO2 Emissions vary across various Nations over the years?
                           </p>
                           <Link to="/CO2">
                                 <Button className="mt-4" color="primary">
@@ -138,7 +138,7 @@ Evolution of yearly CO2 emissions for different countries based on different fac
                             Energy Usage
                           </h6>
                           <p className="description mt-3">
-Evolution of energy usage for different countries based on different factors.
+                          Energy in Flux: Tracing the Dynamic Evolution of Energy Use in Different Countries, shaped by diverse Factors.
                           </p>
                           <Link to="/Energy">
                                 <Button className="mt-4" color="primary">
@@ -162,7 +162,7 @@ Evolution of energy usage for different countries based on different factors.
                             GDP
                           </h6>
                           <p className="description mt-3">
-Evolution of Gross Domestic Product (GDP) for different countries based on different factors.
+                          Global GDP Trends: Dynamic shifts in the GDP rankings of various countries over time.
                           </p>
                           <Link to="/GDP">
                                 <Button className="mt-4" color="primary">
@@ -184,7 +184,7 @@ Evolution of Gross Domestic Product (GDP) for different countries based on diffe
                             Internet Consumption
                           </h6>
                           <p className="description mt-3">
-Evolution of yearly internet usage for different countries based on different factors.
+                          Surfing the Digital Wave: Mapping the Evolution of Internet Usage in Countries Worldwide, Driven by Dynamic Factors.
                           </p>
                           <Link to="/Internet">
                                 <Button className="mt-4" color="primary">

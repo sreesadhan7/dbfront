@@ -12,7 +12,7 @@ function Chart_m_3_2(props) {
         <LineChart
           xAxis={[{ data: props.data.x , scaleType: 'band'}]}
           yAxis={[
-            { id: 'y1', scaleType: 'linear' },
+            { id: 'y1', scaleType: 'linear'},
             { id: 'y2', scaleType: 'linear' },
           ]}
           series={[

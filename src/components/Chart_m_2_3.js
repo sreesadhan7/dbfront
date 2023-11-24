@@ -12,9 +12,8 @@ function Chart_m_2_3(props) {
     <LineChart
       xAxis={[{ data: props.data.x , scaleType: 'band'}]}
       yAxis={[
-        { id: 'y1', scaleType: 'linear' },
-        { id: 'y2', scaleType: 'linear' },
-        { id: 'y3', scaleType: 'linear' },
+        { id: 'y1', scaleType: 'linear', label: 'carbon intensity'},
+        { id: 'y2', scaleType: 'linear', label: 'GDP in billions' },
       ]}
       series={[
         { yAxisKey: 'y1', data: props.data.y1, label: 'carbon intensity' },

@@ -12,9 +12,9 @@ function Chart_m_2_2(props) {
     <LineChart
       xAxis={[{ data: props.data.x , scaleType: 'band'}]}
       yAxis={[
-        { id: 'y1', scaleType: 'linear' },
-        { id: 'y2', scaleType: 'linear' },
-        { id: 'y3', scaleType: 'linear' },
+        { id: 'y1', scaleType: 'linear', label: 'total co2_emissions'},
+        { id: 'y2', scaleType: 'linear'},
+        { id: 'y3', scaleType: 'linear', label: 'surface temperature'},
       ]}
       series={[
         { yAxisKey: 'y1', data: props.data.y1, label: 'total co2_emissions' },
