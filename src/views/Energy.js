@@ -98,7 +98,7 @@ class Energy extends React.Component {
 
 
   topNCountries(url){
-    const years = [5,10, 15]
+    const years = [2,3,4,5,6,7,8,9,10,11,12,13,14, 15]
     console.log("years", years);
     const options = []
     for(let i=0; i<years.length; i++){
