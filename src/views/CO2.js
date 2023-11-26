@@ -57,7 +57,7 @@ class CO2 extends React.Component {
         m_2_3: {
             country: "Germany",
             from: "2000",
-            to: "2019",
+            to: "2018",
             data: null
         },
         m_2_4: {

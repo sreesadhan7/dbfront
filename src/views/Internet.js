@@ -267,33 +267,6 @@ class Internet extends React.Component {
                         <Row>
                             <Col>
                                 <div align="center">
-                                <h5 className='text-black'>Aggregation View</h5>
-                                <UncontrolledDropdown group>
-                                <DropdownToggle caret>
-                                {this.state.agg}
-                                </DropdownToggle>
-                                <DropdownMenu container={'body'}>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"Y")}>
-                                    <div>Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"2Y")}>
-                                    <div>2Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"3Y")}>
-                                    <div>3Y</div>
-                                    </DropdownItem>
-                                    <DropdownItem onClick={e=>this.changeAgg(e,"4Y")}>
-                                    <div>5Y</div>
-                                    </DropdownItem>
-                                </DropdownMenu>
-                                </UncontrolledDropdown>
-                                </div>
-                            </Col>
-                        </Row>
-                        <br></br>
-                        <Row>
-                            <Col>
-                                <div align="center">
                                 <h5>Date Range</h5>
                                 </div>
                             </Col>

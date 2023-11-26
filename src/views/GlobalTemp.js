@@ -56,7 +56,7 @@ class GlobalTemp extends React.Component {
         m_1_3: {
             country: "United States",
             from: "1970",
-            to: "2021",
+            to: "2020",
             data: null
         }
     };
@@ -71,10 +71,10 @@ class GlobalTemp extends React.Component {
     this.fetchData('mockup_1_1', this.state.m_1_1.country, this.state.m_1_1.agg, this.state.m_1_1.from, this.state.m_1_1.to);
     setTimeout(() => {
         this.fetchData('mockup_1_2', 'junk', 'junk', this.state.m_1_2.from, this.state.m_1_2.to);
-    }, 300); // Delay the second request by 500ms
+    }, 600); // Delay the second request by 500ms
     setTimeout(() => {
         this.fetchData('mockup_1_3', this.state.m_1_3.country, 'junk', this.state.m_1_3.from, this.state.m_1_3.to);
-    }, 600); // Delay the second request by 500ms
+    }, 1200); // Delay the second request by 500ms
   }
 
   fetchData(url, country, agg, from, to) {
