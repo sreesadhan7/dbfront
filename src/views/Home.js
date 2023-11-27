@@ -65,7 +65,7 @@ class Landing extends React.Component {
                   <Row>
                     <Col lg="6">
                       <h1 className="display-3 text-white">
-                        Global Warrming - Deep Dive{" "}
+                        Global Warming - Deep Dive{" "}
                       </h1>
                       <p className="lead text-white">
 A deep dive into the causes and consequences of Global Warming spanning Economic factors, internet consumption, global temperatures and more ...
